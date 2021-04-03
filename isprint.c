@@ -6,20 +6,15 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:38:28 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/02 18:23:59 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/03 11:46:08 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	isprint(char *str)
-{
-	int index;
+int	ft_isprint(int c);
 
-	index = 0;
-	while (str[index])
-	{
-		if (str[index] < 32 || str[index] > 127)
-			return (0);
-		index++;
-	}
-	return (1);
+int	ft_isprint(int c)
+{
+	if (c < 32 || c > 127)
+		return (0);
+	return (16384);
 }
