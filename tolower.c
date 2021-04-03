@@ -6,20 +6,17 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:38:05 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/02 17:47:44 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/03 14:45:49 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*tolower(char *str)
-{
-	int index;
+int	ft_tolower(int c);
 
-	index = 0;
-	while (str[index])
-	{
-		if (str[index] >= 'A' && str[index] <= 'Z')
-			str[index] = str[index] + 32;
-		index++;
-	}
-	return (str);
+int	ft_tolower(int c)
+{
+	unsigned char ch;
+	ch = (unsigned char) c;
+	if (ch >= 'A' && ch <= 'Z')
+		ch = ch + 32;
+	return (ch);
 }
