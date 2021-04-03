@@ -6,21 +6,16 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:36:44 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/02 17:45:38 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/03 11:16:12 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	isalpha(char *str)
-{
-	int index;
+int	ft_isalpha(int c);
 
-	index = 0;
-	while (str[index])
-	{
-		if (str[index] < 65 || str[index] > 122 ||
-		(str[index] > 90 && str[index] < 97))
-			return (0);
-		index++;
-	}
-	return (1);
+int	ft_isalpha(int c )
+{
+	if (c < 65 || c > 122 ||
+	(c > 90 && c < 97))
+		return (0);
+	return (1024);
 }
