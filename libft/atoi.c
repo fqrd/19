@@ -5,14 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 17:33:42 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/03 14:21:46 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 12:35:53 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/04/04 12:35:55 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-
-int	ft_atoi(char *str);
 
 static long long	loop_numbers(char *str, long long nbr)
 {

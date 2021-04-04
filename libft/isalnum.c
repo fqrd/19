@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlen.c                                           :+:      :+:    :+:   */
+/*   isalnum.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 17:31:51 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/02 17:33:09 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 14:21:49 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/04/04 14:24:35 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str,int index)
+int	ft_isalnum(int c)
 {
-	int index;
-
-	index = 0;
-	while (str[index])
-		index++;
-	return (index);
+	if (c < 48 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122)
+		return (0);
+	return (8);
 }

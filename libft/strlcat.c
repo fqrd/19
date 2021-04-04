@@ -5,44 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 17:34:53 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/02 17:34:54 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 12:35:06 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/04/04 12:35:08 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlen(char *str)
+#define T_SIZE unsigned long
+
+static unsigned long	ft_strlen(const char *str)
 {
-	unsigned int index;
+	unsigned long	index;
 
 	index = 0;
-	while (str[index])
+	while (str[index] != '\0')
 		index++;
 	return (index);
 }
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+T_SIZE	ft_strlcat(char *dest, const char *src, const T_SIZE size)
 {
-	unsigned int index;
-	unsigned int destlen;
-	unsigned int srclen;
+	T_SIZE		destlen;
+	T_SIZE		srclen;
+	long		sizeleft;
+	T_SIZE		index;
 
 	destlen = ft_strlen(dest);
 	srclen = ft_strlen(src);
-	index = 0;
-	if (size > destlen)
+	sizeleft = size - destlen;
+	if (sizeleft <= 0)
+		return (srclen + destlen + sizeleft);
+	sizeleft--;
+	index = destlen;
+	while (*src != '\0')
 	{
-		while (index < size - 1 && *src)
+		if (sizeleft > 0)
 		{
-			if (index >= destlen)
-			{
-				dest[index] = *src;
-				src++;
-			}
+			dest[index] = *src;
+			sizeleft--;
 			index++;
 		}
-		dest[index] = '\0';
+		src++;
 	}
-	if (size < destlen)
-		return (srclen + size);
-	return (destlen + srclen);
+	dest[index] = '\0';
+	return (srclen + destlen);
 }

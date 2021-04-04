@@ -5,12 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 17:36:44 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/03 11:16:12 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 12:35:30 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/04/04 12:35:36 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int	ft_isalpha(int c);
 
 int	ft_isalpha(int c )
 {
