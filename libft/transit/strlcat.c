@@ -6,15 +6,15 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:35:06 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/04 12:35:08 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/04 22:04:57 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define T_SIZE unsigned long
+#include <stddef.h>
 
-static unsigned long	ft_strlen(const char *str)
+static size_t	ft_strlen(const char *str)
 {
-	unsigned long	index;
+	size_t	index;
 
 	index = 0;
 	while (str[index] != '\0')
@@ -22,12 +22,12 @@ static unsigned long	ft_strlen(const char *str)
 	return (index);
 }
 
-T_SIZE	ft_strlcat(char *dest, const char *src, const T_SIZE size)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	T_SIZE		destlen;
-	T_SIZE		srclen;
+	size_t		destlen;
+	size_t		srclen;
 	long		sizeleft;
-	T_SIZE		index;
+	size_t		index;
 
 	destlen = ft_strlen(dest);
 	srclen = ft_strlen(src);

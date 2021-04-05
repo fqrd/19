@@ -1,20 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   __test_strlcat.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 19:06:30 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/04 12:16:09 by fcaquard         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include <bsd/string.h>
 
 unsigned long	ft_strlcat(char *dest, const char *src, unsigned long size);
-int	ft_strncmp(char *s1, char *s2, unsigned long long n);
 
 int main()
 {
@@ -60,7 +47,7 @@ int main()
 	{
 		int n_strlcat = strlcat(tdest[i],srcs[i] ,sizes[i]);
 		int x_strlcat = ft_strlcat(txdest[i], srcs[i],sizes[i]);
-		if(ft_strncmp(tdest[i],txdest[i],sizes[i]) == 0)
+		if(strncmp(tdest[i],txdest[i],sizes[i]) == 0)
 		{
 			// printf("OK!");
 			printf("OK!\n%s\n%s\n", tdest[i] , txdest[i]);

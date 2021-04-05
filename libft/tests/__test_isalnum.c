@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int ft_alnum(int c);
+int	ft_isalnum(int c);
 
 int main()
 {
@@ -14,7 +14,7 @@ int main()
 	while (string[i] && i < 57)
 	{
 		lib = isalnum(string[i]);
-		own = ft_alnum(string[i]);
+		own = ft_isalnum(string[i]);
 		if(lib == own)
 			printf("OK (%c) -> %d \n", string[i], own);
 		else

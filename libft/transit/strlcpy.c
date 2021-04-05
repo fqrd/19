@@ -6,13 +6,15 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:34:59 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/04 12:35:00 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/04 22:06:44 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static unsigned int	ft_strlen(char *src)
+#include <stddef.h>
+
+static size_t	ft_strlen(char *src)
 {
-	unsigned int index;
+	size_t index;
 
 	index = 0;
 	while (src[index])
@@ -20,10 +22,10 @@ static unsigned int	ft_strlen(char *src)
 	return (index);
 }
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	unsigned int index;
-	unsigned int size_src;
+	size_t index;
+	size_t size_src;
 
 	index = 0;
 	size_src = ft_strlen(src);

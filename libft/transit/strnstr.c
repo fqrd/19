@@ -6,34 +6,37 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 14:31:47 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/04 15:40:13 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:23:50 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strnstr(char *str, char *to_find, unsigned long len)
-{
-	unsigned long	to_find_index;
-	unsigned long	index;
+#include <stddef.h>
 
-	index = 0;
-	to_find_index = 0;
-	if (!to_find[0])
-		return (&str[0]);
-	while (str[index] != '\0' && index < len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
+{
+	const char	*pb;
+	const char	*pl;
+	const char	*start;
+
+	pb = big;
+	pl = little;
+	if (*little == '\0')
+		return ((char *) big);
+	while (*big != '\0' && len - (big - pb) > 0)
 	{
-		if (str[index] == to_find[0])
+		if (*big == *little)
 		{
-			while (to_find[to_find_index] == str[index] && str[index] != '\0')
+			start = big;
+			while (*big == *little && *big != '\0' && len - (big - pb) > 0)
 			{
-				if (to_find[to_find_index + 1] == '\0')
-					return (&str[index - to_find_index]);
-				index++;
-				to_find_index++;
+				if (*(++little) == '\0')
+					return ((char *) start);
+				big++;
 			}
-			index -= to_find_index;
-			to_find_index = 0;
+			big = start;
+			little = pl;
 		}
-		index++;
+		big++;
 	}
 	return (0);
 }

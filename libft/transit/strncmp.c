@@ -6,13 +6,15 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:34:44 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/04 15:30:45 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/04 22:08:51 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned long n)
+#include <stddef.h>
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned long	index;
+	size_t	index;
 	unsigned char	ch1;
 	unsigned char	ch2;
 
