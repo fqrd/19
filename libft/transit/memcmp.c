@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toupper.c                                          :+:      :+:    :+:   */
+/*   memcmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 12:36:28 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/07 15:36:54 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 17:27:23 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/04/07 14:56:21 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
-{
-	unsigned char	ch;
+#include <stddef.h>
 
-	ch = (unsigned char) c;
-	if (ch >= 'a' && ch <= 'z')
-		ch = ch - 32;
-	return (ch);
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*p;
+	unsigned char	*q;
+
+	p = (unsigned char *) s1;
+	q = (unsigned char *) s2;
+	if (n == 0)
+		return (0);
+	while (n && (*p++ == *q++))
+		n--;
+	if (p[-1] - q[-1] != 0)
+		return (p[-1] - q[-1]);
+	else
+		return (0);
 }

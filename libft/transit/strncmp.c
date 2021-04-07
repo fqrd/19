@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:34:44 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/04 22:08:51 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:36:07 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	index;
+	size_t			index;
 	unsigned char	ch1;
 	unsigned char	ch2;
 

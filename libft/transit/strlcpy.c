@@ -6,15 +6,15 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:34:59 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/04 22:06:44 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:35:19 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-static size_t	ft_strlen(char *src)
+static size_t	ft_strlen(const char *src)
 {
-	size_t index;
+	size_t	index;
 
 	index = 0;
 	while (src[index])
@@ -24,8 +24,8 @@ static size_t	ft_strlen(char *src)
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	size_t index;
-	size_t size_src;
+	size_t	index;
+	size_t	size_src;
 
 	index = 0;
 	size_src = ft_strlen(src);

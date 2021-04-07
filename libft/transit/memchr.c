@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toupper.c                                          :+:      :+:    :+:   */
+/*   memchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 12:36:28 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/07 15:36:54 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 17:27:19 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/04/06 19:03:59 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
-{
-	unsigned char	ch;
+#include <stddef.h>
+#include <stdio.h>
 
-	ch = (unsigned char) c;
-	if (ch >= 'a' && ch <= 'z')
-		ch = ch - 32;
-	return (ch);
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	const char	*p;
+
+	p = s;
+	while (n)
+	{
+		if (*p == c)
+			return ((void *) p);
+		p++;
+		n--;
+	}
+	return (NULL);
 }
