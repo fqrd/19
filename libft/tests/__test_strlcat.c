@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <bsd/string.h>
 
-unsigned long	ft_strlcat(char *dest, const char *src, unsigned long size);
+size_t	ft_strlcat(char *dest, const char *src, size_t size);
 
 int main()
 {
