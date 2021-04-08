@@ -5,6 +5,8 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 
 int main()
 {
+	printf("------------\n----STRLCPY----\n------------\n");
+
 	char dest[28] = "159784";
 	char src[28] = "88888";
 

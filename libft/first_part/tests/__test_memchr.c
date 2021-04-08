@@ -7,6 +7,8 @@ void *ft_memchr(const void *s, int c, size_t n);
 
 int main()
 {
+	printf("------------\n----MEMCHR----\n------------\n");
+
 	char s[15] = "abdgetrupsmqdsc";
 	printf("%p\n", ft_memchr(s, 'c', 15));
 	printf("%p\n", memchr(s, 'c', 15));

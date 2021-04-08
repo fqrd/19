@@ -6,6 +6,8 @@ int ft_memcmp(const void *s1, const void *s2, size_t n);
 
 int main()
 {
+	printf("------------\n----MEMCMP----\n------------\n");
+
 	long unsigned int i = 0;
 	while (i < 100)
 	{
