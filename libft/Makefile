@@ -29,7 +29,7 @@ TEST 	= libtest.a
 test: $(TEST)
 
 testobj: $(TESTSRC)
-	$(CC) $(CFLAGS) -c $< $(TESTFLAGS) -o $(TESTOBJ)
+	$(CC) $(CFLAGS) -c $< -o $(TESTOBJ)
 
 $(TEST): $(TESTOBJ)
 	ar rs $(TEST) $(TESTOBJ)

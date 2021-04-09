@@ -1,8 +1,7 @@
 #include <stdio.h>
-#include <bsd/string.h>
+#include <string.h>
 #include "../libft.h"
 
-size_t	strlcpy(char *dst, const char *src, size_t size);
 
 int test_ft_strlcpy()
 {
