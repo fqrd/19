@@ -2,6 +2,8 @@
 # define LIBFT_H
 # include <stddef.h>
 
+int main();
+
 /**
  * 	Numbers
  */

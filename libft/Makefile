@@ -1,11 +1,21 @@
-CC=gcc
-CFLAGS= -Werror -Wextra -Wall
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+EXEC = libft.a
+SRC = $(filter-out main.c, $(wildcard *.c))
+OBJ = $(SRC:.c=.o)
 
-output: main.o
-	gcc main.o -o output
+all : $(EXEC)
 
-main.o: main.c
-	gcc -c main.c -o main.o
+obj: $(SRC)
+	$(CC) $(CFLAGS) -c $< -o $(OBJ)
+
+$(EXEC): $(OBJ)
+	ar rs $(EXEC) $(OBJ)
 
 clean:
-	rm output *.o
+	rm -f *.o
+
+fclean: clean
+	rm -f $(EXEC)
+
+re: fclean all

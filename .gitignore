@@ -1,3 +1,6 @@
 a.out
 core
---LIST_FUNCTIONS--.txt
+LIST_FUNCTIONS
+output
+libft-unit-test
+*.o
