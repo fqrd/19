@@ -26,4 +26,5 @@ int test_ft_memcmp()
 		}
 		i++;
 	}
+	return (0);
 }

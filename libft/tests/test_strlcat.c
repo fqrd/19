@@ -2,6 +2,8 @@
 #include <bsd/string.h>
 #include "../libft.h"
 
+size_t	strlcat(char *dst, const char *src, size_t size);
+
 int test_ft_strlcat()
 {
 	printf("---------------\n----STRLCAT----\n---------------\n");

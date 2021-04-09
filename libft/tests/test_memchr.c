@@ -26,4 +26,5 @@ int test_ft_memchr()
 		printf("---\n%p\n", ft_memchr(t[i], 'c', 15));
 		printf("%p\n", memchr(t[i], 'c', 15));
 	}
+	return (0);
 }
