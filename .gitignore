@@ -2,8 +2,4 @@ a.out
 core
 LIST_FUNCTIONS
 output
-libft-unit-test
 *.o
-libtest.a
-libtest.h
-main.c
