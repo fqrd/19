@@ -52,15 +52,15 @@ void	*test_ft_memset();
 
  */
 
-int	test_ft_strlen();
+int		test_ft_strlen();
 
 int		test_ft_strncmp();
 
-int	*test_ft_strnstr();
+int		*test_ft_strnstr();
 
-int	*test_ft_strchr();
+int		*test_ft_strchr();
 
-int	*test_ft_strrchr();
+int		*test_ft_strrchr();
 
 
 
@@ -70,9 +70,9 @@ int	*test_ft_strrchr();
 
  */
 
-int	test_ft_strlcpy();
+// int	test_ft_strlcpy();
 
-int	test_ft_strlcat();
+// int	test_ft_strlcat();
 
 
 
