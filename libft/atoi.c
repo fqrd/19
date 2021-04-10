@@ -6,9 +6,11 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:35:53 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/09 22:07:21 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/10 20:59:56 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 static int	ft_isspace(int c)
 {
@@ -20,13 +22,11 @@ static int	ft_isspace(int c)
 
 int	ft_atoi(const char *str)
 {
-	long long	poslimit;
-	long long	neglimit;
 	long long	nbr;
+	long long	add;
 	int			sign;
 
-	poslimit = 999999999999999999;
-	neglimit = -999999999999999999;
+	nbr = 0;
 	sign = 1;
 	while (ft_isspace(*str))
 		str++;
@@ -36,13 +36,15 @@ int	ft_atoi(const char *str)
 		str++;
 	while (*str >= 48 && *str <= 57)
 	{
-		nbr = 10 * nbr + (*str - '0');
+		add = 10 * nbr + (*str - '0');
+		if (add > nbr)
+			nbr = add;
 		str++;
 	}
+	if (add < nbr && sign == 1)
+		return (-1);
+	if (add < nbr && sign == -1)
+		return (0);
 	nbr = nbr * sign;
-	if (nbr > poslimit)
-		nbr = 0;
-	if (nbr < neglimit)
-		nbr = -1;
 	return (nbr);
 }
