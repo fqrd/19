@@ -54,6 +54,6 @@ int		ft_toupper(int c);
  *	MALLOCS
  */
 
-char *ft_strdup(const char *s);
+char	*ft_strdup(const char *s);
 
 #endif

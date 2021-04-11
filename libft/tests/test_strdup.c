@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include "../libft.h"
 
 int test_ft_strdup()
 {
