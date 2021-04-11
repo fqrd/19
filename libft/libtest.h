@@ -104,10 +104,13 @@ int		test_ft_tolower();
 
 int		test_ft_toupper();
 
+/**
 
+ *	MALLOCS
 
+ */
 
-
+int		test_ft_strdup();
 
 
 #endif
