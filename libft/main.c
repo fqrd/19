@@ -2,7 +2,7 @@
 #include "libft.h"
 #include <stdio.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	// printf("%d\n", test_ft_atoi());
 	// printf("%d\n", test_ft_isalpha());

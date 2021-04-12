@@ -11,6 +11,6 @@ int test_ft_strlcpy()
 	char src[28] = "88888";
 
 	printf("%ld / %s\n",ft_strlcpy(dest, src, 15), dest);
-	printf("%ld / %s\n",strlcpy(dest, src, 15), dest);
+	printf("%d / %s\n",strlcpy(dest, src, 15), dest);
 	return (0);
 }
