@@ -7,14 +7,18 @@ int test_ft_memccpy ()
 {
 	printf("------------\n----MEMCCPY----\n------------\n");
 
-	int a = 'q';
-	char dest1[16];
-	char dest2[16];
-	char src[16] = "abcdefghijklmnop";
-	printf("---\nbefore:\nlib: %p / %s\nown: %p / %s\nsrc: %p / %s\n", dest1, dest1, dest2, dest2, src, src);
-	memccpy((void*) dest1, (void*) src, a, 15);
-	ft_memccpy((void*) dest2, (void*) src, a, 15);
-	printf("---\nafter:\nlib: %p / %s\nown: %p / %s\nsrc: %p / %s\n----", dest1, dest1, dest2, dest2, src, src);
+	int a = '1';
+	char ldest[16];
+	char odest[16];
+	char lsrc[16] = "159slozmpmmquit";
+	char osrc[16] = "159slozmpmmquit";
+
+	printf("---\nlib: %p / |%s|\nsrc: %p / |%s|\n", ldest, ldest, lsrc, lsrc);
+	memccpy((void*) ldest, (void*) lsrc, a, 1);
+	printf("lib: %p / |%s|\nsrc: %p / |%s|\n----", ldest, ldest, lsrc, lsrc);
+	printf("---\nown: %p / |%s|\nsrc: %p / |%s|\n", odest, odest, osrc, osrc);
+	ft_memccpy((void*) odest, (void*) osrc, a, 1);
+	printf("own: %p / |%s|\nsrc: %p / |%s|\n----", odest, odest, osrc, osrc);
 	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:27 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/12 12:53:34 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/12 14:03:27 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,5 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		return (NULL);
 	
 	return (dest);
-}
-
-int main()
-{
-	printf("%p\n",ft_memmove(NULL, NULL, 12));
-	printf("%p\n", memmove(NULL, NULL, 12));
-	return (0);
 }
 
