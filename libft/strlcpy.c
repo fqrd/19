@@ -6,20 +6,21 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:34:59 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/12 16:03:58 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/12 18:38:55 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+
 size_t	ft_strlen(const char *str);
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	index;
 	size_t	size_src;
-	
-	if(!dest && !src) 
-		return (0); 
+
+	if (!dest && !src)
+		return (0);
 	index = 0;
 	size_src = ft_strlen(src);
 	if (size_src < size)
