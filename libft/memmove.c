@@ -6,40 +6,40 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:27 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/11 19:19:06 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:53:34 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include <stddef.h>
-
+#include <stdio.h>
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*_src;
-	char	*_dest;
-	int		direction;
-
-	_src = (char *)src;
-	_dest = (char *)dest;
-	direction = 0;
-	if (_src + n >= _dest)
+	char	*psrc = (char *) src;
+	char	*pdest = (char *) dest;
+	
+	if (psrc < pdest)
 	{
-		direction = 1;
-		_src = _src + n;
-		_dest = _dest + n;
+		psrc = psrc + (n - 1);
+		pdest = pdest + (n - 1);
+		while (n--)
+			*(pdest)-- = *(psrc)--;
 	}
-	while (n)
+	else
 	{
-		if(direction)
-		{
-			*_dest = *_src--;
-			_dest--;
-		}
-		else
-		{
-			*_dest = *_src++;
-			_dest++;
-		}
-		n--;
+		while(n--)
+			*(pdest)++ = *(psrc)++;
 	}
+	if( !dest && !src)
+		return (NULL);
+	
 	return (dest);
 }
+
+int main()
+{
+	printf("%p\n",ft_memmove(NULL, NULL, 12));
+	printf("%p\n", memmove(NULL, NULL, 12));
+	return (0);
+}
+
