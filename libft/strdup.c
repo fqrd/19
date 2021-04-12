@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 14:55:29 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/12 10:49:16 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/12 10:55:19 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,8 @@ char	*ft_strdup(const char *s)
 	p = malloc(sizeof(char) * (n + 1));
 	if (!p)
 		return (NULL);
-	i = 0;
-	while (i < n)
-	{
+	p[n] = '\0';
+	while (--n >= 0)
 		p[i] = s[i];
-		i++;
-	}
-	p[i] = '\0';
 	return (p);
 }
