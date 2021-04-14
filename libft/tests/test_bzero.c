@@ -7,7 +7,7 @@ int test_ft_bzero()
 {
 	printf("------------\n----BZERO----\n------------\n");
 
-	int error = 0;
+	// int error = 0;
 
 	char *s1 = "This is a test.";
 	char *s2 = "This is a test.";
