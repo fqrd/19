@@ -6,12 +6,11 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:35:06 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/09 16:23:04 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/14 13:35:20 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-size_t	ft_strlen(const char *str);
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

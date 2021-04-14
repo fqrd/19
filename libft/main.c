@@ -2,31 +2,30 @@
 #include "libft.h"
 #include <stdio.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	// printf("%d\n", test_ft_atoi());
-	// printf("%d\n", test_ft_isalpha());
-	// printf("%d\n", test_ft_isalnum());
-	// printf("%d\n", test_ft_isascii());
-	// printf("%d\n", test_ft_isdigit());
-	// printf("%d\n", test_ft_isprint());
+	test_ft_atoi();
+	test_ft_isalpha();
+	test_ft_isalnum();
+	test_ft_isascii();
+	test_ft_isdigit();
+	test_ft_isprint();
 	test_ft_memccpy();
-	// printf("%p\n", test_ft_memchr());
-	// printf("%d\n", test_ft_memcmp());
+	test_ft_memchr();
+	test_ft_memcmp();
 	test_ft_memcpy();
 	test_ft_memmove();
-	// printf("%p\n", test_ft_memset());
-	// printf("%ls\n", test_ft_strchr());
-	// printf("%d\n", test_ft_strlcat());
-	// printf("%d\n", test_ft_strlcpy());
-	// printf("%d\n", test_ft_strlen());
-	// printf("%d\n", test_ft_strncmp());
-	// printf("%ls\n", test_ft_strnstr());
-	// printf("%ls\n", test_ft_strrchr());
-	// printf("%d\n", test_ft_tolower());
-	// printf("%d\n", test_ft_toupper());
-	// test_ft_bzero();
-	//test_ft_strdup();
-	// printf("%d\n", test_ft_());
+	test_ft_memset();
+	test_ft_strchr();
+	test_ft_strlcat();
+	test_ft_strlcpy();
+	test_ft_strlen();
+	test_ft_strncmp();
+	test_ft_strnstr();
+	test_ft_strrchr();
+	test_ft_tolower();
+	test_ft_toupper();
+	test_ft_bzero();
+	test_ft_strdup();
 	return (0);
 }

@@ -6,11 +6,9 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:35:53 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/10 20:59:56 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/14 13:35:33 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 static int	ft_isspace(int c)
 {
