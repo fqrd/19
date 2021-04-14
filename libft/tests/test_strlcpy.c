@@ -10,7 +10,7 @@ int test_ft_strlcpy()
 	char dest[28] = "159784";
 	char src[28] = "88888";
 
-	printf("%ld / %s\n",ft_strlcpy(dest, src, 15), dest);
-	printf("%d / %s\n",strlcpy(dest, src, 15), dest);
+	printf("%lu / %s\n",ft_strlcpy(dest, src, 15), dest);
+	printf("%lu / %s\n",strlcpy(dest, src, 15), dest);
 	return (0);
 }

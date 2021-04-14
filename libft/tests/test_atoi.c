@@ -54,7 +54,7 @@ int test_ft_atoi()
 	}
 	if(!error)
 	{
-		printf("OK");
+		printf("OK\n");
 	}
 	return (0);
 }
