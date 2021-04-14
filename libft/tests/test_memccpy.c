@@ -22,7 +22,7 @@ int test_ft_memccpy ()
 
 	if ((strcmp(ldest, odest) != 0) || (strcmp(odest, osrc) != 0))
 	{
-		printf("ERROR: (lib): |%s| != |%s| :(yours) 	/	 |%s| (src)\n", ldest, odest);
+		printf("ERROR: (lib): |%s| != |%s| :(yours) 	/	 |%s| (src)\n", ldest, odest, lsrc);
 		error = 1;
 	}
 	if (strcmp(lsrc, osrc) != 0)
