@@ -20,17 +20,17 @@ int test_ft_memccpy ()
 	ft_memccpy((void*) odest, (void*) osrc, a, 1);
 	printf("own: %p / |%s|\nsrc: %p / |%s|\n----", odest, odest, osrc, osrc);
 
-	if (ldest != odest || odest != osrc)
+	if ((strcmp(ldest, odest) != 0) || (strcmp(odest, osrc) != 0))
 	{
 		printf("ERROR: (lib): |%s| != |%s| :(yours) 	/	 |%s| (src)\n", ldest, odest);
 		error = 1;
 	}
-	if (lsrc != osrc)
+	if (strcmp(lsrc, osrc) != 0)
 	{
 		printf("ERROR: (lib): |%s| !=	|%s|	:(yours)\n", lsrc, osrc);
 		error = 1;
 	}
-	if (ldest != osrc)
+	if (strcmp(ldest, osrc) != 0)
 	{
 		printf("LIB function ERROR: (lib):	|%s| != |%s|	:(lib)\n", ldest, lsrc);
 		error = 1;
