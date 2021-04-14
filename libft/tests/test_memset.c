@@ -6,7 +6,7 @@
 int test_ft_memset()
 {
 	printf("------------\n----MEMSET----\n------------\n");
-
+	
 	char *s1 = "This is a test.";
 	char *s2 = "This is a test.";
 
