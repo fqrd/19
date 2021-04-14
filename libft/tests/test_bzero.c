@@ -7,6 +7,7 @@ int test_ft_bzero()
 {
 	printf("------------\n----BZERO----\n------------\n");
 
+	int error = 0;
 
 	char *s1 = "This is a test.";
 	char *s2 = "This is a test.";
@@ -63,6 +64,9 @@ int test_ft_bzero()
 	// ft_bzero((void *)&s13, 64);
 	// bzero((void *)&s14, 64);
 	// printf("own: %p\nlib: %p\n----\n", s13, s14);
-
+	if(!error)
+	{
+		printf("OK");
+	}
 	return (0);
 }

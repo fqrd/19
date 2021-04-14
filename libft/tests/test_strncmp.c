@@ -5,6 +5,7 @@
 int test_ft_strncmp()
 {
 	printf("---------------\n----STRNCMP----\n---------------\n");
+	int error = 0;
 	int i = 0;
 	// char master[57] = "§W[eST7´[EdCF0d:hc§ir} fà-5LDxié;1zL)y8'[Qe-\0";
 	// char string[4][100] = {"", "§W[eST7´[EdCF0d:hc§ir} fà-5LDxié;1zL)y8'[Qe-\0", "fà-5LDxié;1zL)ùSm[Qe-\0", "§W[eS´[EdCF0d:hc§ir} fà-5LDxié;1zL)ùSm[Qe-8za,às@µsù\0"};
@@ -15,11 +16,16 @@ int test_ft_strncmp()
 	{
 		int lib = strncmp(master, string[i], 49);
 		int own = ft_strncmp(master, string[i], 49);
-		if(lib == own)
-			printf("OK (%d == %d)\n",lib,own);
-		else
+		if(lib != own)
+		{
 			printf("ERROR (%d != %d)\n",lib,own);
+			error = 1;
+		}
 		i++;
+	}
+	if(!error)
+	{
+		printf("OK");
 	}
 	return (0);
 }

@@ -4,7 +4,8 @@
 
 int test_ft_atoi()
 {
-		printf("------------\n----ATOI----\n------------\n");
+	printf("------------\n----ATOI----\n------------\n");
+	int error = 0;
 	int i = 0;
 	int lib;
 	int own;
@@ -44,8 +45,16 @@ int test_ft_atoi()
 	{
 		lib = atoi(table[i]);
 		own = ft_atoi(table[i]);
-		(lib == own) ? printf("OK (%s) -> %d \n", table[i], own): printf("[ERROR] (%s) >> atoi(%d) != ft_atoi(%d)\n", table[i], lib, own);
+		if (lib != own)
+		{
+			printf("[ERROR] (%s) >> atoi(%d) != ft_atoi(%d)\n", table[i], lib, own);
+			error = 1;
+		}
 		i++;
+	}
+	if(!error)
+	{
+		printf("OK");
 	}
 	return (0);
 }

@@ -6,6 +6,7 @@ int test_ft_strchr()
 {
 	printf("------------\n----STRCHR----\n------------\n");
 
+	int error = 0;
 	char str[5][100] = {"\0\0p\0r\0   	\n\ts","abcdefghijklmnopqrtuvw\0x\0y\ns", "", "abc789456123fopszerrrrrr", "s\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"};
 	char search = 's';
 	char *lib;
@@ -15,7 +16,15 @@ int test_ft_strchr()
 	{
 		lib = strchr(str[i],search);
 		own = ft_strchr(str[i],search);
-		(lib == own) ? printf("OK (%s == %s) \n", lib, own): printf("[ERROR] (%s != %s)\n", lib, own);
+		if (lib != own)
+		{
+			printf("[ERROR] (%s != %s)\n", lib, own);
+			error = 1;
+		}
+		if(!error)
+		{
+			printf("OK");
+		}
 		i++;
 	}
 	return (0);

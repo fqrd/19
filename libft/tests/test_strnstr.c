@@ -5,6 +5,7 @@
 int test_ft_strnstr()
 {
 	printf("---------------\n----STRNSTR----\n---------------\n");
+	int error = 0;
 	int i = 0;
 	// char master[67] = "§W[eST7´[EdCF0d:hc§ir} fà-5LDxié;1zL)y8'L0ù!:Sm[Qe-";
 	// char *master = "";
@@ -31,34 +32,26 @@ int test_ft_strnstr()
 		char *lib = strnstr(master, string[i], size);
 		char *own = ft_strnstr(master, string[i], size);
 
-		if(lib == own)
-		{
-			printf("---\nOK >>\nlib: %s\nown: %s\n", lib , own);
-			// printf("---\nSAME VALUE\n");
-		}
-		else
+		if(lib != own)
 		{
 			printf("---\nERROR >> \nlib: %s\nown: %s\n", lib , own);
+			error = 1;
 		}
 
 		if(lib && own)
 		{
 
-			if(strncmp(lib, own, 1000) == 0)
-			{
-				// printf("IDENTICAL OUTPUT\n%s\n%s\n", lib , own);
-				printf("OK\n");
-			}
-			else
+			if(strncmp(lib, own, 1000) != 0)
 			{
 				printf("ERROR:  %s != %s\n", lib , own);
+				error = 1;
 			}
 		}
-		else
-		{
-			printf("NULL lib: %s == ft_: %s\n", lib, own);
-		}
 		i++;
+	}
+	if(!error)
+	{
+		printf("OK");
 	}
 	return (0);
 }

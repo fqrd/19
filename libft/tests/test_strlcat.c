@@ -6,6 +6,7 @@
 int test_ft_strlcat()
 {
 	printf("---------------\n----STRLCAT----\n---------------\n");
+	int error = 0;
 
 	char tdest[6][120] = 	{
 		"Asturia",
@@ -47,24 +48,21 @@ int test_ft_strlcat()
 	{
 		int n_strlcat = strlcat(tdest[i],srcs[i] ,sizes[i]);
 		int x_strlcat = ft_strlcat(txdest[i], srcs[i],sizes[i]);
-		if(strncmp(tdest[i],txdest[i],sizes[i]) == 0)
-		{
-			// printf("OK!");
-			printf("OK!\n%s\n%s\n", tdest[i] , txdest[i]);
-		}
-		else
+		if(strncmp(tdest[i],txdest[i],sizes[i]) != 0)
 		{
 			printf("DIFFERENTS STRINGS:  %s != %s\n", tdest[i] , txdest[i]);
+			error = 1;
 		}
-
-		if(n_strlcat == x_strlcat)
+		if(n_strlcat != x_strlcat)
 		{
-			// printf("OK!\n");
-			printf("OK! (%d && %d)\n----\n", n_strlcat, x_strlcat);
+			printf("DIFFERENTS OUTPUTS: %d != %d\n----\n", n_strlcat, x_strlcat);	
+			error = 1;
 		}
-		else
-			printf("DIFFERENTS OUTPUTS: %d != %d\n----\n", n_strlcat, x_strlcat);
 		i++;
+	}
+	if(!error)
+	{
+		printf("OK");
 	}
 	return (0);
 }
