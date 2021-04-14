@@ -21,11 +21,11 @@ int test_ft_strchr()
 			printf("[ERROR] (%s != %s)\n", lib, own);
 			error = 1;
 		}
-		if(!error)
-		{
-			printf("OK\n");
-		}
 		i++;
+	}
+	if(!error)
+	{
+		printf("OK\n");
 	}
 	return (0);
 }

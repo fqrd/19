@@ -9,8 +9,8 @@ int test_ft_strlcpy()
 
 	char dest[28] = "159784";
 	char src[28] = "88888";
-
-	printf("%lu / %s\n",ft_strlcpy(dest, src, 15), dest);
-	printf("%lu / %s\n",strlcpy(dest, src, 15), dest);
+	int n = 15;
+	printf("%lu / %s\n",ft_strlcpy(dest, src, n), dest);
+	printf("%lu / %s\n",strlcpy(dest, src, n), dest);
 	return (0);
 }
