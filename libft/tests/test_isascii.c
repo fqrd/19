@@ -22,7 +22,7 @@ int test_ft_isascii()
 	}
 	if(!error)
 	{
-		printf("OK");
+		printf("OK\n");
 	}
 	return (0);
 }

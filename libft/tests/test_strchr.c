@@ -23,7 +23,7 @@ int test_ft_strchr()
 		}
 		if(!error)
 		{
-			printf("OK");
+			printf("OK\n");
 		}
 		i++;
 	}

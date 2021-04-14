@@ -64,9 +64,9 @@ int test_ft_bzero()
 	// ft_bzero((void *)&s13, 64);
 	// bzero((void *)&s14, 64);
 	// printf("own: %p\nlib: %p\n----\n", s13, s14);
-	if(!error)
-	{
-		printf("OK");
-	}
+	// if(!error)
+	// {
+	// 	printf("OK\n");
+	// }
 	return (0);
 }

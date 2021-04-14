@@ -70,9 +70,9 @@ int		*test_ft_strrchr();
 
  */
 
-// int	test_ft_strlcpy();
+int	test_ft_strlcpy();
 
-// int	test_ft_strlcat();
+int	test_ft_strlcat();
 
 
 

@@ -22,7 +22,7 @@ int test_ft_isprint()
 	}
 	if(!error)
 	{
-		printf("OK");
+		printf("OK\n");
 	}
 	return (0);
 }

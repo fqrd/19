@@ -23,7 +23,7 @@ int test_ft_toupper()
 	}
 	if(!error)
 	{
-		printf("OK");
+		printf("OK\n");
 	}
 	return (0);
 }

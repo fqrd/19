@@ -51,7 +51,7 @@ int test_ft_strnstr()
 	}
 	if(!error)
 	{
-		printf("OK");
+		printf("OK\n");
 	}
 	return (0);
 }
