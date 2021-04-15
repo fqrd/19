@@ -4,14 +4,14 @@
 
 int	main(void)
 {
-	test_ft_atoi();
+	/*test_ft_atoi();
 	test_ft_isalpha();
 	test_ft_isalnum();
 	test_ft_isascii();
 	test_ft_isdigit();
 	test_ft_isprint();
-	test_ft_memccpy();
-	test_ft_memchr();
+	*/test_ft_memccpy();
+	/*test_ft_memchr();
 	test_ft_memcmp();
 	test_ft_memcpy();
 	test_ft_memmove();
@@ -27,5 +27,5 @@ int	main(void)
 	test_ft_toupper();
 	test_ft_bzero();
 	test_ft_strdup();
-	return (0);
+	*/return (0);
 }
