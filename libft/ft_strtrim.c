@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/16 14:31:20 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/18 16:25:22 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static	size_t	from_left(char *s, char *ref)
 
 	istr = 0;
 	iref = 0;
+	output = 0;
 	if (s[istr] == ref[iref])
 	{
 		while (s[istr] == ref[iref] && s[istr] != '\0')
@@ -83,5 +84,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!output)
 		return (NULL);
 	output = ft_substr(s, start, end - start);
+	output[(end - start) + 1] = '\0'; 
 	return (output);
 }
