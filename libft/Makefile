@@ -46,5 +46,5 @@ oclean: clean
 
 ru: tclean fclean all test
 
-run: test all
+run: test all oclean
 	$(CC) main.c $(TEST) $(EXEC) && ./a.out

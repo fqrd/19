@@ -112,6 +112,16 @@ int		test_ft_toupper();
 
 int		test_ft_strdup();
 
+/**
+ *	PART2
+ */
+
+
+int		test_ft_substr();
+int		test_ft_strjoin();
+int		test_ft_strtrim(void);
+
+
 
 #endif
 

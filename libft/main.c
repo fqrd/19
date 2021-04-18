@@ -10,8 +10,8 @@ int	main(void)
 	test_ft_isascii();
 	test_ft_isdigit();
 	test_ft_isprint();
-	*/test_ft_memccpy();
-	/*test_ft_memchr();
+	test_ft_memccpy();
+	test_ft_memchr();
 	test_ft_memcmp();
 	test_ft_memcpy();
 	test_ft_memmove();
@@ -26,6 +26,12 @@ int	main(void)
 	test_ft_tolower();
 	test_ft_toupper();
 	test_ft_bzero();
+	*/
 	test_ft_strdup();
-	*/return (0);
+	test_ft_substr();
+	test_ft_strjoin();
+	test_ft_strtrim();
+
+	
+	return (0);
 }
