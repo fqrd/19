@@ -20,10 +20,14 @@ int test_ft_memccpy ()
 	{
 		lres = memccpy((void*) ldest, (void*) lsrc, *a, 16);
 		ores = ft_memccpy((void*) odest, (void*) osrc, *a, 16);
+		// memccpy((void*) ldest, (void*) lsrc, *a, 16);
+		// ft_memccpy((void*) odest, (void*) osrc, *a, 16);
 
-		if (strcmp(ldest, odest) != 0)
+		// if (strcmp(ldest, odest) != 0)
+		if (strcmp(lres, ores) != 0)
 		{
-			printf("ERROR: (lib): |%s|	!=	|%s| :(yours) / |%s| (src)\n", ldest, odest, lsrc);
+			printf("ERROR: (lib): |%s|	!=	|%s| :(yours) / |%s| (src)\n", lres, ores, lsrc);
+			// printf("ERROR: (lib): |%s|	!=	|%s| :(yours) / |%s| (src)\n", ldest, odest, lsrc);
 			error = 1;
 		}
 		else
