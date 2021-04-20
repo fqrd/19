@@ -6,25 +6,24 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:32 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/12 18:37:50 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:50:59 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	*p;
+	char			*p;
+	unsigned char	cc;
 
-	p = (char *)s;
-	i = 0;
-	while (p[i] != '\0')
+	cc = (unsigned char) c;
+	p = (char *) s;
+	while (*p != '\0')
 	{
-		if (p[i] == c)
-			return ((char *)s);
-		i++;
+		if (*(p++) == cc)
+			return ((char *) s);
 		s++;
 	}
-	if (p[i] == c)
-		return ((char *)s);
+	if (cc == '\0')
+		return ((char *) s);
 	return (0);
 }
