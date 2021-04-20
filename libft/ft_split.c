@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/20 19:18:43 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/20 19:26:54 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ static char		**execute_split(char *str, unsigned char cc, char **split, size_t c
 		string = ft_substr(str, start, end - start);
 		split[i] = string;
 
-		printf("split[%ld]:	%s\n", i,  string);
-		// printf("split[i]:	%s\n", split[i]);
-		// split save malloc
-		printf("start: %ld / end: %ld / length: %ld\n", start, end, end - start);
-		start = end;
+		//printf("split[%ld]:	%s\n", i,  string);
+		//// printf("split[i]:	%s\n", split[i]);
+		//// split save malloc
+		//printf("start: %ld / end: %ld / length: %ld\n", start, end, end - start);
+		//start = end;
 		i++;
 	}
-	printf("split[0]:	%s\n", split[0]);
+	//printf("split[0]:	%s\n", split[0]);
 	return (split);
 }
 
@@ -84,9 +84,9 @@ char	**ft_split(char const *s, char c)
 
 	cs = (char *) s;
 	cc = (unsigned char) c;
-	printf("#1 str: %s / cc: %c\n", cs, cc);
+	//printf("#1 str: %s / cc: %c\n", cs, cc);
 	count = count_splits(cs, cc);
-	printf("#2 count: %ld\n", count);
+	//printf("#2 count: %ld\n", count);
 	
 	split = malloc(sizeof(char**) * count);
 	if (!split)
