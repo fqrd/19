@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:30:37 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/15 19:20:42 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/19 14:58:37 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,23 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *p = (char *) s;
-	char *substring;
-	unsigned int i = 0;
-	// size_t slen;
+	char			*ps;
+	char			*substring;
+	unsigned int	i;
 
-	// slen = ft_strlen(p);
-	// if (slen < start + len || slen == 0 || len == 0)
-	// 	return ("STRING NULL RETURNED");
-
-	substring = malloc(sizeof(char *) * (len));
-	if(!substring)
-		return (NULL);
-
-	while (i++ < start)
-		p++;
 	i = 0;
-	while (i < len && *p)
+	substring = malloc(sizeof(char *) * (len + 1));
+	if(!substring || s == NULL || len == 0)
+		return (NULL);
+	if(start >= ft_strlen(s))
+		return (substring);
+	while (i++ < start)
+		s++;
+	i = 0;
+	ps = (char *) s;
+	while (len-- && *ps)
 	{
-		substring[i] = *p;
-		p++;
-		i++;
+		substring[i++] = *ps++;
 	}
 	substring[i] = '\0';
 	return (substring);
