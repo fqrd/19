@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/18 16:45:31 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:15:55 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,26 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	ref = (char *) set;
 	s = (char *) s1;
-	output = (char *) s;
+	if (!s1 || !set)
+		return (NULL);
 	start = from_left(s, ref);
 	end = from_right(s, ref, ft_strlen(s), ft_strlen(ref));
-	if (end <= start)
-		return ("");
-	output = malloc(sizeof(char *) * (end - start + 1));
-	if (!output)
-		return (NULL);
 	output = ft_substr(s, start, end - start);
-	output[end - start] = '\0';
 	return (output);
+}
+
+int	main(void)
+{
+	printf("---------------\n----STRTRIM----\n---------------\n");
+
+	printf("%s\n", ft_strtrim("ox9ox9ox9ox9ox9ox9ox9ox9testox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9", "ox9"));
+	printf("%s\n", ft_strtrim("azhoonsnapazodnonosnaoaoazndnnodanzudnnazudn", "azhoo"));
+	printf("%s\n", ft_strtrim("-à&é!'ç&énk'&péoj'à&éh!dàhipnzdk,ôd)&j&édà", "à"));
+	printf("%s\n", ft_strtrim(" 	              		ppe	 ", " 	"));
+	printf("%s\n", ft_strtrim("\naasjai ,doz\n", "\n"));
+	printf("%s\n", ft_strtrim("\t\npmmmmzmmmz\n", "\t\n"));
+	printf("%s\n", ft_strtrim("09486oazjpazijdazdazd094", "094"));
+	printf("%s\n", ft_strtrim("popopopopopopo", "po"));
+	printf("%s\n", ft_strtrim("pémmémémémémém&,en&é!y e&!éy!&éye )&!éye !)&éye&é!çy ç!é!çé!çé", "é"));
+	return (0);
 }
