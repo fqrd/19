@@ -6,9 +6,13 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:35:53 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/14 13:35:33 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/22 22:17:25 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "libft.h"
 
 static int	ft_isspace(int c)
 {
@@ -32,17 +36,17 @@ int	ft_atoi(const char *str)
 		sign = -1;
 	if (*str == 43 || *str == 45)
 		str++;
-	while (*str >= 48 && *str <= 57)
+	while (*str >= 48 && *str <= 57 && *str)
 	{
-		add = 10 * nbr + (*str - '0');
-		if (add > nbr)
+		add = 10 * nbr + (*str++ - '0');
+		if (add > nbr && ((add / 100) < (nbr / 10)))
+			add *= (-1);
+		if (add > nbr && ((add / 100) >= (nbr / 10)))
 			nbr = add;
-		str++;
 	}
-	if (add < nbr && sign == 1)
+	if ((add < nbr && sign == 1))
 		return (-1);
 	if (add < nbr && sign == -1)
 		return (0);
-	nbr = nbr * sign;
-	return (nbr);
+	return (nbr * sign);
 }
