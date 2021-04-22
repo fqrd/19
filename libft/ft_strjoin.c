@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:33:58 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/15 19:00:35 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:55:54 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	second = (char *) s2;
 	lfirst = ft_strlen(first);
 	lsecond = ft_strlen(second);
-	output = malloc(sizeof(char *) * (lfirst + lsecond + 1));
+	output = malloc(sizeof(char) * (lfirst + lsecond + 1));
 	if (!output)
 		return (NULL);
 	while (i < (lfirst + lsecond))
