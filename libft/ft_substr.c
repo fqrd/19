@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:30:37 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/22 13:55:45 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:09:37 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ps = (char *) s;
 	while (start + llock < ft_strlen(s) && llock < len)
 		llock++;
-	substring = malloc(sizeof(char *) * (llock));
+	substring = malloc(sizeof(char) * (llock));
 	if (!substring || s == NULL || len == 0)
 		return (NULL);
 	if (start > ft_strlen(s))
