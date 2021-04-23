@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:35:11 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/23 14:01:56 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/23 14:13:15 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*to_char(long long value, int size, char *output)
 	}
 	else
 	{
-		to_char(value / 10, --size, output);
+		to_char(value / 10, size - 1, output);
 		output[size] = (value % 10) + '0';
 	}
 	return (output);
@@ -37,7 +37,7 @@ static char	*below_zero(long long v, int size)
 	if (!output)
 		return (NULL);
 	output[0] = '-';
-	to_char(v, size, ++output);
+	to_char(v, size, output);
 	output[size + 1] = '\0';
 	return (output);
 }
@@ -49,7 +49,7 @@ static char	*above_zero(long long v, int size)
 	output = malloc(sizeof(char) * (size));
 	if (!output)
 		return (NULL);
-	to_char(v, size - 1, output);
+	to_char(v, size - 1 , output);
 	output[size] = '\0';
 	return (output);
 }
@@ -71,7 +71,14 @@ char	*ft_itoa(int value)
 		output = below_zero(v*(-1), size);
 	else
 		output = above_zero(v, size);
+	printf("res:	|%s|\n",output);
 	if (!output)
 		return (NULL);
 	return (output);
+}
+
+int main (void)
+{
+	printf("res:	|%s|\n", ft_itoa(-160));
+	return (0);
 }
