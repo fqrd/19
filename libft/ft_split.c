@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/20 19:26:54 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/23 14:04:59 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char		**execute_split(char *str, unsigned char cc, char **split, size_t c
 			end++;
 		while (str[end] == cc && str[end] && end < ft_strlen(str))
 			end++;
-		string = malloc(sizeof(char *) * ((end + 1) - start));
+		string = malloc(sizeof(char) * ((end + 1) - start));
 		if(!string)
 			return (NULL);
 		string[(end + 1) - start] = '\0';
@@ -88,10 +88,10 @@ char	**ft_split(char const *s, char c)
 	count = count_splits(cs, cc);
 	//printf("#2 count: %ld\n", count);
 	
-	split = malloc(sizeof(char**) * count);
+	split = malloc(sizeof(char *) * count);
 	if (!split)
 		return (NULL);
-	split [count] = malloc(sizeof (char) * 1);
+	split[count] = malloc(sizeof(char) * 1);
 	if (!split[count])
 		return (NULL);
 	split[count][0] = '\0';
