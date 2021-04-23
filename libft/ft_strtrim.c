@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/23 19:18:52 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/23 22:12:57 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,74 +15,50 @@
 #include <stddef.h>
 #include "libft.h"
 
-static size_t	find_index(char *ps, char *pset)
+int	check_char(char c, char *test)
 {
-	size_t	index;
-	size_t	len;
-
-	len = ft_strlen(pset);
-	index = 0;
-	while (*ps == *pset && *ps)
+	while (*test)
 	{
-		if (*(pset + 1) == '\0')
+		if ((unsigned char) *test++ == (unsigned char) c)
 		{
-			pset -= (len - 1);
-			index += len;
+			return (1);
 		}
-		else
-			pset++;
-		ps++;
 	}
-	// printf("s1: %s / set: %s\n", ps, pset);
-	return (index);
-}
-
-static char	*reverse(char const *set)
-{
-	char	*pset;
-	char	*rev;
-
-	pset = (char *) set;
-	rev = malloc(sizeof(char) * ft_strlen(set) + 1);
-	if (!rev)
-		return (NULL);
-	pset += (ft_strlen(pset) - 1);
-	while (pset - set >= 0)
-		*rev++ = *pset--;
-	*rev = '\0';
-	// printf("set: %s\n", set);
-	return (rev - ft_strlen(set));
+	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*ps;
-	char	*pset;
+	int	i;
 	size_t	start;
-	size_t	end;
+	size_t	len;
 	char	*output;
 
-	pset = (char *) set;
-	ps = (char *) s1;
-	if (!s1 || !set)
+	i = 0;
+	while (s1[i] && check_char((char) s1[i], (char *) set))
+		i++;
+	start = i;
+	i = ft_strlen(s1) - 1;
+	while (i > 0 && check_char((char) s1[i], (char *) set))
+		i--;
+	len = (i + 1) - start;
+	output = malloc(sizeof(char) * len + 1);
+	if (!output)
 		return (NULL);
-	start = find_index(ps, pset);
-	end = find_index(reverse(ps), reverse(pset));
-	ps = (char *) s1;
-	output = ft_substr(ps, start, ft_strlen(ps) - (start + end));
+	output = ft_substr(s1, start, len);
 	return (output);
 }
-
 /*
 int	main(void)
 {
 	printf("---------------\n----STRTRIM----\n---------------\n");
-	printf("#1	|%s|\n", ft_strtrim("\t\t\t\t\tok\tok\t","\t"));
-	printf("#2	|%s|\n", ft_strtrim("112234456ok654432211ok112234456","112234456"));
-	printf("#3	|%s|\n", ft_strtrim("-$^µù=:;,&éé&'§ok-$^µù=:;,&éé&'§","-$^µù=:;,&éé&'§"));
-	printf("#4	|%s|\n", ft_strtrim(" 	  ok 	  "," 	  "));
-	printf("#5	|%s|\n", ft_strtrim("okokokokok","ok"));
-	printf("#6	|%s|\n", ft_strtrim("okkokkkokk","okk"));
-	printf("#6	|%s|\n", ft_strtrim("",""));
+	ft_strtrim("1238123","123");
+	printf("#1	|%s|\n", ft_strtrim("\t\t\t\t\tok\tok\t","\t")); 								// |ok	ok|
+	printf("#2	|%s|\n", ft_strtrim("11223488456ok8654432211ok1122394456","1234756")); 			// |ok654432211ok|
+	printf("#3	|%s|\n", ft_strtrim("-$^µù=:;,&éé&'§ok-$^µù=:;,&éé&'§","-$^µù=:;,&éé&'§")); 	// |ok|
+	printf("#4	|%s|\n", ft_strtrim(" 	  ok 	  "," 	  "));  								// |ok|
+	printf("#5	|%s|\n", ft_strtrim("okokoko8kok","ok")); 										// ||
+	printf("#6	|%s|\n", ft_strtrim("okmkokkkokk","okk")); 										// |k|
+	printf("#7	|%s|\n", ft_strtrim("","")); 													// |(null)|
 	return (0);
 }*/
