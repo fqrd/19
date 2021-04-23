@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/22 15:47:49 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/23 13:43:42 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 int	main(void)
 {
 	printf("---------------\n----STRTRIM----\n---------------\n");
-	/*printf("%s\n", ft_strtrim("ox9ox9ox9ox9ox9ox9ox9ox9testox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9", "ox9"));
+	printf("%s\n", ft_strtrim("ox9ox9ox9ox9ox9ox9ox9ox9testox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9ox9", "ox9"));
 	printf("%s\n", ft_strtrim("azhoonsnapazodnonosnaoaoazndnnodanzudnnazudn", "azhoo"));
 	printf("%s\n", ft_strtrim("-à&é!'ç&énk'&péoj'à&éh!dàhipnzdk,ôd)&j&édà", "à"));
 	printf("%s\n", ft_strtrim(" 	              		ppe	 ", " 	"));

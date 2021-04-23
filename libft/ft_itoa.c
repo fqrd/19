@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:35:11 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/19 17:25:14 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/23 13:58:33 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*to_char(long long value, int size, char *output)
 	}
 	else
 	{
-		to_char(value / 10, size - 1, output);
+		to_char(value / 10, --size, output);
 		output[size] = (value % 10) + '0';
 	}
 	return (output);
@@ -32,13 +32,12 @@ static char	*to_char(long long value, int size, char *output)
 static char	*below_zero(long long v, int size)
 {
 	char	*output;
-
-	v *= (-1);
-	output = malloc(sizeof(char *) * (size + 2));
+	
+	output = malloc(sizeof(char) * (size + 2));
 	if (!output)
 		return (NULL);
 	output[0] = '-';
-	to_char(v, size, output);
+	to_char(v, size, ++output);
 	output[size + 1] = '\0';
 	return (output);
 }
@@ -47,11 +46,11 @@ static char	*above_zero(long long v, int size)
 {
 	char	*output;
 
-	output = malloc(sizeof(char *) * (size + 1));
+	output = malloc(sizeof(char) * (size + 1));
 	if (!output)
 		return (NULL);
 	to_char(v, size - 1, output);
-	output[size + 1] = '\0';
+	output[size] = '\0';
 	return (output);
 }
 
@@ -69,7 +68,7 @@ char	*ft_itoa(int value)
 		size++;
 	}
 	if (v < 0)
-		output = below_zero(v, size);
+		output = below_zero(v*(-1), size);
 	else
 		output = above_zero(v, size);
 	if (!output)
