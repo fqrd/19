@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/23 14:06:16 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/23 15:35:48 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,78 +15,72 @@
 #include <stddef.h>
 #include "libft.h"
 
-static	size_t	from_left(char *s, char *ref)
+static size_t find_index(char *ps, char *pset)
 {
-	size_t	istr;
-	size_t	iref;
-	size_t	output;
+	size_t 	index;
+	size_t	len;
 
-	istr = 0;
-	iref = 0;
-	output = 0;
-	if (s[istr] == ref[iref])
+	len = ft_strlen(pset);
+	index = 0;
+	while (*ps == *pset && *ps)
 	{
-		while (s[istr] == ref[iref] && s[istr] != '\0')
+		if (*(pset + 1) == '\0')
 		{
-			if (ref[iref + 1] == '\0')
-			{
-				iref = 0;
-				output = istr + 1;
-			}
-			else
-				iref++;
-			istr++;
+			pset -= (len - 1);
+			index += len;
 		}
+		else
+			pset++;
+		ps++;	
 	}
-	return (output);
+	return (index);
 }
 
-static	size_t	from_right(char *s, char *ref, size_t ls, size_t lref)
+static char	*reverse(char const *set)
 {
-	size_t	istr;
-	size_t	iref;
-	size_t	output;
-
-	istr = ls;
-	iref = lref;
-	output = ls;
-	if (s[istr] == ref[iref])
-	{
-		while (s[istr] == ref[iref] && istr > 0)
-		{
-			if (iref == 0)
-			{
-				iref = lref - 1;
-				output = istr;
-			}
-			else
-				iref--;
-			istr--;
-		}
-	}
-	return (output);
+	char *pset;
+	char *rev;
+	
+	pset = (char *) set;
+	rev = malloc(sizeof(char) * ft_strlen(pset) + 1);
+	if (!rev)
+		return (NULL);
+	pset += (ft_strlen(pset) - 1);
+	while (pset - set >= 0)
+		*rev++ = *pset--;
+	*rev = '\0';
+	// printf("#3 rev: %s / pset: %s\n", rev, pset + 1);
+	return (rev - ft_strlen(set));
 }
+
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*s;
-	char	*ref;
-	char	*output;
 	size_t	start;
 	size_t	end;
+	char	*ps;
+	char	*pset;
+	char	*output;
 
-	ref = (char *) set;
-	s = (char *) s1;
-	if (!s1 || !set)
-		return (NULL);
-	start = from_left(s, ref);
-	end = from_right(s, ref, ft_strlen(s), ft_strlen(ref));
-	// printf("start: %zu / end: %zu / len: %zu / s: |%s|\n", start, end, end - start, s);
-	output = ft_substr(s, start, (end - start) + 1);
-	output[(end - start) + 1] = '\0';
+	pset = (char *)	set;
+	ps = (char *) s1;
+	start = find_index(ps, pset);
+	ps = reverse(s1);
+	pset = reverse(set);
+	end = find_index(ps, pset);
+	output = ft_substr(s1, start, ft_strlen(s1) - (start + end));
+	printf("pset: %s / ps: %s / start: %zu / end: %zu\n", pset, ps, start, end);
 	return (output);
 }
 
+
+
+
+// int main(void)
+// {
+// 	printf("result:	%s\n",ft_strtrim("abcopqrstabc55absabc", "abc"));
+// 	return (0);
+// }
 /*
 int	main(void)
 {
