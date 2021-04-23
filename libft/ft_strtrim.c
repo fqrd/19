@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/23 22:58:50 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/23 23:14:56 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	start;
 	size_t	len;
 	char	*output;
+	int 	error;
 
-	if(!s1 || !set || !ft_strlen(s1) || !ft_strlen(set))
-		printf("OUT\n");
+	error = 0;
+	if(!s1 || !ft_strlen(s1))
+		error = 1;
 	i = 0;
 	while (s1[i] && check_char((char) s1[i], (char *) set))
 		i++;
@@ -42,13 +44,19 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (--i > 0 && check_char((char) s1[i], (char *) set));
 	printf("start: %zu / i: %zu\n", start, i);
 	if (i <= start)
-		return ("");
-	len = (i - start) + 1;
-	printf("len: %zu\n", len);
+	{
+		len = 0;
+		error = 1;
+	}
+	else
+		len = (i - start) + 1;
 	output = malloc(sizeof(char) * len + 1);
 	if (!output)
 		return (NULL);
-	output = ft_substr(s1, start, len);
+	if (error)
+		output[0] = '\0';
+	else
+		output = ft_substr(s1, start, len);
 	return (output);
 }
 
