@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/23 23:27:25 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:00:12 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	start;
-	size_t	len;
 	char	*output;
 
 	if (!s1 || !set)
@@ -41,15 +40,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = ft_strlen(s1) - 1;
 	while (i > 0 && check_char((char) s1[i], (char *) set))
 		i--;
-	if (!ft_strlen(s1) || i <= start)
-		len = 0;
-	else
-		len = (i - start) + 1;
-	output = malloc(sizeof(char) * len + 1);
+	if (i > start && ft_strlen(s1) > 0)
+		return (ft_substr(s1, start,(i - start) + 1));
+	output = malloc(sizeof(char) * 1);
 	if (!output)
 		return (NULL);
-	if (len != 0)
-		return (ft_substr(s1, start, len));
 	output[0] = '\0';
 	return (output);
 }
