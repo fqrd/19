@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/24 15:53:17 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:02:02 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	**ft_split(char const *s, char c)
 	n = count_splits(ps, c, 1);
 	printf("trim: %s\n", ps);
 	printf("n: %zu\n", n);
+	if (!s || !c || !ft_strlen(s))
+		n = 0;
 	array = malloc(sizeof(char *) * n + 1);
 	array[n] = malloc(sizeof(char) * 1);
 	if (!array || !array[n])
@@ -73,16 +75,18 @@ char	**ft_split(char const *s, char c)
 		free(array);
 		return (NULL);
 	}
-	array[n] = '\0';
+	array[n] = "\0";
 	split(array, ps, c);
 	return (array);
 }
 
-/*
-int main(void)
+
+/*int main(void)
 {
-	char	**array = ft_split("aaaI caaan't find any GPU online,
-	 everything is soldout. What a shaaame.a", 'a');
+	char	**array = ft_split("aaaI caaan't find any GPU online, everything is soldout. What a shaaame.a", 'a');
+	char	**array = ft_split("     ", ' ');
+	char	**array = ft_split("", ' ');
+	char	**array = ft_split("", 0);
 	printf("|%s|\n", array[0]);
 	printf("|%s|\n", array[1]);
 	printf("|%s|\n", array[2]);
@@ -91,5 +95,5 @@ int main(void)
 	printf("|%s|\n", array[5]);
 	printf("|%s|\n", array[6]);
 	return (0);
-}
-*/
+}*/
+
