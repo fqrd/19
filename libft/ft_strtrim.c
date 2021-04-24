@@ -6,12 +6,11 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/24 14:00:12 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:07:57 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <stddef.h>
 #include "libft.h"
 
@@ -41,7 +40,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (i > 0 && check_char((char) s1[i], (char *) set))
 		i--;
 	if (i > start && ft_strlen(s1) > 0)
-		return (ft_substr(s1, start,(i - start) + 1));
+		return (ft_substr(s1, start, (i - start) + 1));
 	output = malloc(sizeof(char) * 1);
 	if (!output)
 		return (NULL);

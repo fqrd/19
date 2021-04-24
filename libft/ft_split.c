@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/23 14:04:59 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:53:17 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,114 +15,81 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static size_t	count_splits(char *str, unsigned char cc)
+static size_t	count_splits(char *str, unsigned char c, size_t n)
 {
-	size_t	count;
-	size_t	i;
-
-	count = 0;
-	i = 0;
-	while (i < ft_strlen(str) && str[i] != '\0')
+	while (*str)
 	{
-		// printf("#2 str[i]:	%c / cc: %u\n", str[i], cc);
-		while (str[i] == cc && str[i])
-			i++;
-		while (str[i] != cc && str[i])
-			i++;
-		while (str[i] == cc && str[i])
-			i++;
-		count++;			
+		if (*str && *str == c)
+		{
+			while (*str && *str == c)
+				str++;
+			n++;
+		}
+		str++;
 	}
-	// printf("#3 count:	%ld\n", count);
-
-	return (count);
+	return (n);
 }
 
-static char		**execute_split(char *str, unsigned char cc, char **split, size_t count)
+static char	**split(char **array, char *str, unsigned char c)
 {
 	size_t	i;
-	size_t	end;
 	size_t	start;
-	char	*string;
+	size_t	cell;
 
-	i = 0;
+	cell = 0;
 	start = 0;
-	end = 0;
-	
-	while (i < ft_strlen(str) && i < count )
+	i = start;
+	while (str[i])
 	{
-		while (str[end] == cc && str[end] && end < ft_strlen(str))
-			end++;
-		while (str[end] != cc && str[end]  && end < ft_strlen(str))
-			end++;
-		while (str[end] == cc && str[end] && end < ft_strlen(str))
-			end++;
-		string = malloc(sizeof(char) * ((end + 1) - start));
-		if(!string)
-			return (NULL);
-		string[(end + 1) - start] = '\0';
-		string = ft_substr(str, start, end - start);
-		split[i] = string;
-
-		//printf("split[%ld]:	%s\n", i,  string);
-		//// printf("split[i]:	%s\n", split[i]);
-		//// split save malloc
-		//printf("start: %ld / end: %ld / length: %ld\n", start, end, end - start);
-		//start = end;
+		if (str[i] && str[i] == c)
+		{
+			array[cell++] = ft_substr(str, start, (i - start));
+			while (str[i] && str[i] == c)
+				i++;
+			start = i;
+		}
 		i++;
 	}
-	//printf("split[0]:	%s\n", split[0]);
-	return (split);
+	array[cell] = ft_substr(str, start, (i - start));
+	return (array);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t			count;
-	char			*cs;
-	unsigned char	cc;
-	char			**split;
+	size_t	n;
+	char	*ps;
+	char	**array;
 
-	cs = (char *) s;
-	cc = (unsigned char) c;
-	//printf("#1 str: %s / cc: %c\n", cs, cc);
-	count = count_splits(cs, cc);
-	//printf("#2 count: %ld\n", count);
-	
-	split = malloc(sizeof(char *) * count);
-	if (!split)
+	ps = (char *) s;
+	ps = ft_strtrim(ps, &c);
+	n = count_splits(ps, c, 1);
+	printf("trim: %s\n", ps);
+	printf("n: %zu\n", n);
+	array = malloc(sizeof(char *) * n + 1);
+	array[n] = malloc(sizeof(char) * 1);
+	if (!array || !array[n])
+	{
+		free(array[n]);
+		free(array);
 		return (NULL);
-	split[count] = malloc(sizeof(char) * 1);
-	if (!split[count])
-		return (NULL);
-	split[count][0] = '\0';
-
-	if (!s)
-		return (split);
-
-	split = execute_split(cs, cc, split, count);
-
-
-	// split[0] = malloc(sizeof(char *) * 9 + 1);
-	// if(!split[0])
-	// 	return (NULL);
-	// split[0] = "Fuck that";
-	// printf("#4 count:	%zu / split[i]:	%s\n", count, split[0]);
-	
-	return (split);
+	}
+	array[n] = '\0';
+	split(array, ps, c);
+	return (array);
 }
 
 /*
 int main(void)
 {
-	char **split;
-	split = ft_split("JJJANA45A9AmAo", 'A');
-
-	size_t i = 0;
-	while (split[i][0])
-	{
-		printf("split[%ld]:	%s\n", i, split[i]);
-		i++;
-	}
-	free (split);
+	char	**array = ft_split("aaaI caaan't find any GPU online,
+	 everything is soldout. What a shaaame.a", 'a');
+	printf("|%s|\n", array[0]);
+	printf("|%s|\n", array[1]);
+	printf("|%s|\n", array[2]);
+	printf("|%s|\n", array[3]);
+	printf("|%s|\n", array[4]);
+	printf("|%s|\n", array[5]);
+	printf("|%s|\n", array[6]);
 	return (0);
-}*/
+}
+*/
