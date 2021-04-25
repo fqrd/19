@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:33:58 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 19:14:23 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:36:15 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	first = (char *) s1;
 	second = (char *) s2;
-	len = ft_strlen(first) + ft_strlen(second);
-	output = malloc(sizeof(char) * (len + 1));
+	len = ft_strlen(s1) + ft_strlen(s2);
+	output = malloc(sizeof(char) * len + 1);
 	if (!output)
 		return (NULL);
 	while (i < len)
 	{
-		if (i < ft_strlen(first))
+		if (i < ft_strlen(s1))
 			output[i] = *first++;
 		else
 			output[i] = *second++;
