@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:35:53 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 18:10:13 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/25 18:23:02 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s || !(*f))
 		return (NULL);
-
 	ps = (char *) s;
 	i = 0;
 	output = malloc (sizeof(char) * ft_strlen(ps) + 1);
 	if (!output)
 		return (NULL);
-	while (ps[i])
+	while (ps[i] != '\0')
 	{
-		output[i]= (*f)(i, ps[i]);
+		output[i]= (*f)((unsigned int) i,(char) ps[i]);
 		i++;
 	}
+	output[i] = '\0';
 	return (output);
 }
 
