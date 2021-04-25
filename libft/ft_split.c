@@ -6,12 +6,11 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 17:05:08 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/25 17:52:00 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
 
@@ -63,7 +62,7 @@ char	**ft_split(char const *s, char c)
 	ps = ft_strtrim((char *) s, &c);
 	n = count_splits(ps, c, 1);
 	if (!s || !ft_strlen(s))
-		n =  0;
+		n = 0;
 	array = malloc(sizeof(char *) * n + 1);
 	if (!array)
 	{
@@ -75,22 +74,3 @@ char	**ft_split(char const *s, char c)
 	free(ps);
 	return (array);
 }
-
-
-/*int main(void)
-{
-	char	**array = ft_split("aaaI caaan't find any GPU online, everything is soldout. What a shaaame.a", 'a');
-	char	**array = ft_split("     ", ' ');
-	char	**array = ft_split("", ' ');
-	char	**array = ft_split("", 0);
-	printf("|%s|\n", array[0]);
-	printf("|%s|\n", array[1]);
-	printf("|%s|\n", array[2]);
-	printf("|%s|\n", array[3]);
-	printf("|%s|\n", array[4]);
-	printf("|%s|\n", array[5]);
-	printf("|%s|\n", array[6]);
-	free(array);
-	return (0);
-}*/
-
