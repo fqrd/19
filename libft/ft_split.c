@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/24 16:55:05 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/25 17:05:08 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ char	**ft_split(char const *s, char c)
 	ps = ft_strtrim((char *) s, &c);
 	n = count_splits(ps, c, 1);
 	if (!s || !ft_strlen(s))
-		n = 0;
-	printf("count: %zu\n", n);
+		n =  0;
 	array = malloc(sizeof(char *) * n + 1);
 	if (!array)
 	{
 		free(array);
 		return (NULL);
 	}
-	split(array, ps, c);
 	array[n] = NULL;
+	split(array, ps, c);
+	free(ps);
 	return (array);
 }
 
