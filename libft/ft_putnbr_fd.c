@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:39:20 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/27 16:24:21 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:39:46 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ static void	recc_write(int n, int fd)
 	else
 	{
 		recc_write(n / 10, fd);
+		n = n % 10;
 		if (n < 0)
 			n *= (-1);
-		ft_putchar((n % 10) + '0', fd);
+		ft_putchar(n + '0', fd);
 	}
 }
 
