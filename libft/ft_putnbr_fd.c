@@ -6,17 +6,13 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:39:20 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/27 16:39:46 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/27 20:33:33 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
-
-static void	ft_putchar(char c, int fd)
-{
-	write(fd, &c, 1);
-}
+#include "libft.h"
 
 static void	recc_write(int n, int fd)
 {
@@ -25,9 +21,9 @@ static void	recc_write(int n, int fd)
 		if(n < 0)
 		{
 			n *= (-1);	
-			ft_putchar('-', fd);
+			ft_putchar_fd('-', fd);
 		}
-		ft_putchar(n + '0', fd);
+		ft_putchar_fd(n + '0', fd);
 	}
 	else
 	{
@@ -35,7 +31,7 @@ static void	recc_write(int n, int fd)
 		n = n % 10;
 		if (n < 0)
 			n *= (-1);
-		ft_putchar(n + '0', fd);
+		ft_putchar_fd(n + '0', fd);
 	}
 }
 
