@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:39:20 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/27 15:35:43 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:24:21 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_putnbr_fd(int n, int fd)
 {
 	if (fd > -1)
 		recc_write(n, fd);
-	close (fd);
 }
 
 /*
