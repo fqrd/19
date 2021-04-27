@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:39:20 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/27 14:10:36 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:37:44 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putnbr_fd(int n, int fd)
 		nstr = ft_itoa(n);
 		while (*nstr)
 		{
-			write(fd, &nstr, 1);	
+			write(fd, nstr, 1);	
 			nstr++;
 		}
 	}

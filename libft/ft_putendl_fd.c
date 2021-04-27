@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:38:55 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/27 14:10:08 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:37:19 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putendl_fd(char *s, int fd)
 	{
 		while (*s)
 		{
-			write (fd, *s, 1);
+			write (fd, s, 1);
 			s++;
 		}
 		write (fd, "\n", 1);
