@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:39:20 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/27 20:33:33 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:19:27 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	recc_write(int n, int fd)
 {
 	if ((n >= 0 && n < 10) || (n < 0 && n > -10))
 	{
-		if(n < 0)
+		if (n < 0)
 		{
-			n *= (-1);	
+			n *= (-1);
 			ft_putchar_fd('-', fd);
 		}
 		ft_putchar_fd(n + '0', fd);
@@ -40,14 +40,3 @@ void	ft_putnbr_fd(int n, int fd)
 	if (fd > -1)
 		recc_write(n, fd);
 }
-
-/*
-int main(void)
-{
-	int fd;
-	int i = 123456789;
-	fd = open("./b", O_WRONLY);
-	ft_putnbr_fd(i, fd);
-	return (0);
-}
-*/

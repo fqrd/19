@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:35:11 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 19:15:10 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:25:05 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ static char	*above_zero(long long v, int size)
 	return (output);
 }
 
-char	*ft_itoa(int value)
+char	*ft_itoa(int n)
 {
 	long long	v;
 	int			size;
 	char		*output;
 
-	v = (long long) value;
+	v = (long long) n;
 	size = 1;
-	while (value >= 10 || value <= -10)
+	while (n >= 10 || n <= -10)
 	{
-		value /= 10;
+		n /= 10;
 		size++;
 	}
 	if (v < 0)
