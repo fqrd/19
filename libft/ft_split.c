@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 17:52:00 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:18:42 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ char	**ft_split(char const *s, char c)
 	char	*ps;
 	char	**array;
 
+	if (!s)
+		return (NULL);
 	ps = ft_strtrim((char *) s, &c);
 	n = count_splits(ps, c, 1);
-	if (!s || !ft_strlen(s))
+	if (!ft_strlen(s))
 		n = 0;
 	array = malloc(sizeof(char *) * n + 1);
 	if (!array)

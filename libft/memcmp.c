@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:23 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/09 16:19:52 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:23:09 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,5 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		return (0);
 	while (n && (*p++ == *q++))
 		n--;
-	if (p[-1] - q[-1] != 0)
-		return (p[-1] - q[-1]);
-	else
-		return (0);
+	return (p[-1] - q[-1]);
 }
