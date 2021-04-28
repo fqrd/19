@@ -1,17 +1,13 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-SRC = $(filter-out main.c, $(wildcard *.c))
+SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-
-#! REMOVE
-WLSLBSD = -lbsd
-
 
 all : $(NAME)
 
 obj: $(SRC)
-	$(CC) $(CFLAGS) $(WLSLBSD) -c $< -o $(OBJ)
+	$(CC) $(CFLAGS) -c $< -o $(OBJ)
 
 $(NAME): $(OBJ)
 	ar rs $(NAME) $(OBJ)
