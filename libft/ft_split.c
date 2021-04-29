@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/28 15:18:42 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/04/29 18:02:42 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ static size_t	count_splits(char *str, unsigned char c, size_t n)
 	return (n);
 }
 
+static char	**cmalloc(char *sub, char **arr, size_t cell)
+{
+	arr[cell] = sub;
+	if (!arr[cell])
+	{
+		arr = arr - cell;
+		while (*arr)
+			free(*arr++);
+		return (NULL);
+	}
+	return (arr);
+}
+
 static char	**split(char **array, char *str, unsigned char c)
 {
 	size_t	i;
@@ -42,14 +55,17 @@ static char	**split(char **array, char *str, unsigned char c)
 	{
 		if (str[i] && str[i] == c)
 		{
-			array[cell++] = ft_substr(str, start, (i - start));
+			if (!cmalloc(ft_substr(str, start, (i - start)), array, cell))
+				return (NULL);
+			cell++;
 			while (str[i] && str[i] == c)
 				i++;
 			start = i;
 		}
 		i++;
 	}
-	array[cell] = ft_substr(str, start, (i - start));
+	if (!cmalloc(ft_substr(str, start, (i - start)), array, cell))
+		return (NULL);
 	return (array);
 }
 
@@ -61,18 +77,18 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
+	n = 0;
 	ps = ft_strtrim((char *) s, &c);
-	n = count_splits(ps, c, 1);
-	if (!ft_strlen(s))
-		n = 0;
-	array = malloc(sizeof(char *) * n + 1);
-	if (!array)
-	{
-		free(array);
+	if (!ps)
 		return (NULL);
-	}
+	if (ft_strlen(s) > 0)
+		n = count_splits(ps, c, 1);
+	array = malloc(sizeof(char *) * n + 1 );
+	if (!array)
+		return (NULL);
 	array[n] = NULL;
-	split(array, ps, c);
+	if (!split(array, ps, c))
+		return (NULL);
 	free(ps);
 	return (array);
 }
