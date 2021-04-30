@@ -1,16 +1,19 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-SRC = $(wildcard *.c)
-OBJ = $(SRC:.c=.o)
+BONUSFILES = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
+SRCALL = $(wildcard *.c)
+SRCMANDATORY = $(filter-out $(BONUSFILES), $(wildcard *.c))
+MANDATORY = $(SRCMANDATORY:.c=.o)
+ALL = $(SRCALL:.c=.o)
 
 all : $(NAME)
 
-obj: $(SRC)
-	$(CC) $(CFLAGS) -c $< -o $(OBJ)
+$(NAME): $(MANDATORY)
+	ar rs $(NAME) $(MANDATORY)
 
-$(NAME): $(OBJ)
-	ar rs $(NAME) $(OBJ)
+bonus : $(ALL)
+	ar rs $(NAME) $(ALL)
 
 clean:
 	rm -f *.o
