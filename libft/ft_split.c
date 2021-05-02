@@ -6,12 +6,10 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/01 13:16:33 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:48:22 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static size_t	count_splits(char *str, unsigned char c, size_t n)

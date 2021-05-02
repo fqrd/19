@@ -6,11 +6,11 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/12 18:35:24 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:49:18 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

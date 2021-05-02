@@ -6,12 +6,11 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:38:22 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 19:19:10 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:47:22 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stddef.h>
+#include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

@@ -6,11 +6,10 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:33:58 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 19:36:15 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:48:24 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
