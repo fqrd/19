@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 17:40:01 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/05 17:47:59 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	output[0] = '\0';
 	return (output);
 }
-
