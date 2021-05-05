@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:32 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:22:23 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:38:19 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strchr(const char *s, int c)
 	unsigned char	cc;
 
 	cc = (unsigned char) c;
-	p = (char *) s;
+	p = (unsigned char *) s;
 	while (*p != '\0')
 	{
 		if (*(p++) == cc)

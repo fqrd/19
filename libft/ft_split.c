@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:22:12 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/05 13:36:32 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	**cmalloc(char *sub, char **arr, size_t cell)
 		arr = arr - cell;
 		while (*arr)
 			free(*arr++);
+		free(arr);
 		return (NULL);
 	}
 	return (arr);
@@ -88,7 +89,10 @@ char	**ft_split(char const *s, char c)
 	if (n)
 	{	
 		if (!split(array, ps, c))
+		{
+			free(ps);
 			return (NULL);
+		}
 	}
 	free(ps);
 	return (array);
