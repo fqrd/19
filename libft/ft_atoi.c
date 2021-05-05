@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:35:53 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:36:48 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:08:30 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ int	ft_atoi(const char *str)
 		return (-1);
 	if (add < nbr && sign == -1)
 		return (0);
-	return ((int) (nbr * sign));
+	return ((int)(nbr * sign));
 }

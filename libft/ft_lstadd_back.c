@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:20:15 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:43:25 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:08:06 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 	if (!new)
 		return ;
-
 	if (!*lst)
 		*lst = new;
 	else
