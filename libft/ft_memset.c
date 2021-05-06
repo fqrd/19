@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:30 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:22:03 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/06 15:24:02 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memset(void *s, int c, size_t n)
 {
 	char	*p;
 
-	p = s;
+	p = (char *) s;
 	while (n > 0)
 	{
 		*p = c;
