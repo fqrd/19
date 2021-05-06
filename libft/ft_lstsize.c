@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:20:58 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:20:59 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:53:46 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_lstsize(t_list *lst)
 	i = 0;
 	while (lst)
 	{
+		lst = lst->next;
 		i++;
-		lst = lst -> next;
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:39:20 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/06 14:46:39 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:47:36 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	recc_write(int n, int fd)
 {
-	if (n > -10 && n < 0)	
+	if (n > -10 && n < 0)
 		ft_putchar_fd('-', fd);
 	if (n < -10 || n > 10)
 	{

@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:20:34 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:53:45 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:54:10 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_lstclear(t_list **lst, void (*del) (void *))
 	{
 		while (*lst)
 		{
-			tmp = (*lst)-> next;
-			del((*lst)-> content);
+			tmp = (*lst)->next;
+			del((*lst)->content);
 			free (*lst);
 			*lst = tmp;
 		}

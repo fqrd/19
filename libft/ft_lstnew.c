@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:20:55 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:20:55 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:53:17 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstnew(void *content)
 	list = malloc(sizeof(t_list) * 1);
 	if (!list)
 		return (NULL);
-	list -> content = content;
-	list -> next = NULL;
+	list->content = content;
+	list->next = NULL;
 	return (list);
 }
