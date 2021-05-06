@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:20:51 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/06 14:53:05 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/06 15:01:26 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	if (!new)
 		return (NULL);
 	next_new = new;
+	lst = lst->next;
 	while (lst)
 	{	
 		next_new -> next = ft_lstnew((*f)(lst->content));
