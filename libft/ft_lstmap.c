@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/11 18:33:58 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:22:28 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/05/05 13:20:51 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/05/06 15:01:26 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*first;
-	char	*second;
-	char	*output;
-	size_t	len;
-	size_t	i;
+	t_list	*new;
+	t_list	*next_new;
 
-	if (!s1 || !s2)
+	if (!lst || !(*f))
 		return (NULL);
-	i = 0;
-	first = (char *) s1;
-	second = (char *) s2;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	output = malloc(sizeof(char) * len + 1);
-	if (!output)
+	new = ft_lstnew(f(lst->content));
+	if (!new)
 		return (NULL);
-	while (i < len)
-	{
-		if (i < ft_strlen(s1))
-			output[i] = *first++;
-		else
-			output[i] = *second++;
-		i++;
+	next_new = new;
+	lst = lst->next;
+	while (lst)
+	{	
+		next_new -> next = ft_lstnew((*f)(lst->content));
+		if (!next_new->next)
+		{
+			ft_lstclear(&new, del);
+			return (NULL);
+		}
+		next_new = next_new->next;
+		lst = lst->next;
 	}
-	output[i] = '\0';
-	return (output);
+	return (new);
 }

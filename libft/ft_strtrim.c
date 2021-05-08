@@ -6,12 +6,10 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:25 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/28 14:52:05 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/05 17:47:59 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stddef.h>
 #include "libft.h"
 
 static int	check_char(char c, char *test)
@@ -39,7 +37,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = ft_strlen(s1) - 1;
 	while (i > 0 && check_char((char) s1[i], (char *) set))
 		i--;
-	if (i > start && ft_strlen(s1) > 0)
+	if (i >= start && ft_strlen(s1) > 0)
 		return (ft_substr(s1, start, (i - start) + 1));
 	output = malloc(sizeof(char) * 1);
 	if (!output)

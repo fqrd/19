@@ -6,12 +6,14 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 18:34:49 by fcaquard          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/04/29 18:22:57 by fcaquard         ###   ########.fr       */
+=======
+/*   Updated: 2021/05/05 17:47:17 by fcaquard         ###   ########.fr       */
+>>>>>>> e31970b45a1c4a50d4f1c4863734994b4ca9dd32
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static size_t	count_splits(char *str, unsigned char c, size_t n)
@@ -37,6 +39,7 @@ static char	**cmalloc(char *sub, char **arr, size_t cell)
 		arr = arr - cell;
 		while (*arr)
 			free(*arr++);
+		free(arr);
 		return (NULL);
 	}
 	return (arr);
@@ -81,13 +84,16 @@ char	**ft_split(char const *s, char c)
 	ps = ft_strtrim((char *) s, &c);
 	if (!ps)
 		return (NULL);
-	if (ft_strlen(ps) > 0)
+	if (ft_strlen(ps))
 		n = count_splits(ps, c, 1);
 	array = malloc(sizeof(char *) * n + 1 );
 	if (!array)
 		return (NULL);
 	array[n] = NULL;
-	split(array, ps, c);
+	if (n)
+		split(array, ps, c);
 	free(ps);
+	if (!array)
+		return (NULL);
 	return (array);
 }

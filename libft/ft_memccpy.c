@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isalnum.c                                          :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 14:21:49 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/09 22:35:27 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/05/05 13:21:04 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/05/05 13:21:52 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
+#include "libft.h"
+
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	if (c < 48 || (c > 57 && c < 65) || (c > 90 && c < 97) || c > 122)
-		return (0);
-	return (1);
+	size_t			i;
+	unsigned char	*pdest;
+	unsigned char	*psrc;
+	unsigned char	pc;
+
+	i = 0;
+	pc = (unsigned char) c;
+	psrc = (unsigned char *) src;
+	pdest = (unsigned char *) dest;
+	while (i < n)
+	{	
+		pdest[i] = psrc[i];
+		if (pdest[i] == pc)
+			return ((void *) dest + (i + 1));
+		i++;
+	}
+	return ((void *) NULL);
 }

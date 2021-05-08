@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:35:53 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/25 19:15:50 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:08:30 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 static int	ft_isspace(int c)
 {
@@ -44,5 +46,5 @@ int	ft_atoi(const char *str)
 		return (-1);
 	if (add < nbr && sign == -1)
 		return (0);
-	return (nbr * sign);
+	return ((int)(nbr * sign));
 }

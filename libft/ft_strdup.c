@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memccpy.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 17:27:16 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/20 15:56:32 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/11 14:55:29 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/05/05 13:22:26 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
+char	*ft_strdup(const char *s)
 {
-	size_t			i;
-	unsigned char	*pdest;
-	unsigned char	*psrc;
-	unsigned char	pc;
+	char	*p;
+	size_t	n;
+	size_t	i;
 
+	n = 0;
 	i = 0;
-	pc = (unsigned char) c;
-	psrc = (unsigned char *) src;
-	pdest = (unsigned char *) dest;
+	while (s[n])
+		n++;
+	p = malloc(sizeof(char) * (n + 1));
+	if (!p)
+		return (NULL);
 	while (i < n)
-	{	
-		pdest[i] = psrc[i];
-		if (pdest[i] == pc)
-			return ((void *) dest + (i + 1));
+	{
+		p[i] = s[i];
 		i++;
 	}
-	return ((void *) NULL);
+	p[i] = '\0';
+	return (p);
 }

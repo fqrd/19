@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/11 14:55:29 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/14 13:35:27 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/05/05 13:20:55 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/05/06 14:53:17 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strdup(const char *s)
+t_list	*ft_lstnew(void *content)
 {
-	char	*p;
-	size_t	n;
-	size_t	i;
+	t_list	*list;
 
-	n = 0;
-	i = 0;
-	while (s[n])
-		n++;
-	p = malloc(sizeof(char) * (n + 1));
-	if (!p)
+	list = malloc(sizeof(t_list) * 1);
+	if (!list)
 		return (NULL);
-	while (i < n)
-	{
-		p[i] = s[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
+	list->content = content;
+	list->next = NULL;
+	return (list);
 }

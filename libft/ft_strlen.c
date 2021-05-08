@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isprint.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 23:13:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/10 21:36:52 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 12:34:52 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/05/05 13:22:35 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
 {
-	if (c < 32 || c > 126)
-		return (0);
-	return (1);
+	size_t	index;
+
+	index = 0;
+	while (str[index])
+		index++;
+	return (index);
 }

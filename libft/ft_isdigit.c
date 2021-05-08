@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memset.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 17:27:30 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/04/09 16:20:01 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/04/04 12:35:19 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/05/05 13:21:40 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_isdigit(int c)
 {
-	char	*p;
-
-	p = s;
-	while (n > 0)
-	{
-		*p = c;
-		p++;
-		n--;
-	}
-	return (s);
+	if (c < 48 || c > 57)
+		return (0);
+	return (1);
 }
