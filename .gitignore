@@ -2,5 +2,5 @@ a.out
 core
 output
 *.o
-/test-libft
-/unit-test
+/*-test
+libft.a
