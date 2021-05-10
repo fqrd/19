@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:27:27 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/05 13:22:01 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/10 16:05:18 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 	if (!dest && !src)
 		return (NULL);
+	if (dest == src)
+		return (dest);
 	psrc = (char *) src;
 	pdest = (char *) dest;
 	if (psrc < pdest)
