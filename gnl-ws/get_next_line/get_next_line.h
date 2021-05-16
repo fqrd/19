@@ -6,15 +6,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+typedef struct s_status
+{
+    char			*buffer;
+    char			*rest;
+    size_t          offset;
+}                   t_status;
 
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-//     struct s_list   *first;
-// }                   t_list;
-
-    size_t	ft_strlen(const char *str);
-    size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-    size_t	ft_strlcat(char *dest, const char *src, size_t size);
+    t_status	*new_status(void);
+    int get_next_line(int fd, char **line);
 #endif
