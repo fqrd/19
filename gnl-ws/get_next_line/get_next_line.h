@@ -11,9 +11,9 @@ typedef struct s_status
     char			*buffer;
     char			*tmp;
     char			*rest;
-    size_t          offset;
-    size_t          lineend;
-    int             read;
+    size_t          start;
+    size_t          end;
+    int             populated;
 }                   t_status;
 
     t_status	*new_status(void);

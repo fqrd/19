@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/18 17:58:04 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/18 19:00:38 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,94 +19,104 @@ gcc -Werror -Wextra -Wall -D BUFFER_SIZE=32 get_next_line_utils.c get_next_line.
 
 static void      find_char(char *str, t_status *status, char c)
 {
-    while (str[status->offset] && str[status->offset] == c) { 
-        status->offset++;
+    while (str[status->start] && str[status->start] == c) { 
+        status->start++;
     }
-    status->lineend = status->offset;
-    while (str[status->lineend])
+    status->end = status->start;
+    while (str[status->end])
     {
-        if(str[status->lineend] == c)
+        if(str[status->end] == c)
             return ;
-        status->lineend++;
+        status->end++;
     }
     return ;
 }
 
+static void set_default(t_status *status)
+{
+    status->start = 0;
+    status->end = 0;
+    status->tmp = "\0";
+}
+
+static void destroy_status(t_status *status)
+{
+    free(status->rest);
+    free(status->buffer);
+    free(status->tmp);
+    free(status);
+}
+/*
+static void clear(t_status *status)
+{
+    ft_bzero(status->tmp, ft_strlen(status->tmp));
+    ft_bzero(status->line, ft_strlen(status->line));
+}
+*/
+
 int get_next_line(int fd, char **line)
 {
     static t_status *status;
-    // *line = dernière ligne trouvée
-
-    /*
-    Static = status du reste (entre dernier \n trouvé et fin du buffer).
-    Si le buffer est grand et inclus de nombreux \n,
-    on va d'abord s'occuper de ceux ci avant de read à nouveau.
-    Une fois que le buffer actuel est libre de \n, 
-    on refait des read avec la même stratégie jusqu'à EOF.
-    */
-
-   /* protect the function from bad inputs */
     if (!line || fd < 0 || BUFFER_SIZE == 0)
         return (-1);
     *line = "\0";
 
-    /* if first call, initializes static variable */
     if(!status)
         status = new_status();
 
     while (1)
     {
-        /* if static variable is initialized and there's a new line remaining in its buffer */
-        if (status->read)
+        if (status->populated)
         {
             find_char(status->buffer, status, '\n');
-            if(status->lineend < BUFFER_SIZE)
+            if(status->end < BUFFER_SIZE)
             {
                 /* NEW LINE FOUND OR EOF */
-                status->tmp = ft_substr(status->buffer, status->offset, status->lineend);
+                status->tmp = ft_substr(status->buffer, status->start, status->end);
                 if(!status->tmp)
                     return (-1);
-                if(status->offset == 0 && status->rest != NULL)
+                if(status->start == 0 && status->rest[0] != '\0')
                 {
                     *line = ft_strjoin(*line, status->rest);
                     ft_bzero(status->rest, ft_strlen(status->rest));
                 }
                 *line = ft_strjoin(*line, status->tmp);
-                ft_bzero(status->tmp, ft_strlen(status->tmp));
-                status->offset = status->lineend;
-                
-                printf("\n\nline: %s\n", *line);
+                status->start = status->end;
+                // printf("\n\nline: %s\n", *line);
 
-                free(status->buffer);
-                if (status->buffer[status->lineend] == '\0')
+                // clear(status);
+
+                if (status->buffer[status->end] == '\0')
+                {
+                    // destroy_status(status);
                     return (0);
+                }
                 return (1);
             }
             else
             {
                 /* END OF BUFFER REACHED */
-                status->tmp = ft_substr(status->buffer, status->offset, BUFFER_SIZE - status->offset);
+                status->tmp = ft_substr(status->buffer, status->start, BUFFER_SIZE - status->start);
                 if(!status->tmp)
                     return (-1);
                 status->rest = ft_strjoin(status->rest, status->tmp);
                 ft_bzero(status->tmp, ft_strlen(status->tmp));
                 ft_bzero(status->buffer, BUFFER_SIZE);
-                status->read = 0;
+                status->populated = 0;
             }
         }
         else
         {
             /* CALL READ */
             read(fd, status->buffer, BUFFER_SIZE);
-            status->offset = 0;
-            status->tmp = "\0";
-            status->lineend = 0;
-            status->read = 1;
+            set_default(status);
+            status->populated = 1;
         }
     }
-    free(status->buffer);
+    destroy_status(status);
     return (-1);
 }
+
 
 /*
 int main(void)

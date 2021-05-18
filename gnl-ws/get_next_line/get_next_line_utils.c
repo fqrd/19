@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/18 15:57:17 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/18 18:54:15 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_status	*new_status(void)
 	status->buffer[BUFFER_SIZE] = '\0';
 	status->tmp = "\0";
 	status->rest = "\0";
-	status->offset = 0;
-	status->lineend = 0;
-	status->read = 0;
+	status->start = 0;
+	status->end = 0;
+	status->populated = 0;
 	return (status);
 }
 
