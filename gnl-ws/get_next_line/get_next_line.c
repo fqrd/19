@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/18 16:07:42 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/18 17:58:04 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int get_next_line(int fd, char **line)
                 status->offset = status->lineend;
                 
                 printf("\n\nline: %s\n", *line);
+
+                free(status->buffer);
                 if (status->buffer[status->lineend] == '\0')
                     return (0);
                 return (1);
@@ -102,10 +104,11 @@ int get_next_line(int fd, char **line)
             status->read = 1;
         }
     }
+    free(status->buffer);
     return (-1);
 }
 
-
+/*
 int main(void)
 {
     int fd;
@@ -124,4 +127,4 @@ int main(void)
         }
     #endif
     return (0);
-}
+}*/
