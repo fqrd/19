@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/18 13:39:26 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/18 15:57:17 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_status	*new_status(void)
 	status->buffer = malloc (sizeof(char) * BUFFER_SIZE);
 	if (!status->buffer)
 		return (NULL);
-	status->content = NULL;
-	status->rest = NULL;
+	status->buffer[BUFFER_SIZE] = '\0';
+	status->tmp = "\0";
+	status->rest = "\0";
 	status->offset = 0;
 	status->lineend = 0;
 	status->read = 0;
-
 	return (status);
 }
 
@@ -119,4 +119,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	ft_strlcpy(substring, ps + start, llock + 1);
 	return (substring);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*p;
+
+	p = (char *) s;
+	while (n-- > 0)
+		*p++ = '\0';
 }

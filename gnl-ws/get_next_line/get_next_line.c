@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/18 14:51:55 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/18 16:07:42 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ gcc -Werror -Wextra -Wall -D BUFFER_SIZE=32 get_next_line_utils.c get_next_line.
 
 static void      find_char(char *str, t_status *status, char c)
 {
-    while (str[status->offset] == c) { 
+    while (str[status->offset] && str[status->offset] == c) { 
         status->offset++;
     }
     status->lineend = status->offset;
@@ -54,48 +54,53 @@ int get_next_line(int fd, char **line)
     if(!status)
         status = new_status();
 
-    /* if static variable is initialized and there's a new line remaining in its buffer */
-    if (status->read)
+    while (1)
     {
-        find_char(status->buffer, status, '\n');
-        if(status->lineend < BUFFER_SIZE)
+        /* if static variable is initialized and there's a new line remaining in its buffer */
+        if (status->read)
         {
-            printf("New line found in remaining buffer\n%s\noffset: %zu\nlineend: %zu\n", status->buffer, status->offset, status->lineend);
-            status->content = ft_substr(status->buffer, status->offset, status->lineend);
-            if(!status->content)
-                return (-1);
-            // if offset == 0, starts new buffer, maybe we should prepend the rest if any
-            if(status->offset == 0 && status->rest != NULL)
-                ft_strjoin(*line, status->rest);
-            *line = ft_strjoin(*line, status->content);
-            status->offset = status->lineend;
-            printf("---\nline: %s\n", *line);
-            return (1);
+            find_char(status->buffer, status, '\n');
+            if(status->lineend < BUFFER_SIZE)
+            {
+                /* NEW LINE FOUND OR EOF */
+                status->tmp = ft_substr(status->buffer, status->offset, status->lineend);
+                if(!status->tmp)
+                    return (-1);
+                if(status->offset == 0 && status->rest != NULL)
+                {
+                    *line = ft_strjoin(*line, status->rest);
+                    ft_bzero(status->rest, ft_strlen(status->rest));
+                }
+                *line = ft_strjoin(*line, status->tmp);
+                ft_bzero(status->tmp, ft_strlen(status->tmp));
+                status->offset = status->lineend;
+                
+                printf("\n\nline: %s\n", *line);
+                if (status->buffer[status->lineend] == '\0')
+                    return (0);
+                return (1);
+            }
+            else
+            {
+                /* END OF BUFFER REACHED */
+                status->tmp = ft_substr(status->buffer, status->offset, BUFFER_SIZE - status->offset);
+                if(!status->tmp)
+                    return (-1);
+                status->rest = ft_strjoin(status->rest, status->tmp);
+                ft_bzero(status->tmp, ft_strlen(status->tmp));
+                ft_bzero(status->buffer, BUFFER_SIZE);
+                status->read = 0;
+            }
         }
         else
         {
-            status->rest = ft_substr(status->buffer, status->offset, BUFFER_SIZE - status->offset);
-            if(!status->content)
-                return (-1);
-            ft_bzero(status->buffer, BUFFER_SIZE);
-            status->read = 0;
-            printf("offset: %zu\n", status->offset);
-            printf("lineend: %zu\n", status->lineend);
-            printf("buffer: %s\n", status->buffer);
-            printf("EOF reached\n");
+            /* CALL READ */
+            read(fd, status->buffer, BUFFER_SIZE);
+            status->offset = 0;
+            status->tmp = "\0";
+            status->lineend = 0;
+            status->read = 1;
         }
-    }
-    else
-    {
-        printf("Ready to read once more\n");
-        status->rest = ft_substr(status->buffer, status->offset, BUFFER_SIZE);
-        // no \n, need to keep the actual rest alongside new read
-        // clear previous status->rest
-        // copy status->buffer from offset to end in status->rest
-        // clear previous buffer
-        // call new read
-        read(fd, status->buffer, BUFFER_SIZE);
-        status->read = 1;
     }
     return (-1);
 }
@@ -107,17 +112,15 @@ int main(void)
     char *source;
     char *line;
     #ifdef BUFFER_SIZE
-        source = "t_small.txt";
+        // source = "t_small.txt";
+        source = "t_big.txt";
         fd = open(source, O_RDONLY);
         if (fd > -1)
         {
             // get_next_line(fd, &line);
-            printf("#1----\n");
-            get_next_line(fd, &line);
-            printf("#2----\n");
-            get_next_line(fd, &line);
-            printf("#3----\n");
-            get_next_line(fd, &line);
+            while (get_next_line(fd, &line) != 0) { ;}
+            // printf("output: %d\n\n",get_next_line(fd, &line));
+            // printf("output: %d\n\n",get_next_line(fd, &line));
         }
     #endif
     return (0);

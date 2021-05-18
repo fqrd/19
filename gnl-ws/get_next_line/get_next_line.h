@@ -9,7 +9,7 @@
 typedef struct s_status
 {
     char			*buffer;
-    char			*content;
+    char			*tmp;
     char			*rest;
     size_t          offset;
     size_t          lineend;
