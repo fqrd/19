@@ -11,6 +11,8 @@ typedef struct s_status
     char			*buffer;
     char			*tmp;
     char			*rest;
+    int             read;
+    int             eob;
     size_t          start;
     size_t          end;
     int             populated;

@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/18 19:00:38 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/19 12:21:04 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,54 @@
 gcc -Werror -Wextra -Wall -D BUFFER_SIZE=32 get_next_line_utils.c get_next_line.c && ./a.out
 */
 
-static void      find_char(char *str, t_status *status, char c)
+static void      find_char(t_status *status, char c)
 {
-    while (str[status->start] && str[status->start] == c) { 
+    while (status->tmp[status->start] && status->tmp[status->start] == c) { 
         status->start++;
     }
     status->end = status->start;
-    while (str[status->end])
+    while (status->tmp[status->end])
     {
-        if(str[status->end] == c)
+        if(status->tmp[status->end] == c)
             return ;
         status->end++;
     }
+    status->eob = 1;
     return ;
 }
 
-static void set_default(t_status *status)
+static int     conclude(t_status *status, char *line)
 {
-    status->start = 0;
-    status->end = 0;
-    status->tmp = "\0";
+    status->tmp = ft_substr(status->tmp, status->start, status->end);
+    if(!status->tmp)
+        return (0);
+
+    line = ft_strjoin(line, status->tmp);
+    if (!line)
+        return (0);
+
+    free(status->tmp);
+    ft_bzero(status->rest, ft_strlen(status->rest));
+    status->start = status->end;
+
+    // printf("\n\nline: %s\n", line);
+    
+    return (1);
 }
 
-static void destroy_status(t_status *status)
-{
-    free(status->rest);
-    free(status->buffer);
-    free(status->tmp);
-    free(status);
-}
 /*
-static void clear(t_status *status)
+static int      clear(t_status *status, int error)
 {
-    ft_bzero(status->tmp, ft_strlen(status->tmp));
-    ft_bzero(status->line, ft_strlen(status->line));
-}
-*/
+    ft_bzero(status->buffer, BUFFER_SIZE);
+    free(status->buffer);
+    ft_bzero(status->rest, ft_strlen(status->rest));
+    free(status->rest);
+    free(status);
+    if (error)
+        return (-1);
+    return (0);
+}*/
+
 
 int get_next_line(int fd, char **line)
 {
@@ -68,53 +80,64 @@ int get_next_line(int fd, char **line)
     {
         if (status->populated)
         {
-            find_char(status->buffer, status, '\n');
-            if(status->end < BUFFER_SIZE)
+            status->tmp = ft_strjoin(status->rest, status->buffer);
+            if(!status->tmp)
+                return (-1);
+
+            find_char(status, '\n');
+            if(!status->eob)
             {
                 /* NEW LINE FOUND OR EOF */
-                status->tmp = ft_substr(status->buffer, status->start, status->end);
-                if(!status->tmp)
+                if(!conclude(status, *line))
                     return (-1);
-                if(status->start == 0 && status->rest[0] != '\0')
-                {
-                    *line = ft_strjoin(*line, status->rest);
-                    ft_bzero(status->rest, ft_strlen(status->rest));
-                }
-                *line = ft_strjoin(*line, status->tmp);
-                status->start = status->end;
-                // printf("\n\nline: %s\n", *line);
-
-                // clear(status);
-
-                if (status->buffer[status->end] == '\0')
-                {
-                    // destroy_status(status);
-                    return (0);
-                }
+                    
                 return (1);
             }
             else
             {
                 /* END OF BUFFER REACHED */
+                free(status->tmp);
+
                 status->tmp = ft_substr(status->buffer, status->start, BUFFER_SIZE - status->start);
                 if(!status->tmp)
                     return (-1);
+
                 status->rest = ft_strjoin(status->rest, status->tmp);
-                ft_bzero(status->tmp, ft_strlen(status->tmp));
+                if(!status->rest)
+                    return (-1);
+
                 ft_bzero(status->buffer, BUFFER_SIZE);
+                free(status->tmp);
+                
                 status->populated = 0;
             }
         }
         else
         {
             /* CALL READ */
-            read(fd, status->buffer, BUFFER_SIZE);
-            set_default(status);
+            status->read = read(fd, status->buffer, BUFFER_SIZE);
+            if (status->read < 0)
+            {
+                return (-1);
+            }
+            if(status->read == 0)
+            {
+                status->tmp = ft_strjoin(status->rest, status->buffer);
+                if(!status->tmp)
+                    return (-1);
+
+                if(!conclude(status, *line))
+                    return (-1);
+                    
+                return (0);
+            }
+            status->start = 0;
+            status->end = 0;
+            status->eob = 0;
             status->populated = 1;
         }
     }
-    destroy_status(status);
-    return (-1);
+   return (-1);
 }
 
 
