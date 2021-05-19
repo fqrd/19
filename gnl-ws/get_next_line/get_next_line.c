@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/19 12:21:04 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:27:26 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static int      clear(t_status *status, int error)
         return (-1);
     return (0);
 }*/
-
 
 int get_next_line(int fd, char **line)
 {
