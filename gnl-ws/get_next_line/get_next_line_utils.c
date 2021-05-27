@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/27 11:18:27 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/27 16:55:28 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ t_status	*new_status(void)
 	status = malloc(sizeof(t_status) * 1);
 	if (!status)
 		return (NULL);
-	status->buffer[BUFFER_SIZE + 1] = '\0';
-	status->line = "\0";
-	status->cut = "\0";
-	status->rest = "\0";
+
+	status->buffer[BUFFER_SIZE] = '\0';
+	status->cut = NULL;
+	status->rest = NULL;
+
 
 	status->start = 0;
 	status->end = 0;
@@ -68,19 +69,17 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	return (size_src);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_empty(char *s1, char *s2, int do_free)
 {
-	char	*first;
-	char	*second;
 	char	*output;
 	size_t	len;
 	size_t	i;
+	size_t	s1i;
+	size_t	s2i;
 
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
-	first = (char *) s1;
-	second = (char *) s2;
+	s1i =0;
+	s2i =0;
 	len = ft_strlen(s1) + ft_strlen(s2);
 	output = malloc(sizeof(char) * len + 1);
 	if (!output)
@@ -88,10 +87,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (i < len)
 	{
 		if (i < ft_strlen(s1))
-			output[i] = *first++;
+			output[i] = s1[s1i++];
 		else
-			output[i] = *second++;
+			output[i] = s2[s2i++];
 		i++;
+	}
+	if(s1 != NULL && do_free)
+	{
+		free(s1);
 	}
 	output[i] = '\0';
 	return (output);

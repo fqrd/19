@@ -6,10 +6,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+// # include "wraloc.h"
+
 typedef struct s_status
 {
-    char    buffer[BUFFER_SIZE + 1];
-    char    *line;
+    char            buffer[BUFFER_SIZE];
+    char            *line;
     char			*cut;
     char			*rest;
     int             read;
@@ -24,7 +26,7 @@ typedef struct s_status
     int get_next_line(int fd, char **line);
     size_t	ft_strlen(const char *str);
     size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-    char	*ft_strjoin(char const *s1, char const *s2);
+    char	*ft_strjoin_empty(char *s1, char *s2, int do_free);
     char	*ft_substr(char const *s, unsigned int start, size_t len);
     void	ft_bzero(void *s, size_t n);
 
