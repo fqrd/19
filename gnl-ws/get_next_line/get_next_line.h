@@ -8,10 +8,12 @@
 # include <stdio.h>
 typedef struct s_status
 {
-    char			*buffer;
-    char			*tmp;
+    char    buffer[BUFFER_SIZE + 1];
+    char    *line;
+    char			*cut;
     char			*rest;
     int             read;
+
     int             eob;
     size_t          start;
     size_t          end;
