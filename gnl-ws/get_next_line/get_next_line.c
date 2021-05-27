@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/27 11:46:29 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/27 12:01:08 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ static void      find_char(t_status *status, char c)
     }
     status->eob = 1;
     return ;
+}
+
+
+static void     free_variables(t_status *status)
+{
+    free(status->rest);
+    free(status->cut);
+    free(status);
 }
 
 int get_next_line(int fd, char **line)
@@ -93,7 +101,7 @@ int get_next_line(int fd, char **line)
                 if(!*line)
                     return (-1);
                 // printf("\nEOF:\n|%s|\n\n", *line);
-                status->start = status->end;
+                free_variables(status);
                 return (0);
             }
             status->start = 0;
