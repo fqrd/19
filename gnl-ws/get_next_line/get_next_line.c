@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/28 18:36:54 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/28 21:14:05 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	int end_of_line(t_status *s, char **line)
 	s->cut = NULL;
 	s->rest = NULL;
 	s->start = ++s->end;
-	printf("LINE(eol): %p -> |%s|\n", *line,*line);
+	// printf("LINE(eol): %p -> |%s|\n", *line,*line);
 	return (1);
 }
 
@@ -74,31 +74,32 @@ static int	end_of_file(t_status *s, char **line)
 			return (0);
 		s->rest = NULL;
 	}
-	printf("LINE(eof): %p ->  |%s|\n", *line,*line);
+	// printf("LINE(eof): %p ->  |%s|\n", *line,*line);
 	return (1);
 }
 
 static int	freer_the_almighty(t_status *s, int return_value)
 {
-	printf("\nFREER THE ALMIGHT -> DO YOU EVEN FREE ?!\n");
+	// printf("\nFREER THE ALMIGHT -> DO YOU EVEN FREE ?!\n");
 	if (s)
 	{
-		printf("\n------\n[FREEING]\n");
+		// printf("\n------\n[FREEING]\n");
 		if (s->rest)
 		{
-			printf("REST\n");
+			// printf("REST\n");
 			free(s->rest);
 		}
 		if (s->cut)
 		{
-			printf("CUT\n");
+			// printf("CUT\n");
 			free(s->cut);
 		}
-		printf("-> BUFFER\n");
+		// printf("-> BUFFER\n");
 		free(s->buffer);
-		printf("-> S\n");
+		// printf("-> S\n");
 		free(s);
-		printf("-------\n");
+		s = NULL;
+		// printf("-------\n");
 	}
 	return (return_value);
 }
@@ -150,49 +151,53 @@ int	get_next_line(int fd, char **line)
 	return (freer_the_almighty(s, -1));
 }
 
-// /*
+/*
 int main(void)
 {
     int fd;
-    char *source;
     char *line;
+    char *source[]= {
+		// "./tests/42_no_nl",
+    //    "./tests/43_no_nl",
+       "./tests/alternate_line_nl_no_nl",
+       "./tests/big_line_no_nl",
+    //    "./tests/empty",
+    //    "./tests/multiple_line_with_nl",
+    //    "./tests/nl",
+    //    "./tests/t_small.txt",
+    //    "./tests/41_with_nl",
+    //    "./tests/42_with_nl",
+    //    "./tests/43_with_nl",
+    //    "./tests/alternate_line_nl_with_nl",
+    //    "./tests/big_line_with_nl",
+    //    "./tests/multiple_line_no_nl",
+    //    "./tests/multiple_nlx5"
+	   "\0"
+	};
     #ifdef BUFFER_SIZE
         // source = "./tests/41_no_nl";
-        // source = "./tests/42_no_nl";
-        // source = "./tests/43_no_nl";
-        // source = "./tests/alternate_line_nl_no_nl";
-        // source = "./tests/big_line_no_nl";
-        // source = "./tests/empty";
-        // source = "./tests/multiple_line_with_nl";
-        // source = "./tests/nl";
-        // source = "./tests/t_empty.txt";
-        // source = "./tests/t_small.txt";
-        // source = "./tests/41_with_nl";
-        // source = "./tests/42_with_nl";
-        source = "./tests/43_with_nl";
-        // source = "./tests/alternate_line_nl_with_nl";
-        // source = "./tests/big_line_with_nl";
-        // source = "./tests/multiple_line_no_nl";
-        // source = "./tests/multiple_nlx5";
-        // source = "./tests/t_big.txt";
-        // source = "./tests/t_medium.txt";
-        // source = "./tests/t_empty.txt";
-        // source = "./tests/t_small.txt";
-        // source = "./tests/t_medium.txt";
-        // source = "./tests/t_big.txt";
-        fd = open(source, O_RDONLY);
-        if (fd > -1)
-        {
-            // while (get_next_line(fd, &line) != 0) { ;}
-            int res = 1;
-            while (res != 0)
-            {
-                res = get_next_line(fd, &line);
-				printf("free <%p> |%s|\n", line, line);
-                free(line);
-            }
-        }
+		int i = 0;
+		while(source[i][0])
+		{
+
+			printf("\n\n[%s]\n\n", source[i]);
+    	    fd = open(source[i], O_RDWR);
+			if (fd > -1)
+			{
+				// while (get_next_line(fd, &line) != 0) { ;}
+				int res = 1;
+				while (res != 0)
+				{
+					res = get_next_line(fd, &line);
+					printf("free <%p> |%s|\n", line, line);
+					printf("res: %d\n", res);
+					free(line);
+				}
+				close(fd);
+			}
+			i++;
+		}
     #endif
     return (0);
 }
-// */
+*/

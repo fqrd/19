@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/28 17:56:25 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/28 20:53:56 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substring = malloc(sizeof(char) * (llock + 1));
 	if (!substring)
 		return (NULL);
+	// printf("---\nsubstring#1: |%s| |%s| |%zu|\n", substring, ps+start, llock + 1);
 	ft_strlcpy(substring, ps + start, llock + 1);
+	// printf("substring#2: |%s| |%s| |%zu|\n", substring, ps+start, llock + 1);
 	return (substring);
 }
 
