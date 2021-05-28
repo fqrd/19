@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/27 16:55:28 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/28 15:58:36 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ t_status	*new_status(void)
 	status->cut = NULL;
 	status->rest = NULL;
 
-
 	status->start = 0;
 	status->end = 0;
-	status->read = 0;
+	status->read = -1;
 	status->eob = 0;
 	status->populated = 0;
 	return (status);
@@ -95,6 +94,7 @@ char	*ft_strjoin_empty(char *s1, char *s2, int do_free)
 	if(s1 != NULL && do_free)
 	{
 		free(s1);
+		s1 = NULL;
 	}
 	output[i] = '\0';
 	return (output);

@@ -11,6 +11,7 @@
 typedef struct s_status
 {
     char            buffer[BUFFER_SIZE];
+    // char            *buffer;
     char            *line;
     char			*cut;
     char			*rest;

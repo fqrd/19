@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/27 19:46:56 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:56:23 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ static void      find_char(t_status *status, char c)
     return ;
 }
 
-
-static int free_on_error(t_status *status, int return_value)
-{
-    free(status);
-    return (return_value);
-}
-
-
 int get_next_line(int fd, char **line)
 {    
     if (fd < 0 || !line || BUFFER_SIZE <= 0)
@@ -62,26 +54,14 @@ int get_next_line(int fd, char **line)
                 // finds a line break
                 // adds the rest in front of it if any
                 // clears the rest
-                // printf("\\n found\n");
                 status->cut = ft_substr(status->buffer, status->start, status->end - status->start);
                 if(!status->cut)
-                {
-                    free(status->cut);
-                    return (free_on_error(status, -1));
-                }
-                // printf("BUFF: |%s|\n", status->buffer);
-                // printf("CUT: |%s|\n", status->cut);
-                // printf("REST: |%s|\n", status->rest);
+                    return (-1);
                 *line = ft_strjoin_empty(status->rest, status->cut, 1);
                 free(status->cut);
                 if(!*line)
-                {
-                    free(*line);
-                    return (free_on_error(status, -1));
-                }
+                    return (-1);
                 status->cut = NULL;
-                // printf("LINE: %p\n", *line);
-                // printf("REST: |%s|\n", status->rest);
                 status->rest = NULL;
                 status->start = ++status->end;
                 // printf("LINE: |%s|\n", *line);
@@ -92,24 +72,14 @@ int get_next_line(int fd, char **line)
                 // reached the end of the buffer
                 // concats the rest to the previous one if any
                 // does not clear the rest
-                // printf("eob reached\n");
                 status->cut = ft_substr(status->buffer, status->start, BUFFER_SIZE - status->start);
                 if(!status->cut)
-                {
-                    free(status->cut);
-                    return (free_on_error(status, -1));
-                }
-                // printf("CUTEOB: |%s|\n", status->cut);
-                // printf("REST: |%s|\n",status->rest);
+                    return (-1);
                 status->rest = ft_strjoin_empty(status->rest, status->cut, 1);
                 free(status->cut);
                 if(!status->rest)
-                {
-                    free(status->rest);
-                    return (free_on_error(status, -1));
-                }
+                    return (-1);
                 status->cut = NULL;
-                // printf("RESTEOB: |%s|\n", status->rest);
                 status->populated = 0;
             }
         }
@@ -122,32 +92,28 @@ int get_next_line(int fd, char **line)
             {
                 return (-1);
             }
-            if(status->read == 0)
+            if(status->read && status->read == 0)
             {
-                if(ft_strlen(status->rest) == 0)
+                if(!status->rest || ft_strlen(status->rest) == 0)
                 {
                     *line = malloc(sizeof(char) * 1);
                     if(!*line)
-                    {
-                        free(*line);
-                        return (free_on_error(status, -1));
-                    }
-                    if(status->rest)
-                        free(status->rest);
+                        return (-1);
                     *line[0] = '\0';
+                    if(status->rest != NULL)
+                    {
+                        free(status->rest);
+                    }
                 }
                 else
                 {
-                    // printf("REST STRLCPY: |%s|\n", status->rest);
                     *line = ft_strjoin_empty(status->rest, NULL, 1);
                     if(!line)
                     {
                         free(*line);
-                        return (free_on_error(status, -1));
+                        return (-1);
                     }
                 }
-                // printf("REST STRLCPY: |%s|\n", status->rest);
-                // printf("LINE: %p\n", *line);
                 // printf("EOF: |%s|\n", *line);
                 free(status);
                 return (0);
