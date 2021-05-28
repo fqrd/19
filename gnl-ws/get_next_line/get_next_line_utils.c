@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/28 15:58:36 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/28 17:56:25 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 t_status	*new_status(void)
 {
-	t_status	*status;
+	t_status	*s;
 
-	status = malloc(sizeof(t_status) * 1);
-	if (!status)
+	s = malloc(sizeof(t_status) * 1);
+	if (!s)
 		return (NULL);
 
-	status->buffer[BUFFER_SIZE] = '\0';
-	status->cut = NULL;
-	status->rest = NULL;
+	// s->buffer[BUFFER_SIZE] = '\0';
 
-	status->start = 0;
-	status->end = 0;
-	status->read = -1;
-	status->eob = 0;
-	status->populated = 0;
-	return (status);
+	s->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!s->buffer)
+		return (NULL);
+	s->buffer[BUFFER_SIZE] = '\0';
+
+	s->cut = NULL;
+	s->rest = NULL;
+
+	s->start = 0;
+	s->end = 0;
+	s->read = -1;
+	s->eob = 0;
+	s->populated = 0;
+	return (s);
 }
 
 

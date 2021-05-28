@@ -6,12 +6,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-// # include "wraloc.h"
+# include "wraloc.h"
 
 typedef struct s_status
 {
-    char            buffer[BUFFER_SIZE];
-    // char            *buffer;
+    // char            buffer[BUFFER_SIZE + 1];
+    char            *buffer;
     char            *line;
     char			*cut;
     char			*rest;

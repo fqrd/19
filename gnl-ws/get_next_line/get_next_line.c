@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/28 17:50:27 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/28 18:36:54 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	int end_of_line(t_status *s, char **line)
 	s->cut = NULL;
 	s->rest = NULL;
 	s->start = ++s->end;
-	printf("LINE: |%s|\n", *line);
+	printf("LINE(eol): %p -> |%s|\n", *line,*line);
 	return (1);
 }
 
@@ -64,22 +64,43 @@ static int	end_of_file(t_status *s, char **line)
 	{
 		*line = malloc(sizeof(char) * 1);
 		if (!*line)
-			return (-1);
+			return (0);
 		*line[0] = '\0';
-		if (s->rest != NULL)
-		{
-			free(s->rest);
-		}
 	}
 	else
 	{
 		*line = ft_strjoin_empty(s->rest, NULL, 1);
-		if (!line)
-			return (-1);
+		if (!*line)
+			return (0);
+		s->rest = NULL;
 	}
-	free(s);
-	printf("LINE: |%s|\n", *line);
-	return (0);
+	printf("LINE(eof): %p ->  |%s|\n", *line,*line);
+	return (1);
+}
+
+static int	freer_the_almighty(t_status *s, int return_value)
+{
+	printf("\nFREER THE ALMIGHT -> DO YOU EVEN FREE ?!\n");
+	if (s)
+	{
+		printf("\n------\n[FREEING]\n");
+		if (s->rest)
+		{
+			printf("REST\n");
+			free(s->rest);
+		}
+		if (s->cut)
+		{
+			printf("CUT\n");
+			free(s->cut);
+		}
+		printf("-> BUFFER\n");
+		free(s->buffer);
+		printf("-> S\n");
+		free(s);
+		printf("-------\n");
+	}
+	return (return_value);
 }
 
 int	get_next_line(int fd, char **line)
@@ -97,13 +118,14 @@ int	get_next_line(int fd, char **line)
 			find_char(s, '\n');
 			if (!s->eob)
 			{
-				if(!end_of_line(s, &(*line)))
-					return (-1);
+				if(!end_of_line(s, &*line))
+					return (freer_the_almighty(s, -1));
+				return (1);				
 			}
 			else
 			{
 				if(!end_of_buffer(s))
-					return (-1);
+					return (freer_the_almighty(s, -1));
 			}
 		}
 		else
@@ -111,10 +133,12 @@ int	get_next_line(int fd, char **line)
 			ft_bzero(s->buffer, BUFFER_SIZE);
 			s->read = read(fd, s->buffer, BUFFER_SIZE);
 			if (s->read < 0)
-				return (-1);
+				return (freer_the_almighty(s, -1));
 			if (s->read == 0)
 			{
-				return (end_of_file(s, &(*line)));
+				if(freer_the_almighty(s, end_of_file(s, &*line)))
+					return (0);
+				return (-1);
 			}
 			s->start = 0;
 			s->end = 0;
@@ -123,10 +147,10 @@ int	get_next_line(int fd, char **line)
 			s->read = -1;
 		}
 	}
-	return (-1);
+	return (freer_the_almighty(s, -1));
 }
 
-/*
+// /*
 int main(void)
 {
     int fd;
@@ -145,7 +169,7 @@ int main(void)
         // source = "./tests/t_small.txt";
         // source = "./tests/41_with_nl";
         // source = "./tests/42_with_nl";
-        // source = "./tests/43_with_nl";
+        source = "./tests/43_with_nl";
         // source = "./tests/alternate_line_nl_with_nl";
         // source = "./tests/big_line_with_nl";
         // source = "./tests/multiple_line_no_nl";
@@ -155,7 +179,7 @@ int main(void)
         // source = "./tests/t_empty.txt";
         // source = "./tests/t_small.txt";
         // source = "./tests/t_medium.txt";
-        source = "./tests/t_big.txt";
+        // source = "./tests/t_big.txt";
         fd = open(source, O_RDONLY);
         if (fd > -1)
         {
@@ -164,10 +188,11 @@ int main(void)
             while (res != 0)
             {
                 res = get_next_line(fd, &line);
+				printf("free <%p> |%s|\n", line, line);
                 free(line);
             }
         }
     #endif
     return (0);
 }
-*/
+// */
