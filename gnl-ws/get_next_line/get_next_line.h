@@ -8,22 +8,20 @@
 # include <stdio.h>
 // # include "wraloc.h"
 
-typedef struct s_status
+typedef struct s_list
 {
-    // char            buffer[BUFFER_SIZE + 1];
-    char            *buffer;
-    char            *line;
-    char			*cut;
-    char			*rest;
-    int             read;
+    char    buffer[BUFFER_SIZE];
+    char    *cut;
+    char    *rest;
+    int     populated;
+    int     read;
+    size_t  start;
+    size_t  end;
+    int     eob;
+}                   t_list;
 
-    int             eob;
-    size_t          start;
-    size_t          end;
-    int             populated;
-}                   t_status;
+t_list	*new_status(t_list *s);
 
-    t_status	*new_status(void);
     int get_next_line(int fd, char **line);
     size_t	ft_strlen(const char *str);
     size_t	ft_strlcpy(char *dest, const char *src, size_t size);

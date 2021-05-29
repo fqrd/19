@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/28 21:14:05 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:58:37 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 * gcc -Werror -Wextra -Wall -D BUFFER_SIZE=32 get_next_line_utils.c get_next_line.c && ./a.out
 */
 
-static void	find_char(t_status *s, char c)
+static void	find_char(t_list *s, char c)
 {
 	while (s->buffer[s->end])
 	{
@@ -28,7 +28,7 @@ static void	find_char(t_status *s, char c)
 	return ;
 }
 
-static	int end_of_line(t_status *s, char **line)
+static	int end_of_line(t_list *s, char **line)
 {
 	s->cut = ft_substr(s->buffer, s->start, s->end - s->start);
 	if (!s->cut)
@@ -44,7 +44,7 @@ static	int end_of_line(t_status *s, char **line)
 	return (1);
 }
 
-static	int end_of_buffer(t_status *s)
+static	int end_of_buffer(t_list *s)
 {
 	s->cut = ft_substr(s->buffer, s->start, BUFFER_SIZE - s->start);
 	if (!s->cut)
@@ -58,9 +58,9 @@ static	int end_of_buffer(t_status *s)
 	return (1);
 }
 
-static int	end_of_file(t_status *s, char **line)
+static int	end_of_file(t_list *s, char **line)
 {
-	if (!s->rest || ft_strlen(s->rest) == 0)
+	if (!s->rest)
 	{
 		*line = malloc(sizeof(char) * 1);
 		if (!*line)
@@ -78,40 +78,42 @@ static int	end_of_file(t_status *s, char **line)
 	return (1);
 }
 
-static int	freer_the_almighty(t_status *s, int return_value)
+static int	freer_the_almighty(t_list *s, int return_value)
 {
-	// printf("\nFREER THE ALMIGHT -> DO YOU EVEN FREE ?!\n");
 	if (s)
 	{
-		// printf("\n------\n[FREEING]\n");
-		if (s->rest)
+		if (s->rest != NULL)
 		{
-			// printf("REST\n");
 			free(s->rest);
+			s->rest = NULL;
 		}
-		if (s->cut)
+		if (s->cut != NULL)
 		{
-			// printf("CUT\n");
 			free(s->cut);
+			s->cut = NULL;
 		}
-		// printf("-> BUFFER\n");
-		free(s->buffer);
-		// printf("-> S\n");
-		free(s);
-		s = NULL;
-		// printf("-------\n");
+		if (s != NULL)
+		{
+			free(s);
+		}
 	}
 	return (return_value);
 }
 
 int	get_next_line(int fd, char **line)
 {
-	static t_status	*s;
+	static t_list	*s;
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
+
 	if (!s)
-		s = new_status();
+	{
+		s = new_status(s);
+		if (!s)
+			return(-1);
+	}
+
 	while (1)
 	{
 		if (s->populated)
@@ -138,7 +140,10 @@ int	get_next_line(int fd, char **line)
 			if (s->read == 0)
 			{
 				if(freer_the_almighty(s, end_of_file(s, &*line)))
+				{
+					s = NULL;
 					return (0);
+				}
 				return (-1);
 			}
 			s->start = 0;
@@ -156,35 +161,36 @@ int main(void)
 {
     int fd;
     char *line;
+	// char *source;
     char *source[]= {
-		// "./tests/42_no_nl",
-    //    "./tests/43_no_nl",
+		"./tests/42_no_nl",
+       "./tests/43_no_nl",
        "./tests/alternate_line_nl_no_nl",
-       "./tests/big_line_no_nl",
-    //    "./tests/empty",
-    //    "./tests/multiple_line_with_nl",
-    //    "./tests/nl",
-    //    "./tests/t_small.txt",
-    //    "./tests/41_with_nl",
-    //    "./tests/42_with_nl",
-    //    "./tests/43_with_nl",
-    //    "./tests/alternate_line_nl_with_nl",
+    //    "./tests/big_line_no_nl",
+       "./tests/empty",
+       "./tests/multiple_line_with_nl",
+       "./tests/nl",
+       "./tests/t_small.txt",
+       "./tests/41_with_nl",
+       "./tests/42_with_nl",
+       "./tests/43_with_nl",
+       "./tests/alternate_line_nl_with_nl",
     //    "./tests/big_line_with_nl",
-    //    "./tests/multiple_line_no_nl",
-    //    "./tests/multiple_nlx5"
+       "./tests/multiple_line_no_nl",
+       "./tests/multiple_nlx5",
 	   "\0"
 	};
     #ifdef BUFFER_SIZE
-        // source = "./tests/41_no_nl";
+		// while (get_next_line(fd, &line) != 0) { ;}
+		// source = "./tests/multiple_line_with_nl";
+		
 		int i = 0;
 		while(source[i][0])
 		{
-
 			printf("\n\n[%s]\n\n", source[i]);
-    	    fd = open(source[i], O_RDWR);
+			fd = open(source[i], O_RDWR);
 			if (fd > -1)
 			{
-				// while (get_next_line(fd, &line) != 0) { ;}
 				int res = 1;
 				while (res != 0)
 				{
@@ -196,6 +202,35 @@ int main(void)
 				close(fd);
 			}
 			i++;
+		}
+
+		fd = open(source, O_RDWR);
+
+		int res = 1;
+		if (fd > -1)
+		{
+			printf("FIRST\n");
+			while (res != 0)
+			{
+				res = get_next_line(fd, &line);
+				printf("free <%p> |%s|\n", line, line);
+				printf("res: %d\n", res);
+				printf("--- LINE\n");
+				free(line);
+				printf("---\n");
+
+			}
+			res = 1;
+			printf("SECOND\n");
+			while (res != 0)
+			{
+				res = get_next_line(fd, &line);
+				printf("free <%p> |%s|\n", line, line);
+				printf("res: %d\n", res);
+				printf("--- LINE\n");
+				free(line);
+				printf("---\n");
+			}
 		}
     #endif
     return (0);

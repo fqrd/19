@@ -6,30 +6,19 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/28 20:53:56 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:59:21 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_status	*new_status(void)
+t_list	*new_status(t_list *s)
 {
-	t_status	*s;
-
-	s = malloc(sizeof(t_status) * 1);
+	s = malloc(sizeof(t_list) * 1);
 	if (!s)
 		return (NULL);
-
-	// s->buffer[BUFFER_SIZE] = '\0';
-
-	s->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!s->buffer)
-		return (NULL);
-	s->buffer[BUFFER_SIZE] = '\0';
-
 	s->cut = NULL;
 	s->rest = NULL;
-
 	s->start = 0;
 	s->end = 0;
 	s->read = -1;
