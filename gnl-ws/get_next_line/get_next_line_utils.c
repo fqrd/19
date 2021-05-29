@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/29 20:30:30 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 20:43:47 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_list	*new_status(t_list *s)
 	s->populated = 0;
 	return (s);
 }
-
 
 size_t	ft_strlen(const char *str)
 {
@@ -67,7 +66,7 @@ char	*ft_strjoin_empty(char *s1, char *s2, int do_free)
 			output[i] = s2[s2i++];
 		i++;
 	}
-	if(s1 != NULL && do_free)
+	if (s1 != NULL && do_free)
 	{
 		free(s1);
 		s1 = NULL;
@@ -85,51 +84,39 @@ void	ft_bzero(void *s, size_t n)
 		*p++ = '\0';
 }
 
-char *substrjoin(t_list *s, size_t start, size_t end)
+char	*substrjoin(t_list *s, size_t start, size_t end)
 {
-	char *output;
-	size_t index;
-	size_t restlen;
-	size_t len;
+	char	*output;
+	size_t	index;
+	size_t	restlen;
+	size_t	len;
 
 	index = 0;
 	restlen = 0;
 	len = end - start;
-
-	// printf("dest: |%s|\n",dest);
-	// printf("source: |%s|\n",source);
-	// printf("len: |%zu|\n",len);
 	if (s->rest)
 	{
 		restlen = ft_strlen(s->rest);
 	}
-	// printf("restlen: |%zu|\n",restlen);
 	output = malloc(sizeof(char) * (restlen + len + 1));
 	if (!output)
 		return (NULL);
-	// printf("malloc: |%zu|\n",restlen + len + 1);
-	// printf("source[start]: |%c|\n",source[start]);
-
 	while (index < restlen + len)
 	{
 		if (s->rest && s->rest[index] != '\0' && index < restlen)
 		{
 			output[index] = s->rest[index];
-			// printf("index dest: |%c| / %zu\n", dest[index], index);
 		}
 		else
 		{
-			if(s->buffer && s->buffer[start] && start < end)
+			if (s->buffer && s->buffer[start] && start < end)
 			{
 				output[index] = s->buffer[start++];
-				// printf("index source: |%c| / %zu / index : %zu\n", source[start-1], start-1, index);
 			}
 		}
 		index++;
 	}
-	// printf("output: |%s|\n\n", output);
 	output[index] = '\0';
-	// printf("\noutput: |%s| /  index: %zu\n\n", output, index);
 	if (s->rest)
 	{
 		free(s->rest);
