@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/29 20:14:55 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 20:29:59 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int main(void)
     //    "./tests/alternate_line_nl_no_nl",
     //    "./tests/big_line_no_nl",
     //    "./tests/empty",
-       "./tests/multiple_line_with_nl",
+    //    "./tests/multiple_line_with_nl",
     //    "./tests/nl",
     //    "./tests/t_small.txt",
     //    "./tests/41_with_nl",
@@ -171,8 +171,8 @@ int main(void)
     //    "./tests/43_with_nl",
     //    "./tests/alternate_line_nl_with_nl",
     //    "./tests/big_line_with_nl",
-    //    "./tests/multiple_line_no_nl",
-       "./tests/multiple_nlx5",
+       "./tests/multiple_line_no_nl",
+    //    "./tests/multiple_nlx5",
     //    "./tests/test_test",
 	   "\0"
 	};
@@ -201,33 +201,33 @@ int main(void)
 		}
 
 		
-		fd = open(source, O_RDWR);
-		int res = 1;
-		if (fd > -1)
-		{
-			printf("FIRST\n");
-			while (res != 0)
-			{
-				res = get_next_line(fd, &line);
-				printf("free <%p> |%s|\n", line, line);
-				printf("res: %d\n", res);
-				printf("--- LINE\n");
-				free(line);
-				printf("---\n");
+		// fd = open(source, O_RDWR);
+		// int res = 1;
+		// if (fd > -1)
+		// {
+		// 	printf("FIRST\n");
+		// 	while (res != 0)
+		// 	{
+		// 		res = get_next_line(fd, &line);
+		// 		printf("free <%p> |%s|\n", line, line);
+		// 		printf("res: %d\n", res);
+		// 		printf("--- LINE\n");
+		// 		free(line);
+		// 		printf("---\n");
 
-			}
-			res = 1;
-			printf("SECOND\n");
-			while (res != 0)
-			{
-				res = get_next_line(fd, &line);
-				printf("free <%p> |%s|\n", line, line);
-				printf("res: %d\n", res);
-				printf("--- LINE\n");
-				free(line);
-				printf("---\n");
-			}
-		}
+		// 	}
+		// 	res = 1;
+		// 	printf("SECOND\n");
+		// 	while (res != 0)
+		// 	{
+		// 		res = get_next_line(fd, &line);
+		// 		printf("free <%p> |%s|\n", line, line);
+		// 		printf("res: %d\n", res);
+		// 		printf("--- LINE\n");
+		// 		free(line);
+		// 		printf("---\n");
+		// 	}
+		// }
     #endif
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/29 19:27:15 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 20:30:30 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ char *substrjoin(t_list *s, size_t start, size_t end)
 
 	index = 0;
 	restlen = 0;
-	len = s->end - s->start;
+	len = end - start;
+
 	// printf("dest: |%s|\n",dest);
 	// printf("source: |%s|\n",source);
 	// printf("len: |%zu|\n",len);
@@ -128,7 +129,7 @@ char *substrjoin(t_list *s, size_t start, size_t end)
 	}
 	// printf("output: |%s|\n\n", output);
 	output[index] = '\0';
-	printf("\noutput: |%s| /  index: %zu\n\n", output, index);
+	// printf("\noutput: |%s| /  index: %zu\n\n", output, index);
 	if (s->rest)
 	{
 		free(s->rest);
