@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/29 20:55:47 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 21:15:43 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,6 @@ static void	find_char(t_list *s, char c)
 	}
 	s->eob = 1;
 	return ;
-}
-
-static int	end_of_line(t_list *s, char **line)
-{
-	*line = substrjoin(s, s->start, s->end);
-	if (!*line)
-		return (-1);
-	s->start = ++s->end;
-	return (1);
-}
-
-static int	end_of_buffer(t_list *s)
-{
-	s->rest = substrjoin(s, s->start, s->end);
-	if (!s->rest)
-		return (0);
-	s->populated = 0;
-	return (1);
-}
-
-static int	end_of_file(t_list *s, char **line)
-{
-	if (!s->rest)
-	{
-		*line = malloc(sizeof(char) * 1);
-		if (!*line)
-			return (-1);
-		*line[0] = '\0';
-	}
-	else
-	{
-		*line = substrjoin(s, 0, 0);
-		if (!*line)
-			return (-1);
-		s->rest = NULL;
-	}
-	return (0);
 }
 
 static int	freer_the_almighty(t_list *s, int return_value)
@@ -83,7 +46,6 @@ static int	freer_the_almighty(t_list *s, int return_value)
 		if (s != NULL)
 		{
 			free(s);
-			s = NULL;
 		}
 	}
 	return (return_value);
@@ -107,11 +69,19 @@ int	get_next_line(int fd, char **line)
 		{
 			find_char(s, '\n');
 			if (!s->eob)
-				return (freer_the_almighty(s, end_of_line(s, &*line)));
+			{
+				*line = substrjoin(s, s->start, s->end);
+				if (!*line)
+					return (freer_the_almighty(s, -1));
+				s->start = ++s->end;
+				return (1);
+			}
 			else
 			{
-				if (!end_of_buffer(s))
+				s->rest = substrjoin(s, s->start, s->end);
+				if (!s->rest)
 					return (freer_the_almighty(s, -1));
+				s->populated = 0;
 			}
 		}
 		else
@@ -122,7 +92,21 @@ int	get_next_line(int fd, char **line)
 				return (freer_the_almighty(s, -1));
 			if (s->read == 0)
 			{
-				return (freer_the_almighty(s, end_of_file(s, &*line)));
+				if (!s->rest)
+				{
+					*line = malloc(sizeof(char) * 1);
+					if (!*line)
+						return (freer_the_almighty(s, -1));
+					*line[0] = '\0';
+				}
+				else
+				{
+					*line = substrjoin(s, 0, 0);
+					if (!*line)
+						return (freer_the_almighty(s, -1));
+					s->rest = NULL;
+				}
+				return (1);
 			}
 			s->start = 0;
 			s->end = 0;
