@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/29 14:58:37 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 20:14:55 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,9 @@ static void	find_char(t_list *s, char c)
 
 static	int end_of_line(t_list *s, char **line)
 {
-	s->cut = ft_substr(s->buffer, s->start, s->end - s->start);
-	if (!s->cut)
-		return (0);
-	*line = ft_strjoin_empty(s->rest, s->cut, 1);
-	free(s->cut);
+	*line = substrjoin(s, s->start, s->end);
 	if (!*line)
 		return (0);
-	s->cut = NULL;
-	s->rest = NULL;
 	s->start = ++s->end;
 	// printf("LINE(eol): %p -> |%s|\n", *line,*line);
 	return (1);
@@ -46,14 +40,9 @@ static	int end_of_line(t_list *s, char **line)
 
 static	int end_of_buffer(t_list *s)
 {
-	s->cut = ft_substr(s->buffer, s->start, BUFFER_SIZE - s->start);
-	if (!s->cut)
-		return (0);
-	s->rest = ft_strjoin_empty(s->rest, s->cut, 1);
-	free(s->cut);
+	s->rest = substrjoin(s, s->start, s->end);
 	if (!s->rest)
 		return (0);
-	s->cut = NULL;
 	s->populated = 0;
 	return (1);
 }
@@ -69,7 +58,8 @@ static int	end_of_file(t_list *s, char **line)
 	}
 	else
 	{
-		*line = ft_strjoin_empty(s->rest, NULL, 1);
+		// *line = ft_strjoin_empty(s->rest, NULL, 1);
+		*line = substrjoin(s, 0, 0);
 		if (!*line)
 			return (0);
 		s->rest = NULL;
@@ -91,6 +81,11 @@ static int	freer_the_almighty(t_list *s, int return_value)
 		{
 			free(s->cut);
 			s->cut = NULL;
+		}
+		if (s->buffer != NULL)
+		{
+			free(s->buffer);
+			s->buffer = NULL;
 		}
 		if (s != NULL)
 		{
@@ -163,21 +158,22 @@ int main(void)
     char *line;
 	// char *source;
     char *source[]= {
-		"./tests/42_no_nl",
-       "./tests/43_no_nl",
-       "./tests/alternate_line_nl_no_nl",
+		// "./tests/42_no_nl",
+    //    "./tests/43_no_nl",
+    //    "./tests/alternate_line_nl_no_nl",
     //    "./tests/big_line_no_nl",
-       "./tests/empty",
+    //    "./tests/empty",
        "./tests/multiple_line_with_nl",
-       "./tests/nl",
-       "./tests/t_small.txt",
-       "./tests/41_with_nl",
-       "./tests/42_with_nl",
-       "./tests/43_with_nl",
-       "./tests/alternate_line_nl_with_nl",
+    //    "./tests/nl",
+    //    "./tests/t_small.txt",
+    //    "./tests/41_with_nl",
+    //    "./tests/42_with_nl",
+    //    "./tests/43_with_nl",
+    //    "./tests/alternate_line_nl_with_nl",
     //    "./tests/big_line_with_nl",
-       "./tests/multiple_line_no_nl",
+    //    "./tests/multiple_line_no_nl",
        "./tests/multiple_nlx5",
+    //    "./tests/test_test",
 	   "\0"
 	};
     #ifdef BUFFER_SIZE
@@ -204,8 +200,8 @@ int main(void)
 			i++;
 		}
 
+		
 		fd = open(source, O_RDWR);
-
 		int res = 1;
 		if (fd > -1)
 		{

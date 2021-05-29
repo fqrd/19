@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/29 14:59:21 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/29 19:27:15 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ t_list	*new_status(t_list *s)
 	s = malloc(sizeof(t_list) * 1);
 	if (!s)
 		return (NULL);
+	s->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!s->buffer)
+		return (NULL);
+	s->buffer[BUFFER_SIZE] = '\0';
 	s->cut = NULL;
 	s->rest = NULL;
 	s->start = 0;
@@ -38,29 +42,6 @@ size_t	ft_strlen(const char *str)
 	while (str[index])
 		index++;
 	return (index);
-}
-
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
-{
-	size_t	index;
-	size_t	size_src;
-
-	if (!dest && !src)
-		return (0);
-	index = 0;
-	size_src = ft_strlen(src);
-	if (size_src < size)
-		size = size_src + 1;
-	while (index < size)
-	{
-		if (index + 1 == size)
-			dest[index] = '\0';
-		else
-			dest[index] = src[index];
-		index++;
-	}
-	return (size_src);
 }
 
 char	*ft_strjoin_empty(char *s1, char *s2, int do_free)
@@ -95,33 +76,6 @@ char	*ft_strjoin_empty(char *s1, char *s2, int do_free)
 	return (output);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char			*ps;
-	char			*substring;
-	size_t			llock;
-
-	llock = 0;
-	ps = (char *) s;
-	if (!s || len == 0 || start > ft_strlen(s))
-	{
-		substring = malloc(sizeof(char) * 1);
-		if (!substring)
-			return (NULL);
-		ft_strlcpy(substring, "\0", 1);
-		return (substring);
-	}
-	while (start + llock < ft_strlen(s) && llock < len)
-		llock++;
-	substring = malloc(sizeof(char) * (llock + 1));
-	if (!substring)
-		return (NULL);
-	// printf("---\nsubstring#1: |%s| |%s| |%zu|\n", substring, ps+start, llock + 1);
-	ft_strlcpy(substring, ps + start, llock + 1);
-	// printf("substring#2: |%s| |%s| |%zu|\n", substring, ps+start, llock + 1);
-	return (substring);
-}
-
 void	ft_bzero(void *s, size_t n)
 {
 	char	*p;
@@ -129,4 +83,56 @@ void	ft_bzero(void *s, size_t n)
 	p = (char *) s;
 	while (n-- > 0)
 		*p++ = '\0';
+}
+
+char *substrjoin(t_list *s, size_t start, size_t end)
+{
+	char *output;
+	size_t index;
+	size_t restlen;
+	size_t len;
+
+	index = 0;
+	restlen = 0;
+	len = s->end - s->start;
+	// printf("dest: |%s|\n",dest);
+	// printf("source: |%s|\n",source);
+	// printf("len: |%zu|\n",len);
+	if (s->rest)
+	{
+		restlen = ft_strlen(s->rest);
+	}
+	// printf("restlen: |%zu|\n",restlen);
+	output = malloc(sizeof(char) * (restlen + len + 1));
+	if (!output)
+		return (NULL);
+	// printf("malloc: |%zu|\n",restlen + len + 1);
+	// printf("source[start]: |%c|\n",source[start]);
+
+	while (index < restlen + len)
+	{
+		if (s->rest && s->rest[index] != '\0' && index < restlen)
+		{
+			output[index] = s->rest[index];
+			// printf("index dest: |%c| / %zu\n", dest[index], index);
+		}
+		else
+		{
+			if(s->buffer && s->buffer[start] && start < end)
+			{
+				output[index] = s->buffer[start++];
+				// printf("index source: |%c| / %zu / index : %zu\n", source[start-1], start-1, index);
+			}
+		}
+		index++;
+	}
+	// printf("output: |%s|\n\n", output);
+	output[index] = '\0';
+	printf("\noutput: |%s| /  index: %zu\n\n", output, index);
+	if (s->rest)
+	{
+		free(s->rest);
+		s->rest = NULL;
+	}
+	return (output);
 }
