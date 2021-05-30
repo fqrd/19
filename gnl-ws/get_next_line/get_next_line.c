@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 15:18:33 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 15:34:38 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	find_char(t_list *s, char c)
 
 static int	end_of_line(t_list *s, char **line)
 {
-	*line = substrjoin(s, s->start, s->end);
+	*line = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
 	if (!*line)
 		return (0);
 	s->start = ++s->end;
@@ -39,7 +39,7 @@ static int	end_of_line(t_list *s, char **line)
 
 static int	end_of_buffer(t_list *s)
 {
-	s->rest = substrjoin(s, s->start, s->end);
+	s->rest = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
 	if (!s->rest)
 		return (0);
 	s->populated = 0;
@@ -57,7 +57,7 @@ static int	end_of_file(t_list *s, char **line)
 	}
 	else
 	{
-		*line = substrjoin(s, 0, 0);
+		*line = substrjoin(s, 0, 0, ft_strlen(s->rest));
 		if (!*line)
 			return (0);
 		s->rest = NULL;

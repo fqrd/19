@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 15:31:02 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 15:36:02 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,14 @@ void	ft_bzero(void *s, size_t n)
 		*p++ = '\0';
 }
 
-char	*substrjoin(t_list *s, size_t start, size_t end)
+char	*substrjoin(t_list *s, size_t start, size_t end, size_t restlen)
 {
 	char	*output;
 	size_t	index;
-	size_t	restlen;
 	size_t	len;
 
 	index = 0;
 	len = end - start;
-	restlen = 0;
-	if (s->rest)
-		restlen = ft_strlen(s->rest);
 	output = malloc(sizeof(char) * (restlen + len + 1));
 	if (!output)
 		return (NULL);

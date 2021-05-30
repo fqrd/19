@@ -21,7 +21,7 @@ typedef struct s_list
 
 t_list	*new_status(t_list *s);
 int		get_next_line(int fd, char **line);
-char	*substrjoin(t_list *s, size_t start, size_t end);
+char	*substrjoin(t_list *s, size_t start, size_t end, size_t restlen);
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlen(const char *str);
 #endif
