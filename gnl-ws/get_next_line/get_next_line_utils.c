@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 15:36:02 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 16:29:44 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ t_list	*new_status(t_list *s)
 	s->eob = 0;
 	s->populated = 0;
 	return (s);
+}
+
+void	find_char(t_list *s, char c)
+{
+	while (s->buffer[s->end])
+	{
+		if (s->buffer[s->end] == c)
+			return ;
+		s->end++;
+	}
+	s->eob = 1;
+	return ;
 }
 
 size_t	ft_strlen(const char *str)
