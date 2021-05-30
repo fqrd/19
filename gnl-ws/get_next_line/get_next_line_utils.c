@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:41 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 15:16:28 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 15:27:46 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,38 +43,6 @@ size_t	ft_strlen(const char *str)
 	return (index);
 }
 
-char	*ft_strjoin_empty(char *s1, char *s2, int do_free)
-{
-	char	*output;
-	size_t	len;
-	size_t	i;
-	size_t	s1i;
-	size_t	s2i;
-
-	i = 0;
-	s1i =0;
-	s2i =0;
-	len = ft_strlen(s1) + ft_strlen(s2);
-	output = malloc(sizeof(char) * len + 1);
-	if (!output)
-		return (NULL);
-	while (i < len)
-	{
-		if (i < ft_strlen(s1))
-			output[i] = s1[s1i++];
-		else
-			output[i] = s2[s2i++];
-		i++;
-	}
-	if (s1 != NULL && do_free)
-	{
-		free(s1);
-		s1 = NULL;
-	}
-	output[i] = '\0';
-	return (output);
-}
-
 void	ft_bzero(void *s, size_t n)
 {
 	char	*p;
@@ -92,28 +60,19 @@ char	*substrjoin(t_list *s, size_t start, size_t end)
 	size_t	len;
 
 	index = 0;
-	restlen = 0;
 	len = end - start;
+	restlen = 0;
 	if (s->rest)
-	{
 		restlen = ft_strlen(s->rest);
-	}
 	output = malloc(sizeof(char) * (restlen + len + 1));
 	if (!output)
 		return (NULL);
 	while (index < restlen + len)
 	{
 		if (s->rest && s->rest[index] != '\0' && index < restlen)
-		{
 			output[index] = s->rest[index];
-		}
-		else
-		{
-			if (s->buffer && s->buffer[start] && start < end)
-			{
-				output[index] = s->buffer[start++];
-			}
-		}
+		if (s->buffer && s->buffer[start] && start < end)
+			output[index] = s->buffer[start++];
 		index++;
 	}
 	output[index] = '\0';

@@ -24,5 +24,4 @@ int		get_next_line(int fd, char **line);
 char	*substrjoin(t_list *s, size_t start, size_t end);
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlen(const char *str);
-// char	*ft_strjoin_empty(char *s1, char *s2, int do_free);
 #endif
