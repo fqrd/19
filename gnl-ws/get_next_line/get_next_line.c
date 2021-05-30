@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 17:51:48 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 17:58:25 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ static int	mfree(t_list *s, int return_value)
 		{
 			free(s->rest);
 			s->rest = NULL;
-		}
-		if (s->cut != NULL)
-		{
-			free(s->cut);
-			s->cut = NULL;
 		}
 		if (s->buffer != NULL)
 		{
