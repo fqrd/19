@@ -6,15 +6,11 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 15:34:38 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 15:44:18 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-/**
-* gcc -Werror -Wextra -Wall -D BUFFER_SIZE=32 get_next_line_utils.c get_next_line.c && ./a.out
-*/
 
 static void	find_char(t_list *s, char c)
 {
@@ -28,42 +24,42 @@ static void	find_char(t_list *s, char c)
 	return ;
 }
 
-static int	end_of_line(t_list *s, char **line)
-{
-	*line = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
-	if (!*line)
-		return (0);
-	s->start = ++s->end;
-	return (1);
-}
+// static int	end_of_line(t_list *s, char **line)
+// {
+// 	*line = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
+// 	if (!*line)
+// 		return (0);
+// 	s->start = ++s->end;
+// 	return (1);
+// }
 
-static int	end_of_buffer(t_list *s)
-{
-	s->rest = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
-	if (!s->rest)
-		return (0);
-	s->populated = 0;
-	return (1);
-}
+// static int	end_of_buffer(t_list *s)
+// {
+// 	s->rest = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
+// 	if (!s->rest)
+// 		return (0);
+// 	s->populated = 0;
+// 	return (1);
+// }
 
-static int	end_of_file(t_list *s, char **line)
-{
-	if (!s->rest)
-	{
-		*line = malloc(sizeof(char) * 1);
-		if (!*line)
-			return (0);
-		*line[0] = '\0';
-	}
-	else
-	{
-		*line = substrjoin(s, 0, 0, ft_strlen(s->rest));
-		if (!*line)
-			return (0);
-		s->rest = NULL;
-	}
-	return (1);
-}
+// static int	end_of_file(t_list *s, char **line)
+// {
+// 	if (!s->rest)
+// 	{
+// 		*line = malloc(sizeof(char) * 1);
+// 		if (!*line)
+// 			return (0);
+// 		*line[0] = '\0';
+// 	}
+// 	else
+// 	{
+// 		*line = substrjoin(s, 0, 0, ft_strlen(s->rest));
+// 		if (!*line)
+// 			return (0);
+// 		s->rest = NULL;
+// 	}
+// 	return (1);
+// }
 
 static int	mfree(t_list *s, int return_value)
 {
@@ -111,14 +107,18 @@ int	get_next_line(int fd, char **line)
 			find_char(s, '\n');
 			if (!s->eob)
 			{
-				if (!end_of_line(s, &*line))
+				*line = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
+				if (!*line)
 					return (mfree(s, -1));
+				s->start = ++s->end;
 				return (1);
 			}
 			else
 			{
-				if (!end_of_buffer(s))
+				s->rest = substrjoin(s, s->start, s->end, ft_strlen(s->rest));
+				if (!s->rest)
 					return (mfree(s, -1));
+				s->populated = 0;
 			}
 		}
 		else
@@ -129,12 +129,23 @@ int	get_next_line(int fd, char **line)
 				return (mfree(s, -1));
 			if (s->read == 0)
 			{
-				if (mfree(s, end_of_file(s, &*line)))
+				if (!s->rest)
 				{
-					s = NULL;
-					return (0);
+					*line = malloc(sizeof(char) * 1);
+					if (!*line)
+						return (mfree(s, -1));
+					*line[0] = '\0';
 				}
-				return (-1);
+				else
+				{
+					*line = substrjoin(s, 0, 0, ft_strlen(s->rest));
+					if (!*line)
+						return (mfree(s, -1));
+					s->rest = NULL;
+				}
+				mfree(s, 1);
+				s = NULL;
+				return (0);
 			}
 			s->start = 0;
 			s->end = 0;
