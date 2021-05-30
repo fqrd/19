@@ -2,15 +2,12 @@
 # define GET_NEXT_LINE_H
 
 # include <fcntl.h>
-# include <printf.h>
 # include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
+# include <stddef.h>
 // # include "wraloc.h"
 typedef struct s_list
 {
 	char	*buffer;
-	char	*cut;
 	char	*rest;
 	int		populated;
 	int		read;

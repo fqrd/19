@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 17:47:55 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 17:51:48 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	action_on_buffer(t_list *s, char **line)
 		if (!s->rest)
 			return (mfree(s, -1));
 		s->populated = 0;
-		return (2);
+		return (0);
 	}
 }
 
@@ -110,7 +110,7 @@ int	get_next_line(int fd, char **line)
 		if (s->populated)
 		{
 			res = action_on_buffer(s, &*line);
-			if (res < 2)
+			if (res != 0)
 				return (res);
 		}
 		else
