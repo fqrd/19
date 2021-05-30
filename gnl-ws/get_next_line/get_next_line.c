@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 19:26:35 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/30 17:41:32 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/30 17:47:55 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,5 @@ int	get_next_line(int fd, char **line)
 			}
 		}
 	}
-	return (-1);
+	return (mfree(s, -1));
 }
