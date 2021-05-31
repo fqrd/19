@@ -6,20 +6,20 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:58:06 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/31 16:19:45 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/31 19:19:46 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-t_list	*new_status(t_list *s)
+t_list	*new_status(t_list *s, int fd)
 {
 	s = malloc(sizeof(t_list) * 1);
 	if (!s)
 		return (NULL);
-	s->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!s->buffer)
-		return (NULL);
+	// s->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	// if (!s->buffer)
+	// 	return (NULL);
 	s->buffer[BUFFER_SIZE] = '\0';
 	s->rest = NULL;
 	s->start = 0;
@@ -27,6 +27,7 @@ t_list	*new_status(t_list *s)
 	s->read = -1;
 	s->eob = 0;
 	s->populated = 0;
+	s->fd = fd;
 	return (s);
 }
 

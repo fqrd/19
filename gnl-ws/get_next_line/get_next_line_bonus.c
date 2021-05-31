@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:57:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/31 16:37:30 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/31 19:21:35 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,14 @@ static int	mfree(t_list **s, int return_value)
 	if (*s)
 	{
 		if ((*s)->rest != NULL)
-		{
 			free((*s)->rest);
-			(*s)->rest = NULL;
-		}
-		if ((*s)->buffer != NULL)
-		{
-			free((*s)->buffer);
-			(*s)->buffer = NULL;
-		}
+		// if ((*s)->buffer != NULL)
+		// 	free((*s)->buffer);
+		(*s)->rest = NULL;
+		// (*s)->buffer = NULL;
 		if (*s != NULL)
-		{
 			free(*s);
-			*s = NULL;
-		}
+		*s = NULL;
 	}
 	return (return_value);
 }
@@ -86,7 +80,6 @@ static int	last_buffer(int fd, t_list **s, char **line)
 			*line = substrjoin(&*s, 0, 0, ft_strlen((*s)->rest));
 			if (!*line)
 				return (mfree(&*s, -1));
-			(*s)->rest = NULL;
 		}
 		return (mfree(&*s, 0));
 	}
@@ -102,7 +95,7 @@ int	get_next_line(int fd, char **line)
 	if (fd < 0 || !line || BUFFER_SIZE < 1)
 		return (-1);
 	if (!s)
-		s = new_status(s);
+		s = new_status(s, fd);
 	while (s)
 	{
 		if (s->populated)
