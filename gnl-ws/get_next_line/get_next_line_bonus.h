@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:03:04 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/31 19:21:23 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/31 19:40:44 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_list
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	char	*rest;
 	int		populated;
 	int		read;
