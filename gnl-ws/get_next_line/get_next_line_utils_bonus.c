@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:58:06 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/31 14:07:22 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:19:45 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ t_list	*new_status(t_list *s)
 	return (s);
 }
 
-void	find_char(t_list *s, char c)
+void	find_char(t_list **s, char c)
 {
-	while (s->buffer[s->end])
+	while ((*s)->buffer[(*s)->end])
 	{
-		if (s->buffer[s->end] == c)
+		if ((*s)->buffer[(*s)->end] == c)
 			return ;
-		s->end++;
+		(*s)->end++;
 	}
-	s->eob = 1;
+	(*s)->eob = 1;
 	return ;
 }
 
@@ -54,16 +54,16 @@ size_t	ft_strlen(const char *str)
 	return (index);
 }
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *buff, size_t len)
 {
 	char	*p;
 
-	p = (char *) s;
-	while (n-- > 0)
+	p = (char *) buff;
+	while (len-- > 0)
 		*p++ = '\0';
 }
 
-char	*substrjoin(t_list *s, size_t start, size_t end, size_t restlen)
+char	*substrjoin(t_list **s, size_t start, size_t end, size_t restlen)
 {
 	char	*output;
 	size_t	index;
@@ -76,17 +76,17 @@ char	*substrjoin(t_list *s, size_t start, size_t end, size_t restlen)
 		return (NULL);
 	while (index < restlen + len)
 	{
-		if (s->rest && s->rest[index] != '\0' && index < restlen)
-			output[index] = s->rest[index];
-		if (s->buffer && s->buffer[start] && start < end && index >= restlen)
-			output[index] = s->buffer[start++];
+		if ((*s)->rest && (*s)->rest[index] != '\0' && index < restlen)
+			output[index] = (*s)->rest[index];
+		if ((*s)->buffer && (*s)->buffer[start] && start < end && index >= restlen)
+			output[index] = (*s)->buffer[start++];
 		index++;
 	}
 	output[index] = '\0';
-	if (s->rest)
+	if ((*s)->rest)
 	{
-		free(s->rest);
-		s->rest = NULL;
+		free((*s)->rest);
+		(*s)->rest = NULL;
 	}
 	return (output);
 }
