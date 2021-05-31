@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:57:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/31 16:26:03 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:35:01 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,24 +99,23 @@ int	get_next_line(int fd, char **line)
 	static t_list	*s;
 	int				res;
 
-	if (!s && fd > 0)
+	if (fd < 1 || !line || BUFFER_SIZE < 1)
+		return (-1);
+	if (!s)
 		s = new_status(s);
-	if (s && fd > 0 && line && BUFFER_SIZE > 0)
+	while (s)
 	{
-		while (1)
+		if (s->populated)
 		{
-			if (s->populated)
-			{
-				res = action_on_buffer(&s, &*line);
-				if (res != 0)
-					return (res);
-			}
-			else
-			{
-				res = last_buffer(fd, &s, &*line);
-				if (res < 1)
-					return (res);
-			}
+			res = action_on_buffer(&s, &*line);
+			if (res != 0)
+				return (res);
+		}
+		else
+		{
+			res = last_buffer(fd, &s, &*line);
+			if (res < 1)
+				return (res);
 		}
 	}
 	return (mfree(&s, -1));
