@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:57:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/01 19:39:12 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/06/01 19:59:31 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ static int	mfree(t_list **s, int return_value)
 		*s = NULL;
 	}
 	return (return_value);
+}
+
+static int	reinitialize_variables(t_list **s)
+{
+	(*s)->start = 0;
+	(*s)->end = 0;
+	(*s)->populated = 1;
+	return (1);
 }
 
 static int	action_on_buffer(t_list **s, char **line)
@@ -50,22 +58,15 @@ static int	action_on_buffer(t_list **s, char **line)
 	}
 }
 
-static int	reset(t_list **s)
-{
-	(*s)->start = 0;
-	(*s)->end = 0;
-	(*s)->populated = 1;
-	(*s)->read = -1;
-	return (1);
-}
-
 static int	last_buffer(int fd, t_list **s, char **line)
 {
+	int	ret;
+
 	ft_bzero((*s)->buffer, BUFFER_SIZE);
-	(*s)->read = read(fd, (*s)->buffer, BUFFER_SIZE);
-	if ((*s)->read > 0)
-		return (reset(&*s));
-	else if ((*s)->read == 0)
+	ret = read(fd, (*s)->buffer, BUFFER_SIZE);
+	if (ret > 0)
+		return (reinitialize_variables(&*s));
+	else if (ret == 0)
 	{
 		if (!(*s)->rest)
 		{

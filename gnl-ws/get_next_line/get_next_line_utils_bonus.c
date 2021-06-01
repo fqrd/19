@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:58:06 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/01 19:38:30 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/06/01 19:51:33 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_list	*new_status(t_list *s)
 	s->rest = NULL;
 	s->start = 0;
 	s->end = 0;
-	s->read = -1;
 	s->populated = 0;
 	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:03:04 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/01 19:36:31 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/06/01 19:51:30 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct s_list
 {
 	char	*buffer;
 	char	*rest;
 	int		populated;
-	int		read;
 	size_t	start;
 	size_t	end;
 }	t_list;
