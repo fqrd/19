@@ -6,13 +6,13 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:58:06 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/05/31 19:40:10 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/06/01 19:38:30 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-t_list	*new_status(t_list *s, int fd)
+t_list	*new_status(t_list *s)
 {
 	s = malloc(sizeof(t_list) * 1);
 	if (!s)
@@ -25,22 +25,19 @@ t_list	*new_status(t_list *s, int fd)
 	s->start = 0;
 	s->end = 0;
 	s->read = -1;
-	s->eob = 0;
 	s->populated = 0;
-	s->fd = fd;
 	return (s);
 }
 
-void	find_char(t_list **s, char c)
+int	find_char(t_list **s, char c)
 {
 	while ((*s)->buffer[(*s)->end])
 	{
 		if ((*s)->buffer[(*s)->end] == c)
-			return ;
+			return (1);
 		(*s)->end++;
 	}
-	(*s)->eob = 1;
-	return ;
+	return (0);
 }
 
 size_t	ft_strlen(const char *str)
@@ -79,7 +76,8 @@ char	*substrjoin(t_list **s, size_t start, size_t end, size_t restlen)
 	{
 		if ((*s)->rest && (*s)->rest[index] != '\0' && index < restlen)
 			output[index] = (*s)->rest[index];
-		if ((*s)->buffer && (*s)->buffer[start] && start < end && index >= restlen)
+		if ((*s)->buffer && (*s)->buffer[start]
+			&& start < end && index >= restlen)
 			output[index] = (*s)->buffer[start++];
 		index++;
 	}
