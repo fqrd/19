@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/02 16:01:06 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:03:29 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	last_buffer(int fd, t_list **s, char **line)
 
 	ft_bzero((*s)->buffer, BUFFER_SIZE);
 	ret = read(fd, (*s)->buffer, BUFFER_SIZE);
-	if (ret > 0 && ret <= INT_MAX)
+	if (ret > 0)
 		return (reinitialize_variables(&*s));
 	else if (ret == 0)
 	{

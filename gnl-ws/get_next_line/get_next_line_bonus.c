@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:57:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/02 15:44:14 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:04:18 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	last_buffer(int fd, t_list **s, char **line)
 
 	ft_bzero((*s)->buffer, BUFFER_SIZE);
 	ret = read(fd, (*s)->buffer, BUFFER_SIZE);
-	if (ret > 0 && ret <= INT_MAX)
+	if (ret > 0)
 		return (reinitialize_variables(&*s));
 	else if (ret == 0)
 	{
@@ -92,7 +92,7 @@ int	get_next_line(int fd, char **line)
 	static t_list	*s[INT_MAX];
 	int				res;
 
-	if (fd < 0 || fd > INT_MAX || !line || BUFFER_SIZE < 1)
+	if (fd < 0 || !line || BUFFER_SIZE < 1)
 		return (-1);
 	if (!s[fd])
 		s[fd] = new_status(s[fd]);
