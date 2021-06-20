@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 13:57:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/02 17:04:18 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/06/20 11:17:55 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	action_on_buffer(t_list **s, char **line)
 	}
 }
 
-static int	last_buffer(int fd, t_list **s, char **line)
+static int	load_buffer(int fd, t_list **s, char **line)
 {
 	int	ret;
 
@@ -106,7 +106,7 @@ int	get_next_line(int fd, char **line)
 		}
 		else
 		{
-			res = last_buffer(fd, &s[fd], &*line);
+			res = load_buffer(fd, &s[fd], &*line);
 			if (res < 1)
 				return (res);
 		}
