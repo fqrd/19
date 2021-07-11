@@ -6,13 +6,13 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/20 11:09:11 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:19:54 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	mfree(t_list **s, int return_value)
+static void *mfree(t_list **s)
 {
 	if (*s)
 	{
@@ -26,90 +26,116 @@ static int	mfree(t_list **s, int return_value)
 			free(*s);
 		*s = NULL;
 	}
-	return (return_value);
+	return (NULL);
 }
 
-static int	reinitialize_variables(t_list **s)
+static void	reinitialize_variables(t_list **s)
 {
 	(*s)->start = 0;
 	(*s)->end = 0;
 	(*s)->populated = 1;
-	return (1);
 }
 
-static int	action_on_buffer(t_list **s, char **line)
+char	*get_next_line(int fd)
 {
-	if (find_char(&*s, '\n'))
-	{
-		*line = substrjoin(&*s, (*s)->start, (*s)->end, ft_strlen((*s)->rest));
-		if (!*line)
-			return (mfree(&*s, -1));
-		(*s)->start = ++(*s)->end;
-		return (1);
-	}
-	else
-	{
-		(*s)->rest = substrjoin(&*s, (*s)->start,
-				 (*s)->end, ft_strlen((*s)->rest));
-		if (!(*s)->rest)
-			return (mfree(&*s, -1));
-		(*s)->populated = 0;
-		return (0);
-	}
-}
-
-static int	load_buffer(int fd, t_list **s, char **line)
-{
-	int	ret;
-
-	ft_bzero((*s)->buffer, BUFFER_SIZE);
-	ret = read(fd, (*s)->buffer, BUFFER_SIZE);
-	if (ret > 0)
-		return (reinitialize_variables(&*s));
-	else if (ret == 0)
-	{
-		if (!(*s)->rest)
-		{
-			*line = malloc(sizeof(char) * 1);
-			if (!*line)
-				return (mfree(&*s, -1));
-			*line[0] = '\0';
-		}
-		else
-		{
-			*line = substrjoin(&*s, 0, 0, ft_strlen((*s)->rest));
-			if (!*line)
-				return (mfree(&*s, -1));
-		}
-		return (mfree(&*s, 0));
-	}
-	else
-		return (mfree(&*s, -1));
-}
-
-int	get_next_line(int fd, char **line)
-{
-	static t_list	*s[INT_MAX];
+	static t_list	*s[1024];
 	int				res;
 
-	if (fd < 0 || !line || BUFFER_SIZE < 1)
-		return (-1);
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
 	if (!s[fd])
 		s[fd] = new_status(s[fd]);
 	while (s[fd])
 	{
 		if (s[fd]->populated)
 		{
-			res = action_on_buffer(&s[fd], &*line);
-			if (res != 0)
-				return (res);
+			if (find_char(&s[fd], '\n'))
+			{
+				s[fd]->line = substrjoin(&s[fd], s[fd]->start, s[fd]->end, ft_strlen(s[fd]->rest));
+				if (!s[fd]->line)
+					return (mfree(&s[fd]));
+				s[fd]->start = ++s[fd]->end;
+				return (s[fd]->line);
+			}
+			else
+			{
+				s[fd]->rest = substrjoin(&s[fd], s[fd]->start,
+						s[fd]->end, ft_strlen(s[fd]->rest));
+				if (!s[fd]->rest)
+					return (mfree(&s[fd]));
+				s[fd]->populated = 0;
+			}
 		}
 		else
 		{
-			res = load_buffer(fd, &s[fd], &*line);
-			if (res < 1)
-				return (res);
+			ft_bzero(s[fd]->buffer, BUFFER_SIZE);
+			res = read(fd, s[fd]->buffer, BUFFER_SIZE);
+			if (res > 0)
+			{
+				reinitialize_variables(&s[fd]);
+			}
+			else if (res == 0 && s[fd]->rest != NULL)
+			{
+				s[fd]->line = substrjoin(&s[fd], 0, 0, ft_strlen(s[fd]->rest));
+				if (!s[fd]->line)
+					return (mfree(&s[fd]));
+				return (s[fd]->line);
+			}
+			else
+			{
+				return (mfree(&s[fd]));
+			}
 		}
 	}
-	return (mfree(&s[fd], -1));
+	return (mfree(&s[fd]));
+}
+
+
+
+int main(void)
+{
+	
+    int fd;
+    char *source[]= {
+		// "./tests/one_char",
+		// "./tests/42_no_nl",
+    //    "./tests/43_no_nl",
+       "./tests/alternate_line_nl_no_nl",
+    //    "./tests/big_line_no_nl",
+    //    "./tests/empty",
+    //    "./tests/multiple_line_with_nl",
+    //    "./tests/nl",
+    //    "./tests/t_small.txt",
+    //    "./tests/41_with_nl",
+    //    "./tests/42_with_nl",
+    //    "./tests/43_with_nl",
+    //    "./tests/alternate_line_nl_with_nl",
+    //    "./tests/big_line_with_nl",
+    //    "./tests/multiple_line_no_nl",
+    //    "./tests/multiple_nlx5",
+    //    "./tests/test_test",
+	   "\0"
+	};
+    #ifdef BUFFER_SIZE
+		int i = 0;
+		while(source[i][0])
+		{
+			printf("\n\n[testing: %s]\n\n", source[i]);
+			fd = open(source[i], O_RDWR);
+			if (fd > -1)
+			{
+				// printf("%s",get_next_line(fd));
+				char *res;
+				while (res != NULL)
+				{
+					res = get_next_line(fd);
+					printf("|%s|\n", res);
+				}
+				close(fd);
+			}
+			i++;
+		}
+    #endif
+	
+    return (0);
 }
