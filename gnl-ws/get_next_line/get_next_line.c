@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/11 14:19:54 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/12 19:53:33 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*get_next_line(int fd)
 		{
 			if (find_char(&s[fd], '\n'))
 			{
-				s[fd]->line = substrjoin(&s[fd], s[fd]->start, s[fd]->end, ft_strlen(s[fd]->rest));
+				s[fd]->line = substrjoin(&s[fd], s[fd]->start, s[fd]->end + 1, ft_strlen(s[fd]->rest));
 				if (!s[fd]->line)
 					return (mfree(&s[fd]));
 				s[fd]->start = ++s[fd]->end;
@@ -59,10 +59,13 @@ char	*get_next_line(int fd)
 			}
 			else
 			{
-				s[fd]->rest = substrjoin(&s[fd], s[fd]->start,
-						s[fd]->end, ft_strlen(s[fd]->rest));
-				if (!s[fd]->rest)
-					return (mfree(&s[fd]));
+				if (s[fd]->start != s[fd]->end)
+				{
+					s[fd]->rest = substrjoin(&s[fd], s[fd]->start,
+							s[fd]->end, ft_strlen(s[fd]->rest));
+					if (!s[fd]->rest)
+						return (mfree(&s[fd]));
+				}
 				s[fd]->populated = 0;
 			}
 		}
@@ -74,12 +77,19 @@ char	*get_next_line(int fd)
 			{
 				reinitialize_variables(&s[fd]);
 			}
-			else if (res == 0 && s[fd]->rest != NULL)
+			else if (res == 0)
 			{
-				s[fd]->line = substrjoin(&s[fd], 0, 0, ft_strlen(s[fd]->rest));
-				if (!s[fd]->line)
-					return (mfree(&s[fd]));
-				return (s[fd]->line);
+				if (s[fd]->rest != NULL)
+				{
+					s[fd]->line = substrjoin(&s[fd], 0, 0, ft_strlen(s[fd]->rest));
+					if (!s[fd]->line)
+						return (mfree(&s[fd]));
+					return (s[fd]->line);
+				}
+				else
+				{
+					return (NULL);
+				}
 			}
 			else
 			{
@@ -91,45 +101,47 @@ char	*get_next_line(int fd)
 }
 
 
-
+/*
 int main(void)
 {
 	
     int fd;
     char *source[]= {
-		// "./tests/one_char",
+		// "./tests/41_no_nl",
+		// "./tests/41_with_nl",
 		// "./tests/42_no_nl",
-    //    "./tests/43_no_nl",
-       "./tests/alternate_line_nl_no_nl",
-    //    "./tests/big_line_no_nl",
-    //    "./tests/empty",
-    //    "./tests/multiple_line_with_nl",
-    //    "./tests/nl",
-    //    "./tests/t_small.txt",
-    //    "./tests/41_with_nl",
-    //    "./tests/42_with_nl",
-    //    "./tests/43_with_nl",
-    //    "./tests/alternate_line_nl_with_nl",
-    //    "./tests/big_line_with_nl",
-    //    "./tests/multiple_line_no_nl",
-    //    "./tests/multiple_nlx5",
-    //    "./tests/test_test",
-	   "\0"
+		// "./tests/42_with_nl",
+		// "./tests/43_no_nl",
+		// "./tests/43_with_nl",
+		// "./tests/alternate_line_nl_no_nl",
+		// "./tests/alternate_line_nl_with_nl",
+		// "./tests/big_line_no_nl",
+		// "./tests/big_line_with_nl",
+		// "./tests/empty",
+		// "./tests/multiple_line_no_nl",
+		// "./tests/multiple_line_with_nl",
+		// "./tests/multiple_nlx5",
+		"./tests/nl",
+		"\0"
 	};
     #ifdef BUFFER_SIZE
 		int i = 0;
+		char *res = "";
 		while(source[i][0])
 		{
 			printf("\n\n[testing: %s]\n\n", source[i]);
 			fd = open(source[i], O_RDWR);
+			printf("fd: %d\n", fd);
 			if (fd > -1)
 			{
+				res = "";
 				// printf("%s",get_next_line(fd));
-				char *res;
 				while (res != NULL)
 				{
 					res = get_next_line(fd);
-					printf("|%s|\n", res);
+					if (res == NULL)
+						return (1);
+					printf("ret: |%s|\n", res);	
 				}
 				close(fd);
 			}
@@ -139,3 +151,4 @@ int main(void)
 	
     return (0);
 }
+*/
