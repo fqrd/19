@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:07 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/12 19:17:40 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/12 21:23:11 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_list	*new_status(t_list *s)
 		return (NULL);
 	s->buffer[BUFFER_SIZE] = '\0';
 	s->rest = NULL;
+	s->line = NULL;
 	s->start = 0;
 	s->end = 0;
 	s->populated = 0;
