@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:42:11 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 15:12:45 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/13 20:43:26 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-// # include <fcntl.h>
 # include <stdio.h>
 
 typedef struct s_list
