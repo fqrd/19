@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 13:24:37 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/13 13:35:55 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static void	reinitialize_variables(t_list **s)
 	(*s)->populated = 1;
 }
 
+
+// static void free_line(t_list *s)
+// {
+// 	if (s->line != NULL)
+// 	{
+// 		printf("line != NULL: %s\n", s->line);
+// 		free (s->line);
+// 		s->line = NULL;
+// 	}
+// }
+
 char	*get_next_line(int fd)
 {
 	static t_list	*s[1024];
@@ -45,12 +56,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!s[fd])
 		s[fd] = new_status(s[fd]);
-	if (s[fd]->line != NULL)
-	{
-		printf("line != NULL\n");
-		free (s[fd]->line);
-		s[fd]->line = NULL;
-	}
+	// free_line(s[fd]);
 	while (s[fd])
 	{
 		if (s[fd]->populated)
