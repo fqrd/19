@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/31 13:57:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/06/20 11:17:55 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/07/13 14:42:05 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/07/13 14:44:05 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static int	mfree(t_list **s, int return_value)
+static void	*mfree(t_list **s)
 {
 	if (*s)
 	{
@@ -20,96 +20,89 @@ static int	mfree(t_list **s, int return_value)
 			free((*s)->rest);
 		if ((*s)->buffer != NULL)
 			free((*s)->buffer);
-		(*s)->buffer = NULL;
 		(*s)->rest = NULL;
+		(*s)->buffer = NULL;
 		if (*s != NULL)
 			free(*s);
 		*s = NULL;
 	}
-	return (return_value);
+	return (NULL);
 }
 
-static int	reinitialize_variables(t_list **s)
-{
-	(*s)->start = 0;
-	(*s)->end = 0;
-	(*s)->populated = 1;
-	return (1);
-}
-
-static int	action_on_buffer(t_list **s, char **line)
+static char	*action_on_buffer(t_list **s)
 {
 	if (find_char(&*s, '\n'))
 	{
-		*line = substrjoin(&*s, (*s)->start, (*s)->end, ft_strlen((*s)->rest));
-		if (!*line)
-			return (mfree(&*s, -1));
-		(*s)->start = ++(*s)->end;
-		return (1);
+		(*s)->line = substrjoin(&*s, (*s)->start, ++(*s)->end,
+				ft_strlen((*s)->rest));
+		if (!(*s)->line)
+			return (mfree(&*s));
+		(*s)->start = (*s)->end;
+		return ((*s)->line);
 	}
 	else
 	{
-		(*s)->rest = substrjoin(&*s, (*s)->start,
-				 (*s)->end, ft_strlen((*s)->rest));
-		if (!(*s)->rest)
-			return (mfree(&*s, -1));
+		if ((*s)->start != (*s)->end)
+		{
+			(*s)->rest = substrjoin(&*s, (*s)->start,
+					(*s)->end, ft_strlen((*s)->rest));
+			if (!(*s)->rest)
+				return (mfree(&*s));
+		}
 		(*s)->populated = 0;
-		return (0);
+		return ("1");
 	}
 }
 
-static int	load_buffer(int fd, t_list **s, char **line)
+static char	*load_buffer(int fd, t_list **s)
 {
-	int	ret;
+	int	res;
 
 	ft_bzero((*s)->buffer, BUFFER_SIZE);
-	ret = read(fd, (*s)->buffer, BUFFER_SIZE);
-	if (ret > 0)
-		return (reinitialize_variables(&*s));
-	else if (ret == 0)
+	res = read(fd, (*s)->buffer, BUFFER_SIZE);
+	if (res > 0)
 	{
-		if (!(*s)->rest)
-		{
-			*line = malloc(sizeof(char) * 1);
-			if (!*line)
-				return (mfree(&*s, -1));
-			*line[0] = '\0';
-		}
-		else
-		{
-			*line = substrjoin(&*s, 0, 0, ft_strlen((*s)->rest));
-			if (!*line)
-				return (mfree(&*s, -1));
-		}
-		return (mfree(&*s, 0));
+		(*s)->start = 0;
+		(*s)->end = 0;
+		(*s)->populated = 1;
+		return ("1");
 	}
-	else
-		return (mfree(&*s, -1));
+	else if (res == 0 && (*s)->rest != NULL)
+	{
+		(*s)->line = substrjoin(&*s, 0, 0,
+				ft_strlen((*s)->rest));
+		if (!(*s)->line)
+			return (mfree(&*s));
+		return ((*s)->line);
+	}
+	return (mfree(&*s));
 }
 
-int	get_next_line(int fd, char **line)
+char	*get_next_line(int fd)
 {
-	static t_list	*s[INT_MAX];
-	int				res;
+	static t_list	*s[1024];
+	char			*res;
 
-	if (fd < 0 || !line || BUFFER_SIZE < 1)
-		return (-1);
+	res = NULL;
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
 	if (!s[fd])
 		s[fd] = new_status(s[fd]);
+	s[fd]->line = NULL;
 	while (s[fd])
 	{
 		if (s[fd]->populated)
 		{
-			res = action_on_buffer(&s[fd], &*line);
-			if (res != 0)
+			res = action_on_buffer(&s[fd]);
+			if (res == NULL || s[fd]->line != NULL)
 				return (res);
 		}
 		else
 		{
-			res = load_buffer(fd, &s[fd], &*line);
-			if (res < 1)
+			res = load_buffer(fd, &s[fd]);
+			if (res == NULL || s[fd]->line != NULL)
 				return (res);
 		}
 	}
-	return (mfree(&s[fd], -1));
+	return (mfree(&s[fd]));
 }

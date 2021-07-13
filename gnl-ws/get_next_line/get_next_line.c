@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 14:34:26 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/13 14:44:01 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	*mfree(t_list **s)
 	return (NULL);
 }
 
-static char *action_on_buffer(t_list **s)
+static char	*action_on_buffer(t_list **s)
 {
 	if (find_char(&*s, '\n'))
 	{
@@ -54,7 +54,7 @@ static char *action_on_buffer(t_list **s)
 	}
 }
 
-static char *load_buffer(int fd, t_list **s)
+static char	*load_buffer(int fd, t_list **s)
 {
 	int	res;
 

@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:24 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 13:22:57 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/13 14:44:02 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <fcntl.h>
-# include <stdio.h>
-// # include "./wraloc/wraloc.h"
+// # include <fcntl.h>
 
 typedef struct s_list
 {
