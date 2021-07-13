@@ -6,13 +6,13 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:42:05 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 19:16:56 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/13 20:30:00 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static void	*mfree(t_list **s)
+static char	*mfree(t_list **s, char *ret)
 {
 	if (*s)
 	{
@@ -26,7 +26,7 @@ static void	*mfree(t_list **s)
 			free(*s);
 		*s = NULL;
 	}
-	return (NULL);
+	return (ret);
 }
 
 static char	*action_on_buffer(t_list **s)
@@ -36,7 +36,7 @@ static char	*action_on_buffer(t_list **s)
 		(*s)->line = substrjoin(&*s, (*s)->start, ++(*s)->end,
 				ft_strlen((*s)->rest));
 		if (!(*s)->line)
-			return (mfree(&*s));
+			return (mfree(&*s, NULL));
 		(*s)->start = (*s)->end;
 		return ((*s)->line);
 	}
@@ -47,7 +47,7 @@ static char	*action_on_buffer(t_list **s)
 			(*s)->rest = substrjoin(&*s, (*s)->start,
 					(*s)->end, ft_strlen((*s)->rest));
 			if (!(*s)->rest)
-				return (mfree(&*s));
+				return (mfree(&*s, NULL));
 		}
 		(*s)->populated = 0;
 		return ("1");
@@ -72,10 +72,10 @@ static char	*load_buffer(int fd, t_list **s)
 		(*s)->line = substrjoin(&*s, 0, 0,
 				ft_strlen((*s)->rest));
 		if (!(*s)->line)
-			return (mfree(&*s));
-		return ((*s)->line);
+			return (mfree(&*s, NULL));
+		return (mfree(&s[fd], (*s)->line));
 	}
-	return (mfree(s));
+	return (mfree(s, NULL));
 }
 
 char	*get_next_line(int fd)
@@ -83,7 +83,6 @@ char	*get_next_line(int fd)
 	static t_list	*s[1024];
 	char			*res;
 
-	res = NULL;
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	if (!s[fd])
@@ -95,22 +94,14 @@ char	*get_next_line(int fd)
 		{
 			res = action_on_buffer(&s[fd]);
 			if (res == NULL || s[fd]->line != NULL)
-			{
-			//	printf("\naob: |%s|\n", res);
 				return (res);
-			}
 		}
 		else
 		{
 			res = load_buffer(fd, &s[fd]);
 			if (res == NULL || s[fd]->line != NULL)
-			{
-			//	printf("\nlb: |%s|\n", res);
-				mfree(&s[fd]);
 				return (res);
-		
-			}
 		}
 	}
-	return (mfree(&s[fd]));
+	return (mfree(&s[fd], NULL));
 }
