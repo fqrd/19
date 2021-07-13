@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/12 21:22:58 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/13 13:24:37 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ static void *mfree(t_list **s)
 			free((*s)->rest);
 		if ((*s)->buffer != NULL)
 			free((*s)->buffer);
-		if ((*s)->line != NULL)
-			free((*s)->line);
-		(*s)->line = NULL;
-		(*s)->buffer = NULL;
 		(*s)->rest = NULL;
+		(*s)->buffer = NULL;
 		if (*s != NULL)
 			free(*s);
 		*s = NULL;
@@ -48,16 +45,22 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!s[fd])
 		s[fd] = new_status(s[fd]);
+	if (s[fd]->line != NULL)
+	{
+		printf("line != NULL\n");
+		free (s[fd]->line);
+		s[fd]->line = NULL;
+	}
 	while (s[fd])
 	{
 		if (s[fd]->populated)
 		{
 			if (find_char(&s[fd], '\n'))
 			{
-				s[fd]->line = substrjoin(&s[fd], s[fd]->start, s[fd]->end + 1, ft_strlen(s[fd]->rest));
+				s[fd]->line = substrjoin(&s[fd], s[fd]->start, ++s[fd]->end, ft_strlen(s[fd]->rest));
 				if (!s[fd]->line)
 					return (mfree(&s[fd]));
-				s[fd]->start = ++s[fd]->end;
+				s[fd]->start = s[fd]->end;
 				return (s[fd]->line);
 			}
 			else
@@ -103,7 +106,6 @@ char	*get_next_line(int fd)
 	return (mfree(&s[fd]));
 }
 
-
 /*
 int main(void)
 {
@@ -114,7 +116,7 @@ int main(void)
 		// "./tests/41_with_nl",
 		// "./tests/42_no_nl",
 		// "./tests/42_with_nl",
-		// "./tests/43_no_nl",
+		"./tests/43_no_nl",
 		// "./tests/43_with_nl",
 		// "./tests/alternate_line_nl_no_nl",
 		// "./tests/alternate_line_nl_with_nl",
@@ -124,7 +126,7 @@ int main(void)
 		// "./tests/multiple_line_no_nl",
 		// "./tests/multiple_line_with_nl",
 		// "./tests/multiple_nlx5",
-		"./tests/nl",
+		// "./tests/nl",
 		"\0"
 	};
     #ifdef BUFFER_SIZE
@@ -144,7 +146,10 @@ int main(void)
 					res = get_next_line(fd);
 					if (res == NULL)
 						return (1);
-					printf("ret: |%s|\n", res);	
+					else
+					{
+						printf("ret: |%s|\n", res);
+					}
 				}
 				close(fd);
 			}
