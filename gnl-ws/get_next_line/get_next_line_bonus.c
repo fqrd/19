@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:42:05 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 20:46:38 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/13 20:52:48 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!s[fd])
 		s[fd] = new_status(s[fd]);
-	s[fd]->line = NULL;
 	while (s[fd])
 	{
+		s[fd]->line = NULL;
 		if (s[fd]->populated)
 		{
 			res = action_on_buffer(&s[fd]);
