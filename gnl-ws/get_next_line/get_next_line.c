@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 20:00:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 20:52:35 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/14 15:23:19 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ static char	*load_buffer(int fd, t_list **s)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*s[1024];
+	static t_list	*s[FOPEN_MAX];
 	char			*res;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE < 1)
 		return (NULL);
 	if (!s[fd])
 		s[fd] = new_status(s[fd]);
