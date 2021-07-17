@@ -3,5 +3,4 @@ core
 output
 *.o
 *.a
-*.
 */tests
