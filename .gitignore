@@ -1,6 +1,7 @@
-a.out
-core
-output
-*.o
-*.a
+*/a.out
+*/core
+*/output
+*/*.o
+*/*.a
 */tests
+*/.vscode
