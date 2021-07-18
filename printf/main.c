@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 16:59:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/18 18:59:52 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:13:44 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ static void function_switch(char format, va_list args, int *count)
     //     return;
     //     ft_hexadecimal_number(va_arg(args, int), *count);
     // }
-    // if (format == '%')
-    // {
-    //     write (1, "%", 1);
-    //     count++;
-    // }
+    if (format == '%') // %: OK
+    {
+        if (write (1, "%", 1) > -1)
+            (*count)++;
+    }
 }
 
 int ft_printf(const char *format, ...)
