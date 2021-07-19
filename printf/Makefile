@@ -6,7 +6,7 @@
 #    By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/18 16:59:51 by fcaquard          #+#    #+#              #
-#    Updated: 2021/07/18 17:28:58 by fcaquard         ###   ########.fr        #
+#    Updated: 2021/07/18 19:24:24 by fcaquard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 SRCMANDATORY =			\
-	main.c
+	main.c				\
+	ft_printf.c
 
 MANDATORY = $(SRCMANDATORY:.c=.o)
 # BONUS = $(SRCBONUS:.c=.o)
