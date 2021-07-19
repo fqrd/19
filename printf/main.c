@@ -1,5 +1,5 @@
 # include "ft_printf.h"
-
+/*
 int main(void)
 {
     // char *c = "0 1 2 3 4 5 6 7 8 9 m o p % ^ $ * $ \n";
@@ -14,38 +14,39 @@ int main(void)
 	int n;
 
 	n = -123456789;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = -1;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = -10;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = 1;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = 10;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = 506;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = 6405;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = -994563;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = 1597543215;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = 0123;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
 	n = 0x123;
-	ft_printf("\n----\nd: %d\n", n);
-	printf("p: %d\n", n);
+	ft_printf("\n----\nd: %u\n", n);
+	printf("p: %u\n", n);
+
 
     // char *str = "Hello";
     // char *str2 = "World";
@@ -55,3 +56,4 @@ int main(void)
     // printf("%s%%%s%c", str, str2, ch);
     return (0);
 }
+*/
