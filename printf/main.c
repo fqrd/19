@@ -11,49 +11,41 @@ int main(void)
     //     i++;
     // }
 
-    printf("---\n");
+	int n;
 
-	ft_printf("%c", '0');
-	printf("\n");
-	printf("%c", '0');
-	printf("\n");
-	ft_printf(" %c ", '0');
-	printf("\n");
-	printf(" %c ", '0');
-	printf("\n");
-	ft_printf(" %c", '0' - 256);
-	printf("\n");
-	printf(" %c", '0' - 256);
-	printf("\n");
-	ft_printf("%c ", '0' + 256);
-	printf("\n");
-	printf("%c ", '0' + 256);
-	printf("\n");
-	ft_printf(" %c %c %c ", '0', 0, '1');
-	printf("\n");
-	printf(" %c %c %c ", '0', 0, '1');
-	printf("\n");
-	ft_printf(" %c %c %c ", ' ', ' ', ' ');
-	printf("\n");
-	printf(" %c %c %c ", ' ', ' ', ' ');
-	printf("\n");
-	ft_printf(" %c %c %c ", '1', '2', '3');
-	printf("\n");
-	printf(" %c %c %c ", '1', '2', '3');
-	printf("\n");
-	ft_printf(" %c %c %c ", '2', '1', 0);
-	printf("\n");
-	printf(" %c %c %c ", '2', '1', 0);
-	printf("\n");
-	ft_printf(" %c %c %c ", 0, '1', '2');
-	printf("\n");
-	printf(" %c %c %c ", 0, '1', '2');
-	printf("\n");
-
-    printf("---\n");
-
-
-
+	n = -123456789;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = -1;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = -10;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = 1;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = 10;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = 506;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = 6405;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = -994563;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = 1597543215;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = 0123;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
+	n = 0x123;
+	ft_printf("\n----\nd: %d\n", n);
+	printf("p: %d\n", n);
 
     // char *str = "Hello";
     // char *str2 = "World";
