@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 16:59:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/19 19:41:01 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:42:29 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ static void ft_unsigned_decimal(va_list args, int **count)
     int unbr;
 
     unbr = (unsigned int) va_arg(args, unsigned int);
-    ft_putchar(unbr%10 + '0');
-    (**count)++;
+    (**count) += print_num(unbr, 0);
 }
 
 // // xX
