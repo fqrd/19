@@ -1,7 +1,7 @@
-*/a.out
-*/core
-*/output
-*/*.o
-*/*.a
-*/tests
-*/.vscode
+**/a.out
+**/core
+**/output
+**/*.o
+**/*.a
+**/tests
+**/.vscode
