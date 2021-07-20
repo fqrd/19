@@ -1,4 +1,5 @@
 # include "ft_printf.h"
+# include <limits.h>
 
 static void test_c(int fo)
 {
@@ -97,8 +98,7 @@ static void test_u(int fo)
 	// i = UINT_MAX; // MAX
 	// printf("pf: %u\n", INT_MAX);
 	// ft_printf("ft: %u", 9223372036854775807LL);
-	// u = 4294967295;
-	u = 4294967295 - INT_MAX;
+	u = INT_MAX;
 	printf("pf: %d\n", u);
 	ft_printf("ft: %d\n", u);
 	// printf("\n");

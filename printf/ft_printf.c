@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 16:59:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/20 17:27:50 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/20 18:00:57 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int print_num(long long nb, long long n)
 // c: OK
 static void ft_char(va_list args, int **count)
 {
-    char c;
+    unsigned char c;
 
     c = (unsigned char) va_arg(args, int);
     **count += ft_putchar(c);
@@ -73,7 +73,7 @@ static void ft_string(va_list args, int **count)
 {
     char *str;
     
-    str = (char *) va_arg(args, char *);
+    str = va_arg(args, char *);
     if (str == NULL)
         str = "(null)";
     **count += ft_putstr(str);
@@ -84,7 +84,7 @@ static void ft_decimal(va_list args, int **count)
 {
     int nbr;
 
-    nbr = (int) va_arg(args, int);
+    nbr = va_arg(args, int);
     **count += print_num((long long) nbr, 0);
 }
 
@@ -93,7 +93,7 @@ static void ft_unsigned_decimal(va_list args, int **count)
 {
     unsigned int nbr;
     
-    nbr = (unsigned int) va_arg(args, unsigned int);
+    nbr = va_arg(args, unsigned int);
     (**count) += print_num((long long) nbr, 0);
 }
 
