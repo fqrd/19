@@ -69,37 +69,6 @@ static void test_d(int fo)
 	printf("\n");
 }
 
-static void test_p(int fo)
-{
-	if (!fo)
-		return;
-	printf("\n--- TEST P---\n");
-	char p;
-
-	p = '0';
-	printf("|%p|\n", &p);
-	ft_printf("result: |%p|\n", &p);
-	printf("\n");
-}
-
-static void test_x(int fo)
-{
-	if (!fo)
-		return;
-	printf("\n--- TEST xX---\n");
-	int x;
-
-	x = 15698465;
-	printf("pf: |%X|\n", x);
-	ft_printf("ft: |%X|\n", x);
-	printf("\n");
-	x = -15698465;
-	printf("pf: |%X|\n", x);
-	ft_printf("ft: |%X|\n", x);
-	printf("\n");
-}
-
-
 static void test_u(int fo)
 {
 	if (!fo)
@@ -139,12 +108,43 @@ static void test_u(int fo)
 
 }
 
+static void test_x(int fo)
+{
+	if (!fo)
+		return;
+	printf("\n--- TEST xX---\n");
+	int x;
+
+	x = 15698465;
+	printf("pf: |%X|\n", x);
+	ft_printf("ft: |%X|\n", x);
+	printf("\n");
+	x = -15698465;
+	printf("pf: |%X|\n", x);
+	ft_printf("ft: |%X|\n", x);
+	printf("\n");
+}
+
+static void test_p(int fo)
+{
+	if (!fo)
+		return;
+	printf("\n--- TEST P---\n");
+	char p;
+
+	p = '0';
+	printf("|%p|\n", &p);
+	ft_printf("result: |%p|\n", &p);
+	printf("\n");
+}
+
 int main(void)
 {
 	test_c(0);
 	test_s(0);
 	test_d(0);
-	test_p(0);
 	test_u(0);
-	test_x(1);
+	test_x(0);
+
+	test_p(1);
 }

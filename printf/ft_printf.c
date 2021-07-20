@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 16:59:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/20 19:52:25 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/20 20:04:49 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,22 @@ int to_hex(unsigned int x, int *base, int n)
     }
     return (n);
 }
+
+int to_hex_long(unsigned long long x, int *base, int n)
+{
+    if (x < 16)
+    {
+        ft_putchar(base[x]);
+        n++;
+    }
+    else
+    {
+        n = to_hex(x/16, base, n);
+        ft_putchar(base[x%16]);
+        n++;
+    }
+    return (n);
+}
 // c: OK
 static void ft_char(va_list args, int **count)
 {
@@ -127,13 +143,15 @@ static void ft_hexadecimal_number(va_list args, int **count, char format)
 }
 
 // p
-// static void ft_hexadecimal_pointer(va_list args, int **count)
-// {
-//     void *p;
+static void ft_hexadecimal_pointer(va_list args, int **count)
+{
+    unsigned long long p;
+    int base[16] = {48,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102};
 
-//     p = (char *) va_arg(args, void *);
-//     **count += ft_putstr(p);
-// }
+    p = (unsigned long long) va_arg(args, void *);
+    **count += ft_putstr("0x");
+    **count += to_hex_long(p, base, 0);
+}
 
 static void function_switch(char format, va_list args, int *count)
 {
@@ -149,8 +167,8 @@ static void function_switch(char format, va_list args, int *count)
         ft_unsigned_decimal(args, &count);
     if (format == 'x' || format == 'X')
         ft_hexadecimal_number(args, &count, format);
-    // if (format == 'p')
-    //     ft_hexadecimal_pointer(args, &count);
+    if (format == 'p')
+        ft_hexadecimal_pointer(args, &count);
 }
 
 int ft_printf(const char *format, ...)
