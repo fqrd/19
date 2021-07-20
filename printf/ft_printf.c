@@ -6,13 +6,13 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 16:59:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/19 19:42:29 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/20 17:27:50 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+size_t  ft_strlen(const char *str)
 {
 	size_t	index;
 
@@ -24,12 +24,17 @@ size_t	ft_strlen(const char *str)
 	return (index);
 }
 
-void    ft_putchar(char c)
+int ft_putchar(char c)
 {
-    write (1, &c, 1);
+    return (write (1, &c, 1));
 }
 
-int print_num(int nb, int n)
+int ft_putstr(char *s)
+{
+    return (write(1, s, ft_strlen(s)));
+}
+
+int print_num(long long nb, long long n)
 {
     if (nb < 10 && nb > -10)
     {
@@ -57,34 +62,22 @@ int print_num(int nb, int n)
 // c: OK
 static void ft_char(va_list args, int **count)
 {
-    char arg;
+    char c;
 
-    arg = (unsigned char) va_arg(args, int);
-    if (write(1, &arg, 1) > -1)
-        (**count)++;
+    c = (unsigned char) va_arg(args, int);
+    **count += ft_putchar(c);
 }
 
 // // s: OK
 static void ft_string(va_list args, int **count)
 {
-    const char *str;
-    int len;
+    char *str;
     
-    len = 0;
-    str = (const char *) va_arg(args, const char *);
+    str = (char *) va_arg(args, char *);
     if (str == NULL)
         str = "(null)";
-    len = ft_strlen(str);
-    if (write(1, str, len) > -1)
-        **count += len;
+    **count += ft_putstr(str);
 }
-
-// // p
-// static int ft_hexadecimal_pointer(va_list args, int **count)
-// {
-//     (**count)++;
-//     return (arg);
-// }
 
 // d&i: OK
 static void ft_decimal(va_list args, int **count)
@@ -92,17 +85,26 @@ static void ft_decimal(va_list args, int **count)
     int nbr;
 
     nbr = (int) va_arg(args, int);
-    **count += print_num(nbr, 0);
+    **count += print_num((long long) nbr, 0);
 }
 
-// u
+// u: OK
 static void ft_unsigned_decimal(va_list args, int **count)
 {
-    int unbr;
-
-    unbr = (unsigned int) va_arg(args, unsigned int);
-    (**count) += print_num(unbr, 0);
+    unsigned int nbr;
+    
+    nbr = (unsigned int) va_arg(args, unsigned int);
+    (**count) += print_num((long long) nbr, 0);
 }
+
+// // p
+// static void ft_hexadecimal_pointer(va_list args, int **count)
+// {
+//     unsigned long long *p;
+
+//     p = (unsigned long long) va_arg(args, void *);
+//     (**count)++;
+// }
 
 // // xX
 // static int ft_hexadecimal_number(va_list args, int **count, char format)
@@ -113,23 +115,20 @@ static void ft_unsigned_decimal(va_list args, int **count)
 
 static void function_switch(char format, va_list args, int *count)
 {
+    if (format == '%')
+        *count += ft_putchar('%');
     if (format == 'c')
         ft_char(args, &count);
     if (format == 's')
         ft_string(args, &count);
-    // if (format == 'p')
-    //     ft_hexadecimal_pointer(args, &count);
     if (format == 'd' || format == 'i')
         ft_decimal(args, &count);
     if (format == 'u')
         ft_unsigned_decimal(args, &count);
+    // if (format == 'p')
+    //     ft_hexadecimal_pointer(args, &count);
     // if (format == 'x' || format == 'X')
     //     ft_hexadecimal_number(args, &count, format);
-    if (format == '%') // %: OK
-    {
-        if (write (1, "%", 1) > -1)
-            (*count)++;
-    }
 }
 
 int ft_printf(const char *format, ...)
