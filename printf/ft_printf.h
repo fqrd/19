@@ -6,15 +6,13 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 22:43:31 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/20 22:43:33 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/20 22:45:53 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stdio.h>
 # include <stdarg.h>
-# include <stdlib.h>
 # include <unistd.h>
 
 void	ft_char(va_list args, size_t **count);
