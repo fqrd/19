@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 16:59:57 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/20 18:00:57 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/20 19:52:25 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@ int print_num(long long nb, long long n)
     return (n);
 }
 
+int to_hex(unsigned int x, int *base, int n)
+{
+    if (x < 16)
+    {
+        ft_putchar(base[x]);
+        n++;
+    }
+    else
+    {
+        n = to_hex(x/16, base, n);
+        ft_putchar(base[x%16]);
+        n++;
+    }
+    return (n);
+}
 // c: OK
 static void ft_char(va_list args, int **count)
 {
@@ -97,20 +112,27 @@ static void ft_unsigned_decimal(va_list args, int **count)
     (**count) += print_num((long long) nbr, 0);
 }
 
-// // p
+// xX: OK
+static void ft_hexadecimal_number(va_list args, int **count, char format)
+{
+    unsigned int x;
+    int base_x[16] = {48,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102};
+    int base_X[16] = {48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
+    
+    x = va_arg(args, unsigned int);
+    if (format == 'x')
+        **count += to_hex(x, base_x, 0);
+    else 
+        **count += to_hex(x, base_X, 0);
+}
+
+// p
 // static void ft_hexadecimal_pointer(va_list args, int **count)
 // {
-//     unsigned long long *p;
+//     void *p;
 
-//     p = (unsigned long long) va_arg(args, void *);
-//     (**count)++;
-// }
-
-// // xX
-// static int ft_hexadecimal_number(va_list args, int **count, char format)
-// {
-//     (**count)++;
-//     return (arg);
+//     p = (char *) va_arg(args, void *);
+//     **count += ft_putstr(p);
 // }
 
 static void function_switch(char format, va_list args, int *count)
@@ -125,10 +147,10 @@ static void function_switch(char format, va_list args, int *count)
         ft_decimal(args, &count);
     if (format == 'u')
         ft_unsigned_decimal(args, &count);
+    if (format == 'x' || format == 'X')
+        ft_hexadecimal_number(args, &count, format);
     // if (format == 'p')
     //     ft_hexadecimal_pointer(args, &count);
-    // if (format == 'x' || format == 'X')
-    //     ft_hexadecimal_number(args, &count, format);
 }
 
 int ft_printf(const char *format, ...)

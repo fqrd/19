@@ -77,8 +77,25 @@ static void test_p(int fo)
 	char p;
 
 	p = '0';
-	// printf("%p  ", &p);
-	ft_printf("%p", &p);
+	printf("|%p|\n", &p);
+	ft_printf("result: |%p|\n", &p);
+	printf("\n");
+}
+
+static void test_x(int fo)
+{
+	if (!fo)
+		return;
+	printf("\n--- TEST xX---\n");
+	int x;
+
+	x = 15698465;
+	printf("pf: |%X|\n", x);
+	ft_printf("ft: |%X|\n", x);
+	printf("\n");
+	x = -15698465;
+	printf("pf: |%X|\n", x);
+	ft_printf("ft: |%X|\n", x);
 	printf("\n");
 }
 
@@ -99,8 +116,9 @@ static void test_u(int fo)
 	// printf("pf: %u\n", INT_MAX);
 	// ft_printf("ft: %u", 9223372036854775807LL);
 	u = INT_MAX;
-	printf("pf: %d\n", u);
-	ft_printf("ft: %d\n", u);
+	char *s = "Hello";
+	printf("%s pf: %d, %u\n", s, u, u);
+	ft_printf("%s ft: %d, %u\n", s, u, u);
 	// printf("\n");
 	// u = 122;
 	// printf("pf: %u\n", u);
@@ -128,4 +146,5 @@ int main(void)
 	test_d(0);
 	test_p(0);
 	test_u(0);
+	test_x(1);
 }
