@@ -135,7 +135,6 @@ static void test_p(int fo)
 	p = '0';
 	printf("|%p|\n", &p);
 	ft_printf("result: |%p|\n", &p);
-	printf("\n");
 }
 
 int main(void)
