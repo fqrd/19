@@ -6,7 +6,7 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:42:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 14:44:07 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:19:52 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,47 +45,37 @@ size_t	ft_strlen(const char *str)
 	size_t	index;
 
 	index = 0;
-	if (!str)
+	if (str == NULL)
 		return (index);
-	while (str[index])
+	while (str[index] != '\0')
 		index++;
 	return (index);
 }
 
-void	ft_bzero(void *buff, size_t len)
-{
-	char	*p;
-
-	p = (char *) buff;
-	while (len-- > 0)
-		*p++ = '\0';
-}
-
-char	*substrjoin(t_list **s, size_t start, size_t end, size_t restlen)
+char	*substrjoin(t_list **s, size_t start, size_t len, size_t restlen)
 {
 	char	*output;
-	size_t	index;
-	size_t	len;
+	size_t	i;
 
-	index = 0;
-	len = end - start;
+	i = 0;
 	output = malloc(sizeof(char) * (restlen + len + 1));
 	if (!output)
 		return (NULL);
-	while (index < restlen + len)
+	while (i < restlen)
 	{
-		if ((*s)->rest && (*s)->rest[index] != '\0' && index < restlen)
-			output[index] = (*s)->rest[index];
-		if ((*s)->buffer && (*s)->buffer[start]
-			&& start < end && index >= restlen)
-			output[index] = (*s)->buffer[start++];
-		index++;
+		if ((*s)->rest && (*s)->rest[i])
+			output[i] = (*s)->rest[i];
+		i++;
 	}
-	output[index] = '\0';
+	while (len > i - restlen)
+	{
+		if ((*s)->buffer && (*s)->buffer[start])
+			output[i] = (*s)->buffer[start++];
+		i++;
+	}
+	output[i] = '\0';
 	if ((*s)->rest)
-	{
 		free((*s)->rest);
-		(*s)->rest = NULL;
-	}
+	(*s)->rest = NULL;
 	return (output);
 }
