@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/13 14:42:17 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/13 14:44:07 by fcaquard         ###   ########.fr       */
+/*   Created: 2021/06/01 20:00:07 by fcaquard          #+#    #+#             */
+/*   Updated: 2021/07/13 14:44:04 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 t_list	*new_status(t_list *s)
 {
