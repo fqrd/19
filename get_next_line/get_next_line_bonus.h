@@ -6,15 +6,12 @@
 /*   By: fcaquard <fcaquard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:42:11 by fcaquard          #+#    #+#             */
-/*   Updated: 2021/07/22 18:20:04 by fcaquard         ###   ########.fr       */
+/*   Updated: 2021/07/24 17:54:49 by fcaquard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 0
-# endif
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
